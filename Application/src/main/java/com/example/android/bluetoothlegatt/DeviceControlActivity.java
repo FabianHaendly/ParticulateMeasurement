@@ -241,7 +241,6 @@ public class DeviceControlActivity extends Activity {
 
     private void displayData(String data) {
         if (data != null) {
-            Log.d(TAG, "displayData: CALL of dislayData");
 
             ArrayList<String> allMatches = new ArrayList<>();
             Matcher matches = Pattern.compile(PM_PATTERN).matcher(data);

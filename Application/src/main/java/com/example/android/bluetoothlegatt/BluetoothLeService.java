@@ -99,21 +99,25 @@ public class BluetoothLeService extends Service {
                 BluetoothGattService service = gatt.getService(pmIdService);
 
                 if (service != null) {
+                    Log.d(TAG, "onServicesDiscovered: ---- PM Service available");
                     BluetoothGattCharacteristic characteristic = service.getCharacteristic(pmIdCharacteristic);
 
                     if (characteristic != null) {
+                        Log.d(TAG, "onServicesDiscovered: ---- PM CHAR available");
                         gatt.setCharacteristicNotification(characteristic, true);
 
                         BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
 
+                        Log.d(TAG, "onServicesDiscovered: ABOUT TO WRITE DESCRIPTOR");
+                        mBluetoothGatt.writeDescriptor(descriptor);
+                        
                         if (descriptor != null) {
-                            Log.d(TAG, "onServicesDiscovered: " + descriptor.getUuid());
+                            Log.d(TAG, "onServicesDiscovered: ---- Descriptor available " + descriptor.getUuid());
                             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                         }
                     }
                 }
-
-
+                
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
@@ -124,6 +128,9 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
+
+            ////////////////
+            Log.d(TAG, "onCharacteristicRead: GATT_SUCCESS - " + BluetoothGatt.GATT_SUCCESS);
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
@@ -132,6 +139,7 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
+            Log.d(TAG, "onCharacteristicChanged: CHAR CHANGED");
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
     };

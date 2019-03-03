@@ -36,15 +36,15 @@ ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Applica
 	android:name
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:31:19-63
 uses-permission#android.permission.BLUETOOTH
-ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:5-67
+ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:5-68
 	android:name
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:33:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:5-73
+ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:5-74
 	android:name
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:34:22-71
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:5-80
+ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:5-81
 	android:name
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:35:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
