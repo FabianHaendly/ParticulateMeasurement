@@ -38,6 +38,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,
@@ -64,6 +66,8 @@ public class DeviceControlActivity extends Activity {
 
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
+
+    private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -237,6 +241,30 @@ public class DeviceControlActivity extends Activity {
 
     private void displayData(String data) {
         if (data != null) {
+            Log.d(TAG, "displayData: CALL of dislayData");
+
+            ArrayList<String> allMatches = new ArrayList<>();
+            Matcher matches = Pattern.compile(PM_PATTERN).matcher(data);
+            while (matches.find()) {
+                allMatches.add(matches.group());
+            }
+
+            String pm10 = "";
+            String pm25 = "";
+
+            ArrayList<String> finalValues = new ArrayList<>();
+
+            for(int i=0; i<allMatches.size(); i++) {
+                finalValues.add(allMatches.get(i).replaceAll("PM(10|25)", ""));
+            }
+
+            if(finalValues.size() == 2){
+                pm10 = finalValues.get(0);
+                pm25 = finalValues.get(1);
+            }
+
+            data = "PM10: " + pm10 + " - PM25: " + pm25;
+
             mDataField.setText(data);
         }
     }
@@ -261,6 +289,7 @@ public class DeviceControlActivity extends Activity {
             currentServiceData.put(
                     LIST_NAME, SampleGattAttributes.lookup(uuid, unknownServiceString));
             currentServiceData.put(LIST_UUID, uuid);
+
             gattServiceData.add(currentServiceData);
 
             ArrayList<HashMap<String, String>> gattCharacteristicGroupData =
