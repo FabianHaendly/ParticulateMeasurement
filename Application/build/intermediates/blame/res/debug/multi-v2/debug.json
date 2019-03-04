@@ -328,38 +328,6 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-ky_values-ky.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-ky\\values-ky.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,209,304,423,507,614,731,809,888,969,1079,1186,1284,1390,1497,1598,1759,1862",
-                        "endColumns": "103,94,118,83,106,116,77,78,80,109,106,97,105,106,100,160,102,80",
-                        "endOffsets": "204,299,418,502,609,726,804,883,964,1074,1181,1279,1385,1492,1593,1754,1857,1938"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-ky\\values-ky.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "1943",
-                        "endColumns": "100",
-                        "endOffsets": "2039"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-ml_values-ml.arsc.flat",
             "map": [
                 {
@@ -387,6 +355,38 @@
                         "startOffsets": "2004",
                         "endColumns": "100",
                         "endOffsets": "2100"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-ky_values-ky.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-ky\\values-ky.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,304,423,507,614,731,809,888,969,1079,1186,1284,1390,1497,1598,1759,1862",
+                        "endColumns": "103,94,118,83,106,116,77,78,80,109,106,97,105,106,100,160,102,80",
+                        "endOffsets": "204,299,418,502,609,726,804,883,964,1074,1181,1279,1385,1492,1593,1754,1857,1938"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-ky\\values-ky.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "1943",
+                        "endColumns": "100",
+                        "endOffsets": "2039"
                     }
                 }
             ]
@@ -488,6 +488,38 @@
             ]
         },
         {
+            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-es_values-es.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-es\\values-es.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "1975",
+                        "endColumns": "100",
+                        "endOffsets": "2071"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-es\\values-es.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,222,335,443,528,629,757,842,924,1006,1113,1213,1312,1420,1527,1634,1793,1893",
+                        "endColumns": "116,112,107,84,100,127,84,81,81,106,99,98,107,106,106,158,99,81",
+                        "endOffsets": "217,330,438,523,624,752,837,919,1001,1108,1208,1307,1415,1522,1629,1788,1888,1970"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-v16_values-v16.arsc.flat",
             "map": [
                 {
@@ -517,38 +549,6 @@
                         "startOffsets": "55",
                         "endColumns": "65",
                         "endOffsets": "116"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-es_values-es.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-es\\values-es.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "1975",
-                        "endColumns": "100",
-                        "endOffsets": "2071"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-es\\values-es.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,222,335,443,528,629,757,842,924,1006,1113,1213,1312,1420,1527,1634,1793,1893",
-                        "endColumns": "116,112,107,84,100,127,84,81,81,106,99,98,107,106,106,158,99,81",
-                        "endOffsets": "217,330,438,523,624,752,837,919,1001,1108,1208,1307,1415,1522,1629,1788,1888,1970"
                     }
                 }
             ]
@@ -1180,38 +1180,6 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-ja_values-ja.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-ja\\values-ja.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "1832",
-                        "endColumns": "100",
-                        "endOffsets": "1928"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-ja\\values-ja.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,202,295,400,482,580,688,765,841,919,1021,1120,1215,1318,1413,1509,1657,1754",
-                        "endColumns": "96,92,104,81,97,107,76,75,77,101,98,94,102,94,95,147,96,77",
-                        "endOffsets": "197,290,395,477,575,683,760,836,914,1016,1115,1210,1313,1408,1504,1652,1749,1827"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-fi_values-fi.arsc.flat",
             "map": [
                 {
@@ -1239,6 +1207,38 @@
                         "startOffsets": "1930",
                         "endColumns": "100",
                         "endOffsets": "2026"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-ja_values-ja.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-ja\\values-ja.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "1832",
+                        "endColumns": "100",
+                        "endOffsets": "1928"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-ja\\values-ja.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,202,295,400,482,580,688,765,841,919,1021,1120,1215,1318,1413,1509,1657,1754",
+                        "endColumns": "96,92,104,81,97,107,76,75,77,101,98,94,102,94,95,147,96,77",
+                        "endOffsets": "197,290,395,477,575,683,760,836,914,1016,1115,1210,1313,1408,1504,1652,1749,1827"
                     }
                 }
             ]
@@ -1276,38 +1276,6 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-et_values-et.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-et\\values-et.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "1965",
-                        "endColumns": "100",
-                        "endOffsets": "2061"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-et\\values-et.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,222,329,440,526,628,745,825,903,986,1097,1202,1301,1411,1512,1615,1781,1883",
-                        "endColumns": "116,106,110,85,101,116,79,77,82,110,104,98,109,100,102,165,101,81",
-                        "endOffsets": "217,324,435,521,623,740,820,898,981,1092,1197,1296,1406,1507,1610,1776,1878,1960"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-fr_values-fr.arsc.flat",
             "map": [
                 {
@@ -1335,6 +1303,38 @@
                         "startOffsets": "105,216,331,442,524,630,760,843,923,1009,1119,1231,1334,1445,1552,1659,1818,1917",
                         "endColumns": "110,114,110,81,105,129,82,79,85,109,111,102,110,106,106,158,98,85",
                         "endOffsets": "211,326,437,519,625,755,838,918,1004,1114,1226,1329,1440,1547,1654,1813,1912,1998"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\values-et_values-et.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\e0c06c9b14a5563065facf4e7182a413\\res\\values-et\\values-et.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "1965",
+                        "endColumns": "100",
+                        "endOffsets": "2061"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\acd77a6715819cc46a5f5df6895ebccc\\res\\values-et\\values-et.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,222,329,440,526,628,745,825,903,986,1097,1202,1301,1411,1512,1615,1781,1883",
+                        "endColumns": "116,106,110,85,101,116,79,77,82,110,104,98,109,100,102,165,101,81",
+                        "endOffsets": "217,324,435,521,623,740,820,898,981,1092,1197,1296,1406,1507,1610,1776,1878,1960"
                     }
                 }
             ]
