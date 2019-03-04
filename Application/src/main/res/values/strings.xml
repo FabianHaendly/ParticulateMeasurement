@@ -33,4 +33,11 @@
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
     <string name="title_activity_my">MyActivity</string>
+
+    <!--my strings-->
+    <string name="search_devices_btn">Connect to devices</string>
+    <string name="start_measurement_btn">Start measurement</string>
+    <string name="watch_data_btn">Data History</string>
+    <string name="sync_data_btn">Sync data</string>
+
 </resources>

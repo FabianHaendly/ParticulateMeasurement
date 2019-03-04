@@ -6,82 +6,73 @@
     density="xhdpi"
     format="10"
     plugin-version="3.0.1"
-    timestamp="1551714717492"
+    timestamp="1551728691414"
     token="-4689650318375157664"
     verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="209" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="476" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="16" />
     <task
         name="verifier"
-        duration="0" />
+        duration="5" />
 
     <artifact
-        location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-        type="RESOURCES" />
+        location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
     <build
         build-mode="FULL"
-        ir-eligibility="COMPATIBLE"
-        timestamp="1551705936488"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
-            type="SPLIT" />
+        timestamp="1551724403898"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\outputs\apk\debug\Application-debug.apk"
+            type="SPLIT_MAIN" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_2.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_5.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_6.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_8.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\outputs\apk\debug\Application-debug.apk"
-            type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="CLASS_ADDED"
-        timestamp="1551710406821"
+        ir-eligibility="R_CLASS_CHANGE"
+        timestamp="1551728144703"
         verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1551711940000"
-        verifier="R_CLASS_CHANGE" >
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_0.apk"
             type="SPLIT" />
@@ -100,47 +91,52 @@
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_8.apk"
             type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1551714094915"
-        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\outputs\apk\debug\Application-debug.apk"
             type="SPLIT_MAIN" />
     </build>
     <build
-        build-mode="COLD"
-        ir-eligibility="CLASS_ADDED"
-        timestamp="1551714310359"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-    </build>
-    <build
         build-mode="HOT_WARM"
-        timestamp="1551714425803"
+        timestamp="1551728268328"
         verifier="COMPATIBLE" >
         <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551714425803\classes.dex"
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551728268328\classes.dex"
             type="RELOAD_DEX" />
     </build>
     <build
         build-mode="HOT_WARM"
-        timestamp="1551714550464"
+        timestamp="1551728482800"
         verifier="COMPATIBLE" >
         <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551714550464\classes.dex"
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551728482800\classes.dex"
             type="RELOAD_DEX" />
     </build>
     <build
         build-mode="HOT_WARM"
-        timestamp="1551714717492"
+        timestamp="1551728554204"
         verifier="COMPATIBLE" >
         <artifact
-            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-            type="RESOURCES" />
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551728554204\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1551728583466"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551728583466\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1551728691414"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

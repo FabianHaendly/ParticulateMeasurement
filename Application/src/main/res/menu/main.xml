@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_bt_switch"
-        android:titleCondensed="BT"
-        android:showAsAction="always"
-        android:actionLayout="@layout/switch_layout"/>
     <item android:id="@+id/menu_refresh"
           android:checkable="false"
           android:orderInCategory="1"
