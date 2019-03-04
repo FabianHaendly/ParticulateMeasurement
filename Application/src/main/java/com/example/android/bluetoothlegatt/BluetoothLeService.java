@@ -108,16 +108,14 @@ public class BluetoothLeService extends Service {
 
                         BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
 
-                        Log.d(TAG, "onServicesDiscovered: ABOUT TO WRITE DESCRIPTOR");
-                        mBluetoothGatt.writeDescriptor(descriptor);
-                        
                         if (descriptor != null) {
                             Log.d(TAG, "onServicesDiscovered: ---- Descriptor available " + descriptor.getUuid());
                             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                            mBluetoothGatt.writeDescriptor(descriptor);
                         }
                     }
                 }
-                
+
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
@@ -130,8 +128,8 @@ public class BluetoothLeService extends Service {
                                          int status) {
 
             ////////////////
-            Log.d(TAG, "onCharacteristicRead: GATT_SUCCESS - " + BluetoothGatt.GATT_SUCCESS);
             if (status == BluetoothGatt.GATT_SUCCESS) {
+                Log.d(TAG, "onCharacteristicRead: GATT_SUCCESS - " + BluetoothGatt.GATT_SUCCESS);
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
         }
