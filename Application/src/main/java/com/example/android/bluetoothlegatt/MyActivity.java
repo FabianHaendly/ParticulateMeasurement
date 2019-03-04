@@ -133,7 +133,7 @@ public class MyActivity extends Activity {
                 Toast.makeText(getBaseContext(), "Data: " + conStatus + " Device name: " + devName, Toast.LENGTH_SHORT).show();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+                Toast.makeText(getBaseContext(), "Something went wrong ", Toast.LENGTH_SHORT).show();
             }
         }
 

@@ -105,7 +105,13 @@ public class DeviceControlActivity extends Activity {
                     public void run() {
                         Intent returnIntent = new Intent();
                         returnIntent.putExtra("resultDevControl", String.valueOf(mConnected));
-                        DeviceControlActivity.this.setResult(Activity.RESULT_OK, returnIntent);
+                        if (String.valueOf(mConnected) != null) {
+                            DeviceControlActivity.this.setResult(Activity.RESULT_OK, returnIntent);
+                        }
+                        else{
+                            DeviceControlActivity.this.setResult(Activity.RESULT_CANCELED, returnIntent);
+                        }
+
                         finish();
                     }
                 }, CON_TIME);
@@ -126,7 +132,7 @@ public class DeviceControlActivity extends Activity {
 
     private void clearUI() {
         //mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
-        mDataField.setText(R.string.no_data);
+//        mDataField.setText(R.string.no_data);
     }
 
     @Override
@@ -144,7 +150,7 @@ public class DeviceControlActivity extends Activity {
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
-        mDataField = (TextView) findViewById(R.id.data_value);
+//        mDataField = (TextView) findViewById(R.id.data_value);
 
         getActionBar().setTitle(mDeviceName);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -190,7 +196,7 @@ public class DeviceControlActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_connect:
                 mBluetoothLeService.connect(mDeviceAddress);
                 return true;
@@ -230,18 +236,18 @@ public class DeviceControlActivity extends Activity {
 
             ArrayList<String> finalValues = new ArrayList<>();
 
-            for(int i=0; i<allMatches.size(); i++) {
+            for (int i = 0; i < allMatches.size(); i++) {
                 finalValues.add(allMatches.get(i).replaceAll("PM(10|25)", ""));
             }
 
-            if(finalValues.size() == 2){
+            if (finalValues.size() == 2) {
                 pm10 = finalValues.get(0);
                 pm25 = finalValues.get(1);
             }
 
             data = "PM10: " + pm10 + " - PM25: " + pm25;
 
-            mDataField.setText(data);
+//            mDataField.setText(data);
         }
     }
 
