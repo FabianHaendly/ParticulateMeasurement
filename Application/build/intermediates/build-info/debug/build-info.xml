@@ -5,11 +5,10 @@
     build-mode="COLD"
     density="xhdpi"
     format="10"
-    ir-eligibility="COMPATIBLE"
     plugin-version="3.0.1"
-    timestamp="1551693125341"
+    timestamp="1551693560831"
     token="-4689650318375157664"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="METHOD_DELETED" >
 
     <task
         name="javac"
@@ -19,10 +18,10 @@
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="18" />
+        duration="15" />
     <task
         name="verifier"
-        duration="4" />
+        duration="7" />
 
     <artifact
         location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
@@ -112,9 +111,8 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="COMPATIBLE"
-        timestamp="1551693125341"
-        verifier="COLD_SWAP_REQUESTED" >
+        timestamp="1551693560831"
+        verifier="METHOD_DELETED" >
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />

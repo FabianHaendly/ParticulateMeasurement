@@ -1,4 +1,4 @@
-#Mon Mar 04 10:52:13 CET 2019
-base.0=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\123
+#Mon Mar 04 10:59:28 CET 2019
+base.0=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\142
 path.0=classes.dex
 renamed.0=classes.dex
