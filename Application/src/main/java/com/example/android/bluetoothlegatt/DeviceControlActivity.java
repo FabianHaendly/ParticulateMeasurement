@@ -186,6 +186,9 @@ public class DeviceControlActivity extends Activity {
                 onBackPressed();
                 return true;
         }
+
+        Log.d(TAG, "onOptionsItemSelected: MENU - OPTIONS" + item.getTitleCondensed());
+
         return super.onOptionsItemSelected(item);
     }
 
