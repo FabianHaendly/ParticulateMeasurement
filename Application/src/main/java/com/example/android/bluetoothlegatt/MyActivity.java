@@ -11,15 +11,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MyActivity extends Activity {
     private static String TAG = "New My Code";
     private static final int REQUEST_ENABLE_BT = 1;
     BluetoothAdapter mBluetoothAdapter;
     Button mOnOffBtn;
+    Button mSearchDevBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +29,39 @@ public class MyActivity extends Activity {
         View onOffLayout = findViewById(R.id.switch_btn);
         mOnOffBtn = (Button) onOffLayout.findViewById(R.id.onOff_btn);
         if (mBluetoothAdapter.isEnabled())
-            mOnOffBtn.setText("ON");
+            mOnOffBtn.setText("TURN OFF");
         else
-            mOnOffBtn.setText("OFF");
+            mOnOffBtn.setText("TURN ON");
 
+        mSearchDevBtn = findViewById(R.id.search_devices_btn);
+
+        onOffBtnListen();
+        searchDevicesBtnListen();
+    }
+
+    private void onOffBtnListen(){
         mOnOffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: ON/OFF btn clicked");
                 enableBT();
+            }
+        });
+    }
+
+    private void searchDevicesBtnListen(){
+        mSearchDevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: SEARCH btn clicked");
+                if(mBluetoothAdapter.isEnabled())
+                {
+                    //GO TO SCAN
+                    startActivityForResult(new Intent(MyActivity.this, DeviceScanActivity.class), 1);
+                }
+                else{
+                    Toast.makeText(getBaseContext(), "Turn on Bluetooth first", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -102,6 +125,18 @@ public class MyActivity extends Activity {
             Toast.makeText(getBaseContext(), "No measurement possible", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String conStatus = data.getStringExtra("resultDevScan");
+                String devName = data.getStringExtra("deviceName");
+                Toast.makeText(getBaseContext(), "Data: " + conStatus + " Device name: " + devName, Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 

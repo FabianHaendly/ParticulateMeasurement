@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
@@ -59,6 +60,8 @@ public class DeviceControlActivity extends Activity {
     private String mDeviceAddress;
     private BluetoothLeService mBluetoothLeService;
     private boolean mConnected = false;
+    private Handler mHandler;
+    private static int CON_TIME = 3000;
 
     private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
 
@@ -96,6 +99,17 @@ public class DeviceControlActivity extends Activity {
                 mConnected = true;
                 updateConnectionState(R.string.connected);
                 invalidateOptionsMenu();
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("resultDevControl", String.valueOf(mConnected));
+                        DeviceControlActivity.this.setResult(Activity.RESULT_OK, returnIntent);
+                        finish();
+                    }
+                }, CON_TIME);
+
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
@@ -119,6 +133,8 @@ public class DeviceControlActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gatt_services_characteristics);
+
+        mHandler = new Handler();
 
         final Intent intent = getIntent();
         //this manipulates the name in the header

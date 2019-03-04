@@ -36,6 +36,8 @@ public class DeviceScanActivity extends ListActivity {
     private static final String TAG = "My Code";
     private static final int REQUEST_ENABLE_BT = 1;
     private static final long SCAN_PERIOD = 5000;
+    private int mPositionItemClicked;
+    private BluetoothDevice mSelectedDevice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,16 +120,6 @@ public class DeviceScanActivity extends ListActivity {
         scanLeDevice(true);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // User chose not to enable Bluetooth.
-        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
-        if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
-//            finish();
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     //Executes when app is minimized / multitasking
     @Override
@@ -139,17 +131,51 @@ public class DeviceScanActivity extends ListActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // User chose not to enable Bluetooth.
+        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
+        if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
+//            finish();
+            return;
+        }
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("resultDevControl");
+                Log.d(TAG, "onActivityResult: POSITION " + mPositionItemClicked);
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("resultDevScan", result);
+                returnIntent.putExtra("deviceName", mSelectedDevice.getName());
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+        mPositionItemClicked = position;
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
         final Intent intent = new Intent(this, DeviceControlActivity.class);
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
+        mSelectedDevice = device;
+
+        Log.d(TAG, "onListItemClick: POSI " + position);
+
         if (mScanning) {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     private void scanLeDevice(final boolean enable) {
