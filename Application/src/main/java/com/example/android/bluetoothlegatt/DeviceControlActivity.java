@@ -104,11 +104,12 @@ public class DeviceControlActivity extends Activity {
                     @Override
                     public void run() {
                         Intent returnIntent = new Intent();
-                        returnIntent.putExtra("resultDevControl", String.valueOf(mConnected));
                         if (String.valueOf(mConnected) != null) {
+                            returnIntent.putExtra("resultDevControl", String.valueOf(mConnected));
                             DeviceControlActivity.this.setResult(Activity.RESULT_OK, returnIntent);
                         }
                         else{
+                            returnIntent.putExtra("resultDevControl", String.valueOf(mConnected));
                             DeviceControlActivity.this.setResult(Activity.RESULT_CANCELED, returnIntent);
                         }
 

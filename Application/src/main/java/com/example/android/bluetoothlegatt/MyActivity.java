@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class MyActivity extends Activity {
     private static String TAG = "New My Code";
-    private static final int REQUEST_ENABLE_BT = 1;
+    private static final int REQUEST_ENABLE_BT = 99;
     BluetoothAdapter mBluetoothAdapter;
     Button mOnOffBtn;
     Button mSearchDevBtn;
@@ -80,6 +80,7 @@ public class MyActivity extends Activity {
                     case BluetoothAdapter.STATE_OFF:
                         Log.d(TAG, "onReceive: STATE OFF");
                         mOnOffBtn.setText("TURN ON");
+                        mConnectionInfo.setText("Connected: - to Device:");
                         Toast.makeText(getBaseContext(), "Bluetooth turned off", Toast.LENGTH_SHORT).show();
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
@@ -87,6 +88,7 @@ public class MyActivity extends Activity {
                         break;
                     case BluetoothAdapter.STATE_ON:
                         Log.d(TAG, "onReceive: STATE ON");
+                        mOnOffBtn.setText("TURN OFF");
                         Toast.makeText(getBaseContext(), "Bluetooth turned on", Toast.LENGTH_SHORT).show();
                         break;
                     case BluetoothAdapter.STATE_TURNING_ON:
