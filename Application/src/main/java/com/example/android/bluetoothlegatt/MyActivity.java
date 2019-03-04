@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyActivity extends Activity {
@@ -19,6 +20,7 @@ public class MyActivity extends Activity {
     BluetoothAdapter mBluetoothAdapter;
     Button mOnOffBtn;
     Button mSearchDevBtn;
+    TextView mConnectionInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MyActivity extends Activity {
             mOnOffBtn.setText("TURN ON");
 
         mSearchDevBtn = findViewById(R.id.search_devices_btn);
+        mConnectionInfo = findViewById(R.id.display_connection_info);
 
         onOffBtnListen();
         searchDevicesBtnListen();
@@ -131,6 +134,7 @@ public class MyActivity extends Activity {
                 String conStatus = data.getStringExtra("resultDevScan");
                 String devName = data.getStringExtra("deviceName");
                 Toast.makeText(getBaseContext(), "Data: " + conStatus + " Device name: " + devName, Toast.LENGTH_SHORT).show();
+                mConnectionInfo.setText("Connection: true - to Device: " + devName);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 Toast.makeText(getBaseContext(), "Something went wrong ", Toast.LENGTH_SHORT).show();

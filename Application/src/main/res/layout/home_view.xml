@@ -17,7 +17,9 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_below="@id/layout_switch">
+        android:layout_below="@id/layout_switch"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp">
 
         <Button
             android:id="@+id/search_devices_btn"
@@ -25,32 +27,31 @@
             android:layout_height="wrap_content"
             android:text="@string/search_devices_btn"
             android:layout_marginTop="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             />
+        <TextView
+            android:id="@+id/display_connection_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/display_connection_info"/>
         <Button
             android:id="@+id/start_measurement_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             android:text="@string/start_measurement_btn"/>
         <Button
             android:id="@+id/watch_data_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
             android:text="@string/watch_data_btn"/>
         <Button
             android:id="@+id/sync_data_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
+
             android:text="@string/sync_data_btn"/>
 
 
