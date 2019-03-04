@@ -55,10 +55,6 @@ application
 ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:5-50:19
 	android:label
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:38:18-50
-	android:icon
-		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:9-45
-	android:theme
-		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:40:9-56
 activity#com.example.android.bluetoothlegatt.DeviceScanActivity
 ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:9-47:20
 	android:label
