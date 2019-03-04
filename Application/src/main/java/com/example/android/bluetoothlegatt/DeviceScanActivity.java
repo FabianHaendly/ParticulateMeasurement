@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2013 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.android.bluetoothlegatt;
 
 import android.Manifest;
@@ -49,12 +33,9 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
     private Handler mHandler;
-
     private static final String TAG = "My Code";
-
     private static final int REQUEST_ENABLE_BT = 1;
-    // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 10000;
+    private static final long SCAN_PERIOD = 5000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,19 +66,6 @@ public class DeviceScanActivity extends ListActivity {
         }
     }
 
-    private void checkBTPermissions() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
-            permissionCheck += this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
-
-            if (permissionCheck != 0) {
-                this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
-            } else {
-                Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP");
-            }
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -119,18 +87,19 @@ public class DeviceScanActivity extends ListActivity {
         switch (item.getItemId()) {
             case R.id.menu_scan:
                 mLeDeviceListAdapter.clear();
+                Log.d(TAG, "onOptionsItemSelected: MENU - OPTIONS " + item.getTitleCondensed() + " - ID " + item.getItemId());
                 scanLeDevice(true);
                 break;
             case R.id.menu_stop:
+                Log.d(TAG, "onOptionsItemSelected: MENU - OPTIONS " + item.getTitleCondensed() + " - ID " + item.getItemId());
                 scanLeDevice(false);
                 break;
         }
 
-        Log.d(TAG, "onOptionsItemSelected: MENU - OPTIONS" + item.getTitleCondensed());
-
         return true;
     }
 
+    //Executes when app is openend and has not been closed before
     @Override
     protected void onResume() {
         super.onResume();
@@ -138,10 +107,9 @@ public class DeviceScanActivity extends ListActivity {
         // Ensures Bluetooth is enabled on the device.  If Bluetooth is not currently enabled,
         // fire an intent to display a dialog asking the user to grant permission to enable it.
         if (!mBluetoothAdapter.isEnabled()) {
-            if (!mBluetoothAdapter.isEnabled()) {
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
+            Log.d(TAG, "onResume: AFTER CLOSING AND BT WAS OFF");
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
 
         // Initializes list view adapter.
@@ -153,16 +121,19 @@ public class DeviceScanActivity extends ListActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // User chose not to enable Bluetooth.
+        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
-            finish();
+//            finish();
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    //Executes when app is minimized / multitasking
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause: PAUSED SCAN DISABLE");
         scanLeDevice(false);
         mLeDeviceListAdapter.clear();
     }
@@ -190,14 +161,17 @@ public class DeviceScanActivity extends ListActivity {
                     mScanning = false;
                     mBluetoothAdapter.stopLeScan(mLeScanCallback);
                     invalidateOptionsMenu();
+                    Log.d(TAG, "run: PERIOD + STOP SCAN");
                 }
             }, SCAN_PERIOD);
 
             mScanning = true;
             mBluetoothAdapter.startLeScan(mLeScanCallback);
+            Log.d(TAG, "scanLeDevice: START SCAN");
         } else {
             mScanning = false;
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
+            Log.d(TAG, "scanLeDevice: STOP SCAN");
         }
         invalidateOptionsMenu();
     }
@@ -206,16 +180,28 @@ public class DeviceScanActivity extends ListActivity {
     private BluetoothAdapter.LeScanCallback mLeScanCallback =
             new BluetoothAdapter.LeScanCallback() {
 
-        @Override
-        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
-            runOnUiThread(new Runnable() {
                 @Override
-                public void run() {
-                    mLeDeviceListAdapter.addDevice(device);
-                    mLeDeviceListAdapter.notifyDataSetChanged();
+                public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLeDeviceListAdapter.addDevice(device);
+                            mLeDeviceListAdapter.notifyDataSetChanged();
+                        }
+                    });
                 }
-            });
-        }
-    };
+            };
 
+    private void checkBTPermissions() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
+            permissionCheck += this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
+
+            if (permissionCheck != 0) {
+                this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
+            } else {
+                Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP");
+            }
+        }
+    }
 }

@@ -6,7 +6,7 @@
     density="xhdpi"
     format="10"
     plugin-version="3.0.1"
-    timestamp="1551703301594"
+    timestamp="1551714717492"
     token="-4689650318375157664"
     verifier="COMPATIBLE" >
 
@@ -29,8 +29,9 @@
 
     <build
         build-mode="FULL"
-        timestamp="1551702879871"
-        verifier="FULL_BUILD_REQUESTED" >
+        ir-eligibility="COMPATIBLE"
+        timestamp="1551705936488"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
@@ -69,8 +70,73 @@
             type="SPLIT_MAIN" />
     </build>
     <build
+        build-mode="COLD"
+        ir-eligibility="CLASS_ADDED"
+        timestamp="1551710406821"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\dep\dependencies.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1551711940000"
+        verifier="R_CLASS_CHANGE" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1551714094915"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\outputs\apk\debug\Application-debug.apk"
+            type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        ir-eligibility="CLASS_ADDED"
+        timestamp="1551714310359"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+    </build>
+    <build
         build-mode="HOT_WARM"
-        timestamp="1551703301594"
+        timestamp="1551714425803"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551714425803\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1551714550464"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\builds\debug\1551714550464\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1551714717492"
         verifier="COMPATIBLE" >
         <artifact
             location="C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
