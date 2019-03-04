@@ -92,11 +92,9 @@ public class DeviceScanActivity extends ListActivity {
 
             if (permissionCheck != 0) {
                 this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
-                ;
             } else {
                 Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP");
             }
-
         }
     }
 
