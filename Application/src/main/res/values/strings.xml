@@ -40,5 +40,10 @@
     <string name="watch_data_btn">Data History</string>
     <string name="sync_data_btn">Sync data</string>
     <string name="display_connection_info">Connected: - to Device:</string>
+    <string name="title_activity_measurement">MeasurementActivity</string>
+    <string name="device_name_header"><u>Device</u></string>
+    <string name="connection_status_header"><u>Status</u></string>
+    <string name="device_name"></string>
+    <string name="connection_status"></string>
 
 </resources>

@@ -17,6 +17,7 @@
 package com.example.android.bluetoothlegatt;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
@@ -62,8 +63,9 @@ public class DeviceControlActivity extends Activity {
     private boolean mConnected = false;
     private Handler mHandler;
     private static int CON_TIME = 3000;
+    private BluetoothDevice mDevice;
 
-    private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
+
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -121,20 +123,15 @@ public class DeviceControlActivity extends Activity {
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
-                clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
                 //displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                //displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
     };
 
-    private void clearUI() {
-        //mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
-//        mDataField.setText(R.string.no_data);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -145,8 +142,9 @@ public class DeviceControlActivity extends Activity {
 
         final Intent intent = getIntent();
         //this manipulates the name in the header
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        mDevice = intent.getParcelableExtra("device");
+        mDeviceName = mDevice.getName();
+        mDeviceAddress = mDevice.getAddress();
 
         // Sets up UI references.
         ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
@@ -221,35 +219,6 @@ public class DeviceControlActivity extends Activity {
                 mConnectionState.setText(resourceId);
             }
         });
-    }
-
-    private void displayData(String data) {
-        if (data != null) {
-
-            ArrayList<String> allMatches = new ArrayList<>();
-            Matcher matches = Pattern.compile(PM_PATTERN).matcher(data);
-            while (matches.find()) {
-                allMatches.add(matches.group());
-            }
-
-            String pm10 = "";
-            String pm25 = "";
-
-            ArrayList<String> finalValues = new ArrayList<>();
-
-            for (int i = 0; i < allMatches.size(); i++) {
-                finalValues.add(allMatches.get(i).replaceAll("PM(10|25)", ""));
-            }
-
-            if (finalValues.size() == 2) {
-                pm10 = finalValues.get(0);
-                pm25 = finalValues.get(1);
-            }
-
-            data = "PM10: " + pm10 + " - PM25: " + pm25;
-
-//            mDataField.setText(data);
-        }
     }
 
 
