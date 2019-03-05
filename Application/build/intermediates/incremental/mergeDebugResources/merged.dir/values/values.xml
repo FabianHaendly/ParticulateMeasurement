@@ -601,8 +601,10 @@
     <string name="no_data">No data</string>
     <string name="search_devices_btn">Connect to devices</string>
     <string name="search_menu_title">Search</string>
+    <string name="start_measure">Start Measurement</string>
     <string name="start_measurement_btn">Start measurement</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="stop_measure">Stop Measurement</string>
     <string name="sync_data_btn">Sync data</string>
     <string name="title_activity_measurement">MeasurementActivity</string>
     <string name="title_activity_my">MyActivity</string>

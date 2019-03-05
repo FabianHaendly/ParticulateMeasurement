@@ -29,16 +29,15 @@
         android:testOnly="true" >
         <activity
             android:name="com.example.android.bluetoothlegatt.MeasurementActivity"
-            android:label="@string/title_activity_measurement" >
+            android:label="@string/title_activity_measurement" />
+        <activity
+            android:name="com.example.android.bluetoothlegatt.MainActivity"
+            android:label="@string/title_activity_my" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.android.bluetoothlegatt.MainActivity"
-            android:label="@string/title_activity_my" >
         </activity>
         <activity
             android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"

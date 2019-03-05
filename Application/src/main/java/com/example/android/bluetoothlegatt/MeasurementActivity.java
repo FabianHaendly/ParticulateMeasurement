@@ -5,12 +5,15 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,12 +21,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MeasurementActivity extends Activity {
-    private static String TAG = "MEASUREMENT: ";
+    private static String TAG = "MEASUREMENT_ACTIVITY: ";
     TextView mTvDeviceName;
+    TextView mPmTenValue;
+    TextView mPmTwentyFiveValue;
     BluetoothDevice mBtDevice;
     private BluetoothLeService mBluetoothLeService;
-    private boolean mConnected = false;
-    private TextView mTvConnectionStaus;
+    private TextView mTvConnectionStatus;
+    Button mStartMeasurementBtn;
+    boolean mMeasurementStarted = false;
     private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
 
 
@@ -36,9 +42,28 @@ public class MeasurementActivity extends Activity {
         mTvDeviceName = findViewById(R.id.tvDeviceName);
         mBtDevice = intent.getParcelableExtra("device");
         mTvDeviceName.setText(mBtDevice.getName());
-        mTvConnectionStaus = findViewById(R.id.tvConnectionStaus);
+        mTvConnectionStatus = findViewById(R.id.tvConnectionStatus);
+        mStartMeasurementBtn = findViewById(R.id.startMeasurementBtn);
 
+        mPmTenValue = findViewById(R.id.tvPmTenValue);
+        mPmTwentyFiveValue = findViewById(R.id.tvPmTwentyFiveValue);
 
+        mStartMeasurementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mMeasurementStarted == false) mMeasurementStarted = true;
+                else mMeasurementStarted = false;
+
+                if(mMeasurementStarted)
+                {
+                    Intent gattServiceIntent = new Intent(MeasurementActivity.this, BluetoothLeService.class);
+                    bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+                }
+                else{
+                    Log.d(TAG, "onClick: STOP MEASUREMENT ");
+                }
+            }
+        });
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -66,23 +91,43 @@ public class MeasurementActivity extends Activity {
     }
 
 
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mBtDevice.getAddress());
+            Log.d(TAG, "Connect request result=" + result);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mGattUpdateReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+        mBluetoothLeService = null;
+    }
+
+
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
-                mConnected = true;
-                updateConnectionState(R.string.connected);
-                invalidateOptionsMenu();
+                updateConnectionState("Connected");
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                mConnected = false;
-                updateConnectionState(R.string.disconnected);
-                invalidateOptionsMenu();
+                updateConnectionState("Disconnected");
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
                 //displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                //displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                
+                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
     };
@@ -111,18 +156,26 @@ public class MeasurementActivity extends Activity {
                 pm25 = finalValues.get(1);
             }
 
-            data = "PM10: " + pm10 + " - PM25: " + pm25;
-
-            //mDataField.setText(data);
+            mPmTenValue.setText(pm10);
+            mPmTwentyFiveValue.setText(pm25);
         }
     }
 
-    private void updateConnectionState(final int resourceId) {
+    private void updateConnectionState(final String state) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mTvConnectionStaus.setText(resourceId);
+                mTvConnectionStatus.setText(state);
             }
         });
+    }
+
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
     }
 }

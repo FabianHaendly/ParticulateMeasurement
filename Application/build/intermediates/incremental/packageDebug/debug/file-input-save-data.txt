@@ -1,7 +1,27 @@
 #Internal package file, do not edit.
-#Tue Mar 05 09:23:08 CET 2019
-0.baseType=DIRECTORY
-0.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\303
+#Tue Mar 05 10:49:18 CET 2019
+2.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\335
+5.set=DEX
 0.path=classes.dex
+2.baseType=DIRECTORY
+3.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\336
+2.set=DEX
+1.path=classes.dex
+4.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\339
+count=6
+5.baseType=DIRECTORY
+2.path=classes.dex
+5.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\337
+4.set=DEX
+3.path=classes.dex
+3.baseType=DIRECTORY
+1.set=DEX
+4.path=classes.dex
+1.baseType=DIRECTORY
+5.path=classes.dex
+0.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\334
+0.baseType=DIRECTORY
+3.set=DEX
+1.base=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\338
+4.baseType=DIRECTORY
 0.set=DEX
-count=1

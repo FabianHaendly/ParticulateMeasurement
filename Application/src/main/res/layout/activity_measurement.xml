@@ -53,11 +53,10 @@
                 android:height="40dp"
                 android:gravity="center"
                 android:text="@string/device_name"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textSize="20dp"/>
 
             <TextView
-                android:id="@+id/tvConnectionStaus"
+                android:id="@+id/tvConnectionStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -65,8 +64,70 @@
                 android:height="40dp"
                 android:gravity="center"
                 android:text="@string/connection_status"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textSize="20dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp">
+            <Button
+                android:id="@+id/startMeasurementBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/start_measure"
+                android:layout_gravity="center"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tvPmTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PM 10:"
+                android:textSize="40dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tvPmTenValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="       "
+                android:layout_weight="1"
+                android:textSize="40dp"
+                android:gravity="left"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tvPmTwentyFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PM 25:"
+                android:textSize="40dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tvPmTwentyFiveValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="       "
+                android:layout_weight="1"
+                android:textSize="40dp"
+                android:gravity="left"/>
         </LinearLayout>
     </LinearLayout>
 
