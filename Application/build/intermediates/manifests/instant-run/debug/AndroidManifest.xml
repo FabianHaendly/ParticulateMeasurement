@@ -27,7 +27,6 @@
         android:debuggable="true"
         android:label="@string/app_name"
         android:testOnly="true" >
-        <activity android:name="com.example.android.bluetoothlegatt.GraphDataActivity" />
         <activity
             android:name="com.example.android.bluetoothlegatt.MeasurementActivity"
             android:label="@string/title_activity_measurement" />

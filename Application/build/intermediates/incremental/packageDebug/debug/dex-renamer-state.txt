@@ -1,4 +1,4 @@
-#Tue Mar 05 17:02:42 CET 2019
+#Tue Mar 05 18:00:22 CET 2019
 path.1=classes.dex
 path.0=classes.dex
 renamed.5=classes6.dex
@@ -7,12 +7,12 @@ renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\357
-base.4=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\355
-base.3=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\358
-base.2=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\353
-base.1=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\356
-base.0=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\354
+base.5=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\374
+base.4=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\372
+base.3=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\377
+base.2=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\375
+base.1=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\376
+base.0=C\:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\373
 path.5=classes.dex
 path.4=classes.dex
 path.3=classes.dex

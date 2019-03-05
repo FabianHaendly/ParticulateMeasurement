@@ -7,10 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
-import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
@@ -18,16 +16,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class MeasurementActivity extends Activity {
     private static String TAG = "MEASUREMENT_ACTIVITY: ";
@@ -41,16 +34,8 @@ public class MeasurementActivity extends Activity {
     boolean mMeasurementStarted = false;
     private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
 
-    LineChart lineChart;
-    Button mAddBtn;
-    ArrayList<Entry> yPmTen;
-    LineDataSet dataSetTen;
-    ArrayList<Entry> yPmTwentyFive;
-    LineDataSet dataSetTwentyFive;
-    ArrayList<ILineDataSet> dataSets;
-    private float mPm10;
-    private float mPm25;
-
+    LineChart mLineChart;
+    GraphService mGraphService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +52,8 @@ public class MeasurementActivity extends Activity {
         mPmTenValue = findViewById(R.id.tvPmTenValue);
         mPmTwentyFiveValue = findViewById(R.id.tvPmTwentyFiveValue);
 
-        //Properties for graph
-        yPmTen = new ArrayList<>();
-        yPmTwentyFive = new ArrayList<>();
-        dataSets = new ArrayList<>();
+        mLineChart = (LineChart) findViewById(R.id.lineChart);
+        mGraphService = new GraphService(mLineChart);
 
         mStartMeasurementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,85 +75,6 @@ public class MeasurementActivity extends Activity {
             }
         });
     }
-
-    private void doGraphStuff() {
-        lineChart = (LineChart) findViewById(R.id.lineChart);
-        lineChart = returnLineChartWithFormatting(lineChart, 21);
-
-        if (yPmTen.size() > 20 && yPmTwentyFive.size() > 20) {
-
-            yPmTen = returnBufferedList(yPmTen);
-            yPmTwentyFive = returnBufferedList(yPmTwentyFive);
-
-            Log.d("BUFFER", "onClick: Ten: " + yPmTen.size());
-        }
-
-
-
-        yPmTen.add(new Entry(yPmTen.size(), mPm10));
-        yPmTwentyFive.add(new Entry(yPmTwentyFive.size(), mPm25));
-
-        dataSetTen = returnLineDataset(yPmTen, "PM 10", false, Color.RED);
-        dataSetTwentyFive = returnLineDataset(yPmTwentyFive, "PM 25", false, Color.GREEN);
-
-        lineChart.setData(new LineData(dataSets));
-
-        dataSets.clear();
-        lineChart.clearValues();
-        dataSets.add(dataSetTen);
-        dataSets.add(dataSetTwentyFive);
-        lineChart.setData(new LineData(dataSets));
-
-        Log.d("Onclick", "onClick: Size 10: " + yPmTen.size() + "Size 25: " + yPmTwentyFive.size());
-    }
-
-
-    private ArrayList<Entry> returnBufferedList(ArrayList<Entry> arr) {
-        ArrayList<Entry> newArr = new ArrayList<>();
-
-        for (int i = 0; i < arr.size() - 1; i++) {
-            Entry prevEntry = arr.get(i);
-            Entry currentEntry = arr.get(i + 1);
-
-            newArr.add(new Entry(prevEntry.getX(), currentEntry.getY()));
-        }
-
-        for (int i = 0; i < arr.size(); i++) {
-            Log.d("TAG", "ELEMENT at: " + i + "   X: " + arr.get(i).getX() + "   Y: " + arr.get(i).getY());
-        }
-        return newArr;
-    }
-
-    private LineDataSet returnLineDataset(ArrayList<Entry> set, String label, boolean drawingValues, int color) {
-        LineDataSet dataSet = new LineDataSet(set, label);
-        dataSet.setDrawValues(drawingValues);
-        dataSet.setColor(color);
-        dataSet.setDrawCircles(false);
-
-        return dataSet;
-    }
-
-    private LineChart returnLineChartWithFormatting(LineChart lineChart, int range) {
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-
-        //Makes description disappear
-        Description desc = new Description();
-        desc.setText("");
-        lineChart.setDescription(desc);
-
-        lineChart.getAxisLeft().setEnabled(true); //show y-axis at left
-        lineChart.getAxisRight().setEnabled(false); //hide y-axis at right
-
-        lineChart.setDragEnabled(false);
-        lineChart.setTouchEnabled(false);
-
-        lineChart.setVisibleXRangeMaximum(range);
-
-        return lineChart;
-    }
-
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
@@ -266,10 +170,7 @@ public class MeasurementActivity extends Activity {
             mPmTenValue.setText(pm10);
             mPmTwentyFiveValue.setText(pm25);
 
-            mPm10 = Float.valueOf(pm10);
-            mPm25 = Float.valueOf(pm25);
-
-            doGraphStuff();
+            mGraphService.initializeGraph(Float.valueOf(pm10), Float.valueOf(pm25));
         }
     }
 
