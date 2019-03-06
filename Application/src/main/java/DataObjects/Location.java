@@ -1,15 +1,25 @@
 package DataObjects;
 
 public class Location {
-    private float Longitude;
-    private float Latitude;
-    private float Altidude;
-    private String CountryCode;
+    private String Longitude;
+    private String Latitude;
+    private String Altitude;
 
-    public Location(float longitude, float latitude, float altidude, String countryCode){
-        Longitude = longitude;
-        Latitude = latitude;
-        Altidude = altidude;
-        CountryCode = countryCode;
+    public Location(float longitude, float latitude, float altitude){
+        Longitude = String.valueOf(longitude);
+        Latitude = String.valueOf(latitude);
+        Altitude = String.valueOf(altitude);
+    }
+
+    public String getAltitude() {
+        return Altitude;
+    }
+
+    public String getLatitude() {
+        return Latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
     }
 }

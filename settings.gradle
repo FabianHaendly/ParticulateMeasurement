@@ -1,1 +1,3 @@
 include 'Application'
+include 'Location'
+include 'DataObject'

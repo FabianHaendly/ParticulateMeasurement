@@ -26,7 +26,8 @@
     <application
         android:debuggable="true"
         android:label="@string/app_name"
-        android:testOnly="true" >
+        android:testOnly="true"
+        android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="com.example.android.bluetoothlegatt.MeasurementActivity"
             android:label="@string/title_activity_measurement" />
@@ -39,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.android.bluetoothlegatt.LocationActivity" />
         <activity
             android:name="com.example.android.bluetoothlegatt.DeviceScanActivity"
             android:label="@string/app_name" />
@@ -47,6 +49,15 @@
         <service
             android:name="com.example.android.bluetoothlegatt.BluetoothLeService"
             android:enabled="true" />
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"

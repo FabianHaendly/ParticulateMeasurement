@@ -42,7 +42,7 @@ public class GraphService {
         yPmTwentyFive.add(new Entry(yPmTwentyFive.size(), pm25));
 
         dataSetTen = returnLineDataset(yPmTen, "PM 10", false, Color.RED);
-        dataSetTwentyFive = returnLineDataset(yPmTwentyFive, "PM 25", false, Color.GREEN);
+        dataSetTwentyFive = returnLineDataset(yPmTwentyFive, "PM 25", false, Color.BLUE);
 
         mLineChart.setData(new LineData(dataSets));
 

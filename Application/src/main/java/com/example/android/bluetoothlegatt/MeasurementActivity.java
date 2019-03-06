@@ -1,5 +1,6 @@
 package com.example.android.bluetoothlegatt;
 
+import android.Manifest;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -7,9 +8,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +24,20 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import DataObjects.DataObject;
+import DataObjects.Location;
+
 
 public class MeasurementActivity extends Activity {
+    //Measurement Activity Member
     private static String TAG = "MEASUREMENT_ACTIVITY: ";
     TextView mTvDeviceName;
     TextView mPmTenValue;
@@ -33,9 +48,19 @@ public class MeasurementActivity extends Activity {
     Button mStartMeasurementBtn;
     boolean mMeasurementStarted = false;
     private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
-
     LineChart mLineChart;
     GraphService mGraphService;
+
+    //Location Activity Member
+    LocationManager locationManager;
+    LocationListener locationListener;
+    private DataObject mDataObject;
+    private Location mLocation;
+    float mLongitude;
+    float mLatitude;
+    float mAltitude;
+    String mTimeStamp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +77,7 @@ public class MeasurementActivity extends Activity {
         mPmTenValue = findViewById(R.id.tvPmTenValue);
         mPmTwentyFiveValue = findViewById(R.id.tvPmTwentyFiveValue);
 
-        mLineChart = (LineChart) findViewById(R.id.lineChart);
+        mLineChart = findViewById(R.id.lineChart);
         mGraphService = new GraphService(mLineChart);
 
         mStartMeasurementBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +99,61 @@ public class MeasurementActivity extends Activity {
                 }
             }
         });
+
+        mLocation = new Location((float) 0.0, (float) 0.0, (float) 0.0);
+
+        locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(android.location.Location location) {
+
+                if (location == null) {
+                    mLocation = new Location((float) 0.0, (float) 0.0, (float) 0.0);
+                    Log.d(TAG, "onLocationChanged: GOOGLES LOCATION WAS NULL");
+                } else {
+                    mLongitude = (float) location.getLongitude();
+                    mLatitude = (float) location.getLatitude();
+                    mAltitude = (float) location.getAltitude();
+                    mLocation = new Location(mLongitude, mLatitude, mAltitude);
+                    Log.d(TAG, "onLocationChanged: LOCATION SET");
+                }
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                Log.d(TAG, "onStatusChanged: STATUS CHANGE");
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+                Log.d(TAG, "onProviderEnabled: PROVIDER ENABLED");
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Log.d(TAG, "onProviderDisabled: PROVIDER DISABLED");
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+            return;
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, locationListener);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, locationListener);
+            }
+        }
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -139,8 +219,6 @@ public class MeasurementActivity extends Activity {
     private void displayData(String data) {
         if (data != null) {
 
-            Log.d(TAG, "displayData: DISPLAYDATA IS CALLED");
-            
             if (!mMeasurementStarted) {
                 mPmTenValue.setText("   -   ");
                 mPmTwentyFiveValue.setText("   -   ");
@@ -170,8 +248,24 @@ public class MeasurementActivity extends Activity {
             mPmTenValue.setText(pm10);
             mPmTwentyFiveValue.setText(pm25);
 
-            mGraphService.initializeGraph(Float.valueOf(pm10), Float.valueOf(pm25));
+            if (pm10 != "" && pm25 != "") {
+                mGraphService.initializeGraph(Float.valueOf(pm10), Float.valueOf(pm25));
+                mTimeStamp = returnTimeStamp();
+            }
+
+            mDataObject = new DataObject(Float.valueOf(pm10), Float.valueOf(pm25), mTimeStamp, mLocation);
+            Log.d(TAG, "DATAOBJECT: " + "PM10: " + pm10 + " PM25: " + pm25 + " Date: " + mTimeStamp);
+            Log.d(TAG, "Location: Longitude: " + mLocation.getLongitude() + " Latitude: " + mLocation.getLatitude() + " Altitude: " + mLocation.getAltitude());
         }
+    }
+
+    private String returnTimeStamp() {
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(date);
+
+        return formattedDate;
     }
 
     private void updateConnectionState(final String state) {
