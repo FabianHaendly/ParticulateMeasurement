@@ -3339,6 +3339,7 @@ public final class R {
     public static final int unknown_device=0x7f0b0052;
     public static final int unknown_service=0x7f0b0053;
     public static final int watch_data_btn=0x7f0b0054;
+    public static final int y_axes=0x7f0b0055;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0c0000;

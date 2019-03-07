@@ -1007,6 +1007,7 @@ int string unknown_characteristic 0x7f0b0051
 int string unknown_device 0x7f0b0052
 int string unknown_service 0x7f0b0053
 int string watch_data_btn 0x7f0b0054
+int string y_axes 0x7f0b0055
 int style AlertDialog_AppCompat 0x7f0c0000
 int style AlertDialog_AppCompat_Light 0x7f0c0001
 int style Animation_AppCompat_Dialog 0x7f0c0002

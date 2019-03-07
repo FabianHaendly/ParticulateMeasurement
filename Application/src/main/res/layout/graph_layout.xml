@@ -1,21 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/graph_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5"
-    android:orientation="vertical"
-    android:id="@+id/graph_layout">
+    android:orientation="horizontal"
+    android:weightSum="10">
 
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChart"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="4"></com.github.mikephil.charting.charts.LineChart>
+        android:layout_weight="9."
+        android:background="#AAA">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:rotation="-90"
+            android:text="@string/y_axes"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="5">
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:minHeight="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5">
+
+        </com.github.mikephil.charting.charts.LineChart>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Number of measurement value"
+            android:textColor="#000"/>
+    </LinearLayout>
 </LinearLayout>

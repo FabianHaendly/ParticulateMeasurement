@@ -19,7 +19,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     SQLiteDatabase db;
 
-
     public SQLiteDBHelper(Context context) {
         super(context, FeedEntry.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();

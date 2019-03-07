@@ -1008,6 +1008,7 @@ string unknown_characteristic
 string unknown_device
 string unknown_service
 string watch_data_btn
+string y_axes
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

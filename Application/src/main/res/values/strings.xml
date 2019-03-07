@@ -54,4 +54,6 @@
     <string name="this_month_btn">This Month</string>
     <string name="this_year_btn">This year</string>
 
+    <string name="y_axes">\u00B5g PM|m^3</string>
+
 </resources>
