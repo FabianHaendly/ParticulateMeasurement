@@ -28,6 +28,7 @@
         android:debuggable="true"
         android:label="@string/app_name"
         android:testOnly="true" >
+        <activity android:name="com.example.android.bluetoothlegatt.StatisticsActivity" />
         <activity
             android:name="com.example.android.bluetoothlegatt.MeasurementActivity"
             android:label="@string/title_activity_measurement" />

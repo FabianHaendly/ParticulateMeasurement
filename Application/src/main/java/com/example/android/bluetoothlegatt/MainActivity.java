@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
     Button mOnOffBtn;
     Button mSearchDevBtn;
     Button mStartMeasurementBtn;
+    Button mStatisticsBtn;
     TextView mConnectionInfo;
 
     @Override
@@ -41,10 +42,12 @@ public class MainActivity extends Activity {
         mSearchDevBtn = findViewById(R.id.search_devices_btn);
         mConnectionInfo = findViewById(R.id.display_connection_info);
         mStartMeasurementBtn = findViewById(R.id.start_measurement_btn);
+        mStatisticsBtn = findViewById(R.id.statistics_btn);
 
         onOffBtnListen();
-        onSearchDevicesBtnListen();
+        onSearchDevicesBtn();
         onStartMeasurementBtn();
+        onStatisticBtn();
     }
 
     private void onOffBtnListen(){
@@ -57,7 +60,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void onSearchDevicesBtnListen(){
+    private void onSearchDevicesBtn(){
         mSearchDevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +90,16 @@ public class MainActivity extends Activity {
                 Intent passArgIntent = new Intent(MainActivity.this, MeasurementActivity.class);
                 passArgIntent.putExtra("device", mBtDevice);
                 startActivity(passArgIntent);
+            }
+        });
+    }
+
+    private void onStatisticBtn(){
+        mStatisticsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -776,6 +776,7 @@ id menu_scan
 id menu_stop
 id message
 id middle
+id month_btn
 id multiply
 id never
 id none
@@ -825,6 +826,7 @@ id standard
 id start
 id startMeasurementBtn
 id start_measurement_btn
+id statistics_btn
 id status_bar_latest_event_content
 id submenuarrow
 id submit_area
@@ -840,6 +842,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id today_btn
 id top
 id topPanel
 id tvConnectionStatus
@@ -851,11 +854,12 @@ id tvPmTwentyFiveValue
 id uniform
 id up
 id useLogo
-id watch_data_btn
+id week_btn
 id wide
 id withText
 id wrap
 id wrap_content
+id year_btn
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer cancel_button_image_alpha
@@ -890,6 +894,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout actionbar_indeterminate_progress
 layout activity_measurement
+layout activity_statistics
 layout gatt_services_characteristics
 layout home_view
 layout listitem_device
@@ -990,6 +995,10 @@ string start_measurement_btn
 string status_bar_notification_info_overflow
 string stop_measure
 string sync_data_btn
+string this_day_btn
+string this_month_btn
+string this_week_btn
+string this_year_btn
 string title_activity_measurement
 string title_activity_my
 string title_devices
