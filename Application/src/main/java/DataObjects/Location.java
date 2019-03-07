@@ -5,7 +5,7 @@ public class Location {
     private String Latitude;
     private String Altitude;
 
-    public Location(float longitude, float latitude, float altitude){
+    public Location(String longitude, String latitude, String altitude){
         Longitude = String.valueOf(longitude);
         Latitude = String.valueOf(latitude);
         Altitude = String.valueOf(altitude);

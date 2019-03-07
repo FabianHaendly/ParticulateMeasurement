@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
 
 import DataObjects.DataObject;
 import DataObjects.Location;
+import SQLDatabse.SQLiteDBHelper;
 
 
 public class MeasurementActivity extends Activity {
@@ -56,10 +57,11 @@ public class MeasurementActivity extends Activity {
     LocationListener locationListener;
     private DataObject mDataObject;
     private Location mLocation;
-    float mLongitude;
-    float mLatitude;
-    float mAltitude;
+    String mLongitude;
+    String mLatitude;
+    String mAltitude;
     String mTimeStamp;
+    SQLiteDBHelper db;
 
 
     @Override
@@ -79,6 +81,7 @@ public class MeasurementActivity extends Activity {
 
         mLineChart = findViewById(R.id.lineChart);
         mGraphService = new GraphService(mLineChart);
+        db = new SQLiteDBHelper(this);
 
         mStartMeasurementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +103,7 @@ public class MeasurementActivity extends Activity {
             }
         });
 
-        mLocation = new Location((float) 0.0, (float) 0.0, (float) 0.0);
+        mLocation = new Location("0.0", "0.0", "0.0");
 
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -108,12 +111,12 @@ public class MeasurementActivity extends Activity {
             public void onLocationChanged(android.location.Location location) {
 
                 if (location == null) {
-                    mLocation = new Location((float) 0.0, (float) 0.0, (float) 0.0);
+                    mLocation = new Location("0.0", "0.0", "0.0");
                     Log.d(TAG, "onLocationChanged: GOOGLES LOCATION WAS NULL");
                 } else {
-                    mLongitude = (float) location.getLongitude();
-                    mLatitude = (float) location.getLatitude();
-                    mAltitude = (float) location.getAltitude();
+                    mLongitude = String.valueOf(location.getLongitude());
+                    mLatitude = String.valueOf(location.getLatitude());
+                    mAltitude = String.valueOf(location.getAltitude());
                     mLocation = new Location(mLongitude, mLatitude, mAltitude);
                     Log.d(TAG, "onLocationChanged: LOCATION SET");
                 }
@@ -253,9 +256,16 @@ public class MeasurementActivity extends Activity {
                 mTimeStamp = returnTimeStamp();
             }
 
-            mDataObject = new DataObject(Float.valueOf(pm10), Float.valueOf(pm25), mTimeStamp, mLocation);
-            Log.d(TAG, "DATAOBJECT: " + "PM10: " + pm10 + " PM25: " + pm25 + " Date: " + mTimeStamp);
-            Log.d(TAG, "Location: Longitude: " + mLocation.getLongitude() + " Latitude: " + mLocation.getLatitude() + " Altitude: " + mLocation.getAltitude());
+            mDataObject = new DataObject(pm10, pm25, mTimeStamp, mLocation);
+            db.addItem(mDataObject);
+
+
+            ArrayList<DataObject> list = db.getItems(SQLiteDBHelper.Querys.GET_ALL_ITEMS);
+            Log.d(TAG, "DB SIZE " + list.size());
+
+            for (int i = 0; i < list.size(); i++) {
+                Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate());
+            }
         }
     }
 
