@@ -667,9 +667,9 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable finish_icon
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
-drawable ic_launcher
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -682,7 +682,6 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
-drawable tile
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
@@ -747,6 +746,7 @@ id end
 id end_padder
 id expand_activities_button
 id expanded_menu
+id finishMeasurementBtn
 id forever
 id gone
 id groups
@@ -973,6 +973,7 @@ string device_name_header
 string disconnected
 string display_connection_info
 string error_bluetooth_not_supported
+string finish_measurement
 string intro_message
 string label_data
 string label_device_address

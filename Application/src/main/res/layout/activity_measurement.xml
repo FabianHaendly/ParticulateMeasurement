@@ -70,16 +70,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp"
+            android:orientation="vertical">
             <Button
                 android:id="@+id/startMeasurementBtn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/start_measure"
-                android:layout_gravity="center"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 />
+
+            <Button
+                android:id="@+id/finishMeasurementBtn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/finish_measurement"
+                android:drawableRight="@drawable/finish_icon"
+                android:gravity="center|center_vertical"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

@@ -47,5 +47,6 @@
     <string name="connection_status"></string>
     <string name="start_measure">Start Measurement</string>
     <string name="stop_measure">Stop Measurement</string>
+    <string name="finish_measurement">Finish current measurement</string>
 
 </resources>

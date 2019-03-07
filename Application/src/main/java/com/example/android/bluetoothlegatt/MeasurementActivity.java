@@ -20,7 +20,9 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 
@@ -47,6 +49,7 @@ public class MeasurementActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private TextView mTvConnectionStatus;
     Button mStartMeasurementBtn;
+    Button mFinishMeasurementBtn;
     boolean mMeasurementStarted = false;
     private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
     LineChart mLineChart;
@@ -75,6 +78,7 @@ public class MeasurementActivity extends Activity {
         mTvDeviceName.setText(mBtDevice.getName());
         mTvConnectionStatus = findViewById(R.id.tvConnectionStatus);
         mStartMeasurementBtn = findViewById(R.id.startMeasurementBtn);
+        mFinishMeasurementBtn = findViewById(R.id.finishMeasurementBtn);
 
         mPmTenValue = findViewById(R.id.tvPmTenValue);
         mPmTwentyFiveValue = findViewById(R.id.tvPmTwentyFiveValue);
@@ -100,6 +104,15 @@ public class MeasurementActivity extends Activity {
                 } else {
                     Log.d(TAG, "onClick: STOP MEASUREMENT ");
                 }
+            }
+        });
+
+        mFinishMeasurementBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MeasurementActivity.this, MainActivity.class);
+                toastMessage("Data has been saved!");
+                startActivity(intent);
             }
         });
 
@@ -294,5 +307,9 @@ public class MeasurementActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 }
