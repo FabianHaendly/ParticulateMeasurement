@@ -38,12 +38,12 @@
         </activity>
         <activity android:name=".LocationActivity" />
         <activity
-            android:name=".DeviceScanActivity"
+            android:name="BLEHelper.DeviceScanActivity"
             android:label="@string/app_name" />
-        <activity android:name=".DeviceControlActivity" />
+        <activity android:name="BLEHelper.DeviceControlActivity" />
 
         <service
-            android:name=".BluetoothLeService"
+            android:name="BLEHelper.BluetoothLeService"
             android:enabled="true" />
     </application>
 

@@ -11,25 +11,57 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import DataObjects.DataObject;
 
 public class GraphService {
     ArrayList<Entry> yPmTen;
-    LineDataSet dataSetTen;
     ArrayList<Entry> yPmTwentyFive;
+    LineDataSet dataSetTen;
     LineDataSet dataSetTwentyFive;
     ArrayList<ILineDataSet> dataSets;
     private LineChart mLineChart;
+    ArrayList<DataObject> mObjList;
 
-    public GraphService(LineChart lineChart){
+    public GraphService(LineChart lineChart) {
+        this(lineChart, null);
+    }
+
+    public GraphService(LineChart lineChart, ArrayList<DataObject> objList){
         mLineChart = lineChart;
         yPmTen = new ArrayList<>();
         yPmTwentyFive = new ArrayList<>();
         dataSets = new ArrayList<>();
         mLineChart = returnLineChartWithFormatting(mLineChart, 21);
+        mObjList = objList;
     }
 
-    public void initializeGraph(float pm10, float pm25){
+    public void initializeStaticGraph(){
+
+        for(int i=0; i<mObjList.size(); i++){
+            float pm10 = Float.valueOf(mObjList.get(i).getPmTen());
+            float pm25 = Float.valueOf(mObjList.get(i).getPmTwentyFive());
+            Entry pmTenEntry = new Entry(i, pm10);
+            Entry pmTwentyFiveEntry= new Entry(i, pm25);
+            yPmTen.add(pmTenEntry);
+            yPmTwentyFive.add(pmTwentyFiveEntry);
+        }
+
+        dataSetTen = returnLineDataset(yPmTen, "PM 10", false, Color.RED);
+        dataSetTwentyFive = returnLineDataset(yPmTwentyFive, "PM 25", false, Color.BLUE);
+
+        mLineChart.setData(new LineData(dataSets));
+
+        dataSets.clear();
+        mLineChart.clearValues();
+        dataSets.add(dataSetTen);
+        dataSets.add(dataSetTwentyFive);
+        mLineChart.setData(new LineData(dataSets));
+    }
+
+    public void initializeLiveGraph(float pm10, float pm25){
         if (yPmTen.size() > 20 && yPmTwentyFive.size() > 20) {
 
             yPmTen = returnBufferedList(yPmTen);
@@ -75,7 +107,7 @@ public class GraphService {
         LineDataSet dataSet = new LineDataSet(set, label);
         dataSet.setDrawValues(drawingValues);
         dataSet.setColor(color);
-        dataSet.setDrawCircles(false);
+        dataSet.setDrawCircles(true);
 
         return dataSet;
     }

@@ -20,20 +20,16 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import BLEHelper.BluetoothLeService;
 import DataObjects.DataObject;
 import DataObjects.Location;
 import SQLDatabse.SQLiteDBHelper;
@@ -265,30 +261,21 @@ public class MeasurementActivity extends Activity {
             mPmTwentyFiveValue.setText(pm25);
 
             if (pm10 != "" && pm25 != "") {
-                mGraphService.initializeGraph(Float.valueOf(pm10), Float.valueOf(pm25));
-                mTimeStamp = returnTimeStamp();
+                mGraphService.initializeLiveGraph(Float.valueOf(pm10), Float.valueOf(pm25));
+                mTimeStamp = DataObject.returnTimeStamp();
             }
 
             mDataObject = new DataObject(pm10, pm25, mTimeStamp, mLocation);
             db.addItem(mDataObject);
 
 
-            ArrayList<DataObject> list = db.getItems(SQLiteDBHelper.Querys.GET_ALL_ITEMS);
+            ArrayList<DataObject> list = db.getItems();
             Log.d(TAG, "DB SIZE " + list.size());
 
             for (int i = 0; i < list.size(); i++) {
                 Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate());
             }
         }
-    }
-
-    private String returnTimeStamp() {
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = dateFormat.format(date);
-
-        return formattedDate;
     }
 
     private void updateConnectionState(final String state) {
@@ -310,6 +297,6 @@ public class MeasurementActivity extends Activity {
     }
 
     private void toastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG);
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

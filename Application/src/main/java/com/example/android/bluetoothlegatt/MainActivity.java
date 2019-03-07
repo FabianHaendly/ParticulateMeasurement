@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import BLEHelper.DeviceScanActivity;
+
 public class MainActivity extends Activity {
     private static String TAG = "New My Code";
     private static final int REQUEST_ENABLE_BT = 99;

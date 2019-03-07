@@ -749,6 +749,7 @@ id expanded_menu
 id finishMeasurementBtn
 id forever
 id gone
+id graph_layout
 id groups
 id home
 id homeAsUp
@@ -896,6 +897,7 @@ layout actionbar_indeterminate_progress
 layout activity_measurement
 layout activity_statistics
 layout gatt_services_characteristics
+layout graph_layout
 layout home_view
 layout listitem_device
 layout notification_action

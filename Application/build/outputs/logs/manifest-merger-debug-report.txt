@@ -108,22 +108,22 @@ activity#com.example.android.bluetoothlegatt.LocationActivity
 ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:9-54
 	android:name
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:39:19-51
-activity#com.example.android.bluetoothlegatt.DeviceScanActivity
+activity#BLEHelper.DeviceScanActivity
 ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:40:9-42:48
 	android:label
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:42:13-45
 	android:name
-		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:13-47
-activity#com.example.android.bluetoothlegatt.DeviceControlActivity
-ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:43:9-59
+		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:41:13-56
+activity#BLEHelper.DeviceControlActivity
+ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:43:9-68
 	android:name
-		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:43:19-56
-service#com.example.android.bluetoothlegatt.BluetoothLeService
+		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:43:19-65
+service#BLEHelper.BluetoothLeService
 ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:45:9-47:38
 	android:enabled
 		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:47:13-35
 	android:name
-		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:46:13-47
+		ADDED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml:46:13-56
 uses-sdk
 INJECTED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Fabian\AndroidStudioProjects\android-BluetoothLeGatt\Application\src\main\AndroidManifest.xml

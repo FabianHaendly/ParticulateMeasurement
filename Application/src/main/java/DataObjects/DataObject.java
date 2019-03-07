@@ -1,5 +1,10 @@
 package DataObjects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class DataObject {
     private int ID;
     private String PmTen;
@@ -16,7 +21,14 @@ public class DataObject {
         Location = location;
     }
 
+    public static String returnTimeStamp() {
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormat.format(date);
 
+        return formattedDate;
+    }
 
     public String getPmTen() {
         return PmTen;
