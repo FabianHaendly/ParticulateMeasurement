@@ -1,9 +1,11 @@
 package com.example.android.bluetoothlegatt;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import DataObjects.DataObject;
 import SQLDatabse.SQLiteDBHelper;
 
 public class StatisticsActivity extends Activity {
+    private static String TAG = "DISPLAYLIST: ";
 
     Button mTodayBtn;
     Button mWeekBtn;
@@ -26,6 +29,8 @@ public class StatisticsActivity extends Activity {
     ArrayList<DataObject> mDbData;
     ArrayList<DataObject> mDisplayList;
     FilterService mFilterService;
+
+    Button currentSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class StatisticsActivity extends Activity {
         mYearBtn= findViewById(R.id.year_btn);
         mLineChart = findViewById(R.id.lineChart);
         mFilterService = new FilterService();
+
 
         SQLiteDBHelper db = new SQLiteDBHelper(this);
         mDbData = db.getItems();
@@ -61,8 +67,12 @@ public class StatisticsActivity extends Activity {
 
     private void btnExecute(int period){
         mDisplayList = FilterService.returnFilteredList(mDbData, period);
-        mGraphService = new GraphService(mLineChart, mDisplayList);
-        mGraphService.initializeStaticGraph();
+        Log.d(TAG, "" + mDisplayList.size());
+        if(mDisplayList.size()>0) {
+            mGraphService = new GraphService(mLineChart, mDisplayList);
+            mGraphService.initializeStaticGraph();
+        }
+        else toastMessage("No values for this selection!");
     }
 
     private void toastMessage(String message) {

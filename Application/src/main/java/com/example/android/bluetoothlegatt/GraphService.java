@@ -2,13 +2,17 @@ package com.example.android.bluetoothlegatt;
 
 import android.graphics.Color;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.lang.reflect.Array;
@@ -129,6 +133,16 @@ public class GraphService {
         lineChart.setTouchEnabled(false);
 
         lineChart.setVisibleXRangeMaximum(range);
+        Legend leg = lineChart.getLegend();
+        leg.setDrawInside(true);
+
+        mLineChart.measure(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        int width=mLineChart.getMeasuredWidth();
+        int height=mLineChart.getMeasuredHeight();
+
+        leg.setXOffset(width*2);
+        leg.setYOffset(height/5);
+
 
         return lineChart;
     }

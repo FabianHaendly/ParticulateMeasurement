@@ -1,5 +1,7 @@
 package com.example.android.bluetoothlegatt;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,7 +11,7 @@ import java.util.regex.Pattern;
 import DataObjects.DataObject;
 
 public class FilterService {
-
+    private static final String TAG ="MATCHES SIZE: ";
     public static final int PERIOD_CURRENT_DAY = 1;
     public static final int PERIOD_CURRENT_WEEK= 2;
     public static final int PERIOD_CURRENT_MONTH = 3;
@@ -40,6 +42,7 @@ public class FilterService {
             case PERIOD_CURRENT_DAY:
                 pattern = currentDate;
                 allMatches = returnMatches(list, pattern,0,10);
+                Log.d(TAG, "" + allMatches.size());
                 return allMatches;
             case PERIOD_CURRENT_WEEK:
                 int week = cal.get(Calendar.WEEK_OF_YEAR);
@@ -54,6 +57,7 @@ public class FilterService {
 
                 //relevant substring: index 0-10
                 allMatches = returnMatches(list, pattern, 0,10);
+                Log.d(TAG, "" + allMatches.size());
                 return allMatches;
             case PERIOD_CURRENT_MONTH:
                 int month = Calendar.MONTH + 1;
@@ -66,11 +70,13 @@ public class FilterService {
                 }
 
                 allMatches = returnMatches(list, pattern,4,8);
+                Log.d(TAG, "" + allMatches.size());
                 return allMatches;
             case PERIOD_CURRENT_YEAR:
                 int year = cal.get(Calendar.YEAR);
                 pattern = String.valueOf(year);
                 allMatches = returnMatches(list, pattern, 0, 4);
+                Log.d(TAG, "" + allMatches.size());
                 return allMatches;
             default:
                 break;

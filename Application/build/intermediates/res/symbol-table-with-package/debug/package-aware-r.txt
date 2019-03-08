@@ -648,6 +648,8 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable button_change_background
+drawable cancel_64px
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1008,6 +1010,7 @@ string unknown_characteristic
 string unknown_device
 string unknown_service
 string watch_data_btn
+string x_axes
 string y_axes
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
