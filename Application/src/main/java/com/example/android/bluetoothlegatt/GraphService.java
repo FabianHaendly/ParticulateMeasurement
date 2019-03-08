@@ -38,7 +38,7 @@ public class GraphService {
         yPmTen = new ArrayList<>();
         yPmTwentyFive = new ArrayList<>();
         dataSets = new ArrayList<>();
-        mLineChart = returnLineChartWithFormatting(mLineChart, 21);
+        mLineChart = returnLineChartWithFormatting(mLineChart);
         mObjList = objList;
     }
 
@@ -116,7 +116,7 @@ public class GraphService {
         return dataSet;
     }
 
-    private LineChart returnLineChartWithFormatting(LineChart lineChart, int range) {
+    private LineChart returnLineChartWithFormatting(LineChart lineChart) {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -132,7 +132,6 @@ public class GraphService {
         lineChart.setDragEnabled(false);
         lineChart.setTouchEnabled(false);
 
-        lineChart.setVisibleXRangeMaximum(range);
         Legend leg = lineChart.getLegend();
         leg.setDrawInside(true);
 

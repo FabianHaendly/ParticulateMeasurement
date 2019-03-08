@@ -856,6 +856,10 @@
         "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\d489d74456e641fa25372dca139aafd7\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
+        "merged": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_key_values_bottom.xml.flat",
+        "source": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\src\\main\\res\\layout\\key_values_bottom.xml"
+    },
+    {
         "merged": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\color-v23_abc_tint_edittext.xml.flat",
         "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\d489d74456e641fa25372dca139aafd7\\res\\color-v23\\abc_tint_edittext.xml"
     },
