@@ -109,16 +109,28 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     private static ArrayList<DataObject> returnDataObjects(ArrayList<String> dates){
         ArrayList<DataObject> objs = new ArrayList<>();
-        Location loc = new Location("20.1312", "54.123", "234.645");
+//        Location loc = new Location("20.1312", "54.123", "234.645");
 
-        for(int i = 0; i<dates.size(); i++){
-            Random r = new Random();
-            float randPmTen = (float)(3.00 + r.nextFloat() * (3.00 - 1.50));
-            float randPmTwen = (float)(2.00 + r.nextFloat() * (2.00 - 0.00));
+//        for(int i = 0; i<dates.size(); i++){
+//            Random r = new Random();
+//            float randPmTen = (float)(3.00 + r.nextFloat() * (3.00 - 1.50));
+//            float randPmTwen = (float)(2.00 + r.nextFloat() * (2.00 - 0.00));
+//
+//            DataObject obj = new DataObject(String.valueOf(randPmTen).substring(0,4), String.valueOf(randPmTwen).substring(0,4), returnDates().get(i), loc);
+//            objs.add(obj);
+//        }
 
-            DataObject obj = new DataObject(String.valueOf(randPmTen).substring(0,4), String.valueOf(randPmTwen).substring(0,4), returnDates().get(i), loc);
-            objs.add(obj);
-        }
+        Location loc1 = new Location("12.43077537", "51.37791981", "");
+        Location loc2 = new Location("12.43076853", "51.3778346", "");
+        Location loc3 = new Location("12.43076853", "50.45165111", "");
+
+        DataObject o1 = new DataObject("5.201", "0.801", "2019-02-25 10:53:41",loc1);
+        DataObject o2 = new DataObject("5.201","1.801","2019-02-25 10:53:41", loc2);
+        DataObject o3 = new DataObject("5.201","5.401","2019-02-25 10:53:41", loc3);
+
+        objs.add(o1);
+        objs.add(o2);
+        objs.add(o3);
 
         return objs;
     }

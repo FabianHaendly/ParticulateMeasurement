@@ -96,33 +96,68 @@ public class StatisticsActivity extends Activity {
         ArrayList<String> avgs = returnAveragePmValues(list);
 
         mValues.setText(String.valueOf(list.size()));
-        //TODO distance
-        mDistance.setText(String.valueOf(0.0f));
-
+        mDistance.setText(returnTraveledDistance(list));
         mMaxPm10.setText(maxes.get(0).getPmTen());
         mMaxPm25.setText(maxes.get(1).getPmTwentyFive());
         mAvgPm10.setText(avgs.get(0));
         mAvgPm25.setText(avgs.get(1));
     }
 
-    private ArrayList<DataObject> returnMaxPmObject(ArrayList<DataObject> list){
+    private String returnTraveledDistance(ArrayList<DataObject> list) {
+
+        double distanceSum = 0.0;
+        double lat1, lat2, lon1, lon2, distance;
+
+        for(int i=0; i<list.size()-1;i++) {
+            lat1 = Double.valueOf(list.get(i).getLocation().getLatitude());
+            lat2 = Double.valueOf(list.get(i+1).getLocation().getLatitude());
+            lon1 = Double.valueOf(list.get(i).getLocation().getLongitude());
+            lon2 = Double.valueOf(list.get(i+1).getLocation().getLongitude());
+
+            distance = distanceHaversine(lon1, lat1, lon2, lat2);
+            distanceSum+=distance;
+        }
+
+        Log.d(TAG, "returnTraveledDistance: " + distanceSum);
+
+        return String.valueOf(distanceSum);
+    }
+
+    private double distanceHaversine(double lon1, double lat1, double lon2, double lat2) {
+
+        final int R = 6371; // Radius of the earth
+
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c; // convert to meters
+
+        distance = Math.pow(distance, 2);
+
+        return Math.sqrt(distance);
+    }
+
+    private ArrayList<DataObject> returnMaxPmObject(ArrayList<DataObject> list) {
         DataObject maxPmTenObj = list.get(0);
         DataObject maxPmTwentyFiveObj = list.get(0);
         float maxPmTen = Float.valueOf(maxPmTenObj.getPmTen());
         float maxPmTwentyFive = Float.valueOf(maxPmTwentyFiveObj.getPmTen());
 
-        for(int i=1; i<list.size(); i++){
+        for (int i = 1; i < list.size(); i++) {
             float currentPmTen = Float.valueOf(list.get(i).getPmTen());
             float currentPmTwentyFive = Float.valueOf(list.get(i).getPmTwentyFive());
 
 //            Log.d(TAG, "returnMaxPmObject: CURRENT PM10: " + currentPmTen);
 //            Log.d(TAG, "returnMaxPmObject: CURRENT PM25: " + currentPmTwentyFive);
 
-            if(currentPmTen > maxPmTen){
+            if (currentPmTen > maxPmTen) {
                 maxPmTen = currentPmTen;
                 maxPmTenObj = list.get(i);
             }
-            if(currentPmTwentyFive > maxPmTwentyFive){
+            if (currentPmTwentyFive > maxPmTwentyFive) {
                 maxPmTwentyFive = currentPmTwentyFive;
                 maxPmTwentyFiveObj = list.get(i);
             }
@@ -135,17 +170,17 @@ public class StatisticsActivity extends Activity {
         return result;
     }
 
-    private ArrayList<String> returnAveragePmValues(ArrayList<DataObject> list){
+    private ArrayList<String> returnAveragePmValues(ArrayList<DataObject> list) {
         float sumPmTen = 0.0f;
         float sumPmTwentyFive = 0.0f;
 
-        for(int i = 0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             sumPmTen += Float.valueOf(list.get(i).getPmTen());
             sumPmTwentyFive += Float.valueOf(list.get(i).getPmTwentyFive());
         }
 
-        String avgPmTen = String.valueOf(sumPmTen/list.size()).substring(0,4);
-        String avgPmTwentyFive = String.valueOf(sumPmTwentyFive/list.size()).substring(0,4);
+        String avgPmTen = String.valueOf(sumPmTen / list.size()).substring(0, 4);
+        String avgPmTwentyFive = String.valueOf(sumPmTwentyFive / list.size()).substring(0, 4);
 
 //        Log.d(TAG, "returnAveragePmValues: PM10 AVG: " + avgPmTen);
 //        Log.d(TAG, "returnAveragePmValues: PM25 AVG: " + mAvgPm25);
