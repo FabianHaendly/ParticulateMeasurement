@@ -111,7 +111,7 @@ public class GraphService {
         LineDataSet dataSet = new LineDataSet(set, label);
         dataSet.setDrawValues(drawingValues);
         dataSet.setColor(color);
-        dataSet.setDrawCircles(true);
+        dataSet.setDrawCircles(false);
 
         return dataSet;
     }
@@ -139,6 +139,7 @@ public class GraphService {
         int width=mLineChart.getMeasuredWidth();
         int height=mLineChart.getMeasuredHeight();
 
+        //location of legend top right corner
         leg.setXOffset(width*2);
         leg.setYOffset(height/5);
 

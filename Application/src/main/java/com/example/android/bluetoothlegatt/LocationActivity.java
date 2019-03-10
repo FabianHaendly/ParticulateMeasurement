@@ -33,13 +33,6 @@ public class LocationActivity extends AppCompatActivity {
                 float longitude = (float)location.getLongitude();
                 float latitude= (float)location.getLatitude();
                 float altitude = (float)location.getAltitude();
-
-//                Intent intent = new Intent();
-//                intent.putExtra("longitude", longitude);
-//                intent.putExtra("latitude", latitude);
-//                intent.putExtra("altitude", altitude);
-//                setResult(1, intent);
-//                finish();
             }
 
             @Override

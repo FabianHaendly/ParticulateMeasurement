@@ -205,7 +205,9 @@ public class MeasurementActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(mServiceConnection);
+        if(mBluetoothLeService != null) {
+            unbindService(mServiceConnection);
+        }
         mBluetoothLeService = null;
     }
 
