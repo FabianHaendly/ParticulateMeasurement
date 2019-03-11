@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.lang.reflect.Array;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,19 +110,28 @@ public class StatisticsActivity extends Activity {
         double distanceSum = 0.0;
         double lat1, lat2, lon1, lon2, distance;
 
-        for(int i=0; i<list.size()-1;i++) {
+        for (int i = 0; i < list.size() - 1; i++) {
             lat1 = Double.valueOf(list.get(i).getLocation().getLatitude());
-            lat2 = Double.valueOf(list.get(i+1).getLocation().getLatitude());
+            lat2 = Double.valueOf(list.get(i + 1).getLocation().getLatitude());
             lon1 = Double.valueOf(list.get(i).getLocation().getLongitude());
-            lon2 = Double.valueOf(list.get(i+1).getLocation().getLongitude());
+            lon2 = Double.valueOf(list.get(i + 1).getLocation().getLongitude());
 
-            distance = distanceHaversine(lon1, lat1, lon2, lat2);
-            distanceSum+=distance;
+            if (lat1 != 0.0 && lon1 != 0.0 && lat2 != 0.0 && lon2 != 0) {
+                distance = distanceHaversine(lon1, lat1, lon2, lat2);
+                distanceSum += distance;
+            }
+
         }
 
-        Log.d(TAG, "returnTraveledDistance: " + distanceSum);
+//        Log.d(TAG, "returnTraveledDistance: " + distanceSum);
 
-        return String.valueOf(distanceSum);
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+
+//        String formatted = df.format(distanceSum);
+//        Log.d(TAG, "---returnTraveledDistance:--- " + df.format(distanceSum));
+
+        return df.format(distanceSum);
     }
 
     private double distanceHaversine(double lon1, double lat1, double lon2, double lat2) {
