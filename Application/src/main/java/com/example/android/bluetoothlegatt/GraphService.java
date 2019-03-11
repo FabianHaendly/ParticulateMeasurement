@@ -45,10 +45,10 @@ public class GraphService {
     public void initializeStaticGraph(){
 
         for(int i=0; i<mObjList.size(); i++){
-            float pm10 = Float.valueOf(mObjList.get(i).getPmTen());
-            float pm25 = Float.valueOf(mObjList.get(i).getPmTwentyFive());
-            Entry pmTenEntry = new Entry(i, pm10);
-            Entry pmTwentyFiveEntry= new Entry(i, pm25);
+            double pm10 = Double.valueOf(mObjList.get(i).getPmTen());
+            double pm25 = Double.valueOf(mObjList.get(i).getPmTwentyFive());
+            Entry pmTenEntry = new Entry(i, (float)pm10);
+            Entry pmTwentyFiveEntry= new Entry(i, (float)pm25);
             yPmTen.add(pmTenEntry);
             yPmTwentyFive.add(pmTwentyFiveEntry);
         }
@@ -65,7 +65,7 @@ public class GraphService {
         mLineChart.setData(new LineData(dataSets));
     }
 
-    public void initializeLiveGraph(float pm10, float pm25){
+    public void initializeLiveGraph(double pm10, double pm25){
         if (yPmTen.size() > 20 && yPmTwentyFive.size() > 20) {
 
             yPmTen = returnBufferedList(yPmTen);
@@ -74,8 +74,8 @@ public class GraphService {
             Log.d("BUFFER", "onClick: Ten: " + yPmTen.size());
         }
 
-        yPmTen.add(new Entry(yPmTen.size(), pm10));
-        yPmTwentyFive.add(new Entry(yPmTwentyFive.size(), pm25));
+        yPmTen.add(new Entry(yPmTen.size(), (float)pm10));
+        yPmTwentyFive.add(new Entry(yPmTwentyFive.size(), (float)pm25));
 
         dataSetTen = returnLineDataset(yPmTen, "PM 10", false, Color.RED);
         dataSetTwentyFive = returnLineDataset(yPmTwentyFive, "PM 25", false, Color.BLUE);

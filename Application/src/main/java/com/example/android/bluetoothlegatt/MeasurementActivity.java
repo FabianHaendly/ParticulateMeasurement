@@ -263,7 +263,7 @@ public class MeasurementActivity extends Activity {
             mPmTwentyFiveValue.setText(pm25);
 
             if (pm10 != "" && pm25 != "") {
-                mGraphService.initializeLiveGraph(Float.valueOf(pm10), Float.valueOf(pm25));
+                mGraphService.initializeLiveGraph(Double.valueOf(pm10), Double.valueOf(pm25));
                 mTimeStamp = DataObject.returnTimeStamp();
             }
 

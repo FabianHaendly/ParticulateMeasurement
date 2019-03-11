@@ -143,12 +143,12 @@ public class StatisticsActivity extends Activity {
     private ArrayList<DataObject> returnMaxPmObject(ArrayList<DataObject> list) {
         DataObject maxPmTenObj = list.get(0);
         DataObject maxPmTwentyFiveObj = list.get(0);
-        float maxPmTen = Float.valueOf(maxPmTenObj.getPmTen());
-        float maxPmTwentyFive = Float.valueOf(maxPmTwentyFiveObj.getPmTen());
+        double maxPmTen = Double.valueOf(maxPmTenObj.getPmTen());
+        double maxPmTwentyFive = Double.valueOf(maxPmTwentyFiveObj.getPmTen());
 
         for (int i = 1; i < list.size(); i++) {
-            float currentPmTen = Float.valueOf(list.get(i).getPmTen());
-            float currentPmTwentyFive = Float.valueOf(list.get(i).getPmTwentyFive());
+            double currentPmTen = Double.valueOf(list.get(i).getPmTen());
+            double currentPmTwentyFive = Double.valueOf(list.get(i).getPmTwentyFive());
 
 //            Log.d(TAG, "returnMaxPmObject: CURRENT PM10: " + currentPmTen);
 //            Log.d(TAG, "returnMaxPmObject: CURRENT PM25: " + currentPmTwentyFive);
@@ -171,12 +171,12 @@ public class StatisticsActivity extends Activity {
     }
 
     private ArrayList<String> returnAveragePmValues(ArrayList<DataObject> list) {
-        float sumPmTen = 0.0f;
-        float sumPmTwentyFive = 0.0f;
+        double sumPmTen = 0.0;
+        double sumPmTwentyFive = 0.0;
 
         for (int i = 0; i < list.size(); i++) {
-            sumPmTen += Float.valueOf(list.get(i).getPmTen());
-            sumPmTwentyFive += Float.valueOf(list.get(i).getPmTwentyFive());
+            sumPmTen += Double.valueOf(list.get(i).getPmTen());
+            sumPmTwentyFive += Double.valueOf(list.get(i).getPmTwentyFive());
         }
 
         String avgPmTen = String.valueOf(sumPmTen / list.size()).substring(0, 4);
