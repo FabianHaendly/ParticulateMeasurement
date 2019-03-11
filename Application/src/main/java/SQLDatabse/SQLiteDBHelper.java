@@ -22,6 +22,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     public SQLiteDBHelper(Context context) {
         super(context, FeedEntry.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
+
         //populateDB();
     }
 
@@ -123,14 +124,17 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         Location loc1 = new Location("12.43077537", "51.37791981", "");
         Location loc2 = new Location("12.43076853", "51.3778346", "");
         Location loc3 = new Location("12.43076853", "50.45165111", "");
+        Location loc4 = new Location("12.43077537", "51.37791981", "");
 
         DataObject o1 = new DataObject("5.201", "0.801", "2019-02-25 10:53:41",loc1);
         DataObject o2 = new DataObject("5.201","1.801","2019-02-25 10:53:41", loc2);
         DataObject o3 = new DataObject("5.201","5.401","2019-02-25 10:53:41", loc3);
+        DataObject o4 = new DataObject("10.0", "10.0", "2019-01-03 22:59:36",loc4);
 
         objs.add(o1);
         objs.add(o2);
         objs.add(o3);
+        objs.add(o4);
 
         return objs;
     }

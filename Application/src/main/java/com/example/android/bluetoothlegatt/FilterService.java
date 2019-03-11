@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 
 import DataObjects.DataObject;
+import DataObjects.DataObjectComparer;
 
 public class FilterService {
     private static final String TAG ="MATCHES SIZE: ";
@@ -97,8 +98,7 @@ public class FilterService {
             }
         }
 
-        //TODO sorting
-//        Collections.sort(allMatches);
+        Collections.sort(allMatches, new DataObjectComparer());
 
         return allMatches;
     }
