@@ -846,6 +846,7 @@ id status_bar_latest_event_content
 id submenuarrow
 id submit_area
 id switch_btn
+id sync_btn
 id sync_data_btn
 id tabMode
 id tag_transition_group
@@ -866,6 +867,10 @@ id tvPmTen
 id tvPmTenValue
 id tvPmTwentyFive
 id tvPmTwentyFiveValue
+id tv_last_sync
+id tv_last_sync_data
+id tv_unsynced_values_data
+id tv_unsynced_values_static
 id uniform
 id up
 id useLogo
@@ -910,6 +915,7 @@ layout abc_select_dialog_material
 layout actionbar_indeterminate_progress
 layout activity_measurement
 layout activity_statistics
+layout activity_sync
 layout gatt_services_characteristics
 layout graph_layout
 layout home_view
@@ -1012,6 +1018,8 @@ string kv_values_data
 string label_data
 string label_device_address
 string label_state
+string last_sync_data
+string last_sync_text
 string menu_connect
 string menu_disconnect
 string menu_scan
@@ -1034,6 +1042,8 @@ string title_devices
 string unknown_characteristic
 string unknown_device
 string unknown_service
+string unsynced_values
+string unsynced_values_data
 string watch_data_btn
 string x_axes
 string y_axes

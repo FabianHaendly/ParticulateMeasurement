@@ -1484,6 +1484,10 @@
         "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\d489d74456e641fa25372dca139aafd7\\res\\drawable-mdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
+        "merged": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\layout_activity_sync.xml.flat",
+        "source": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\src\\main\\res\\layout\\activity_sync.xml"
+    },
+    {
         "merged": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\d489d74456e641fa25372dca139aafd7\\res\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
     },

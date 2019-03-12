@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 import BLEHelper.BluetoothLeService;
 import DataObjects.DataObject;
 import DataObjects.Location;
-import SQLDatabse.SQLiteDBHelper;
+import SQLLocalDatabse.SQLiteDBHelper;
 
 
 public class MeasurementActivity extends Activity {

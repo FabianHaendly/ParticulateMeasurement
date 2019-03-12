@@ -1,27 +1,21 @@
 package com.example.android.bluetoothlegatt;
 
         import android.app.Activity;
-        import android.graphics.Color;
         import android.os.Bundle;
-        import android.provider.ContactsContract;
         import android.util.Log;
         import android.view.View;
-        import android.view.ViewGroup;
         import android.widget.Button;
-        import android.widget.Filter;
         import android.widget.TextView;
         import android.widget.Toast;
 
         import com.github.mikephil.charting.charts.LineChart;
 
-        import java.lang.reflect.Array;
         import java.math.RoundingMode;
         import java.text.DecimalFormat;
         import java.util.ArrayList;
-        import java.util.List;
 
         import DataObjects.DataObject;
-        import SQLDatabse.SQLiteDBHelper;
+        import SQLLocalDatabse.SQLiteDBHelper;
 
 public class StatisticsActivity extends Activity {
     private static String TAG = "DISPLAYLIST: ";

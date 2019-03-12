@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import BLEHelper.DeviceScanActivity;
+import Helper.CheckNetworkStatus;
 
 public class MainActivity extends Activity {
     private static String TAG = "New My Code";
@@ -26,6 +27,7 @@ public class MainActivity extends Activity {
     Button mSearchDevBtn;
     Button mStartMeasurementBtn;
     Button mStatisticsBtn;
+    Button mSyncButton;
     TextView mConnectionInfo;
 
     @Override
@@ -35,7 +37,7 @@ public class MainActivity extends Activity {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         View onOffLayout = findViewById(R.id.switch_btn);
-        mOnOffBtn = (Button) onOffLayout.findViewById(R.id.onOff_btn);
+        mOnOffBtn = onOffLayout.findViewById(R.id.onOff_btn);
         if (mBluetoothAdapter.isEnabled())
             mOnOffBtn.setText("TURN OFF");
         else
@@ -45,11 +47,13 @@ public class MainActivity extends Activity {
         mConnectionInfo = findViewById(R.id.display_connection_info);
         mStartMeasurementBtn = findViewById(R.id.start_measurement_btn);
         mStatisticsBtn = findViewById(R.id.statistics_btn);
+        mSyncButton = findViewById(R.id.sync_data_btn);
 
         onOffBtnListen();
         onSearchDevicesBtn();
         onStartMeasurementBtn();
         onStatisticBtn();
+        onSyncBtn();
     }
 
     private void onOffBtnListen(){
@@ -105,6 +109,26 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    public void onSyncBtn(){
+        mSyncButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+                    Intent i = new Intent(getApplicationContext(),
+                            SyncActivity.class);
+                    startActivity(i);
+                } else {
+                    //Display error message if not connected to internet
+                    Toast.makeText(MainActivity.this,
+                            "Unable to connect to internet",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+
 
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
         @Override
