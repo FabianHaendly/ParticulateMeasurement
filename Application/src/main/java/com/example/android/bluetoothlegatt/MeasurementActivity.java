@@ -47,7 +47,7 @@ public class MeasurementActivity extends Activity {
     Button mStartMeasurementBtn;
     Button mFinishMeasurementBtn;
     boolean mMeasurementStarted = false;
-    private final String PM_PATTERN = "PM(10|25)[0-9]+.[0-9]{2}";
+    private final String PM_PATTERN = "PM(1|2)[0-9]+.[0-9]{2}|[0-9]{5}";
     LineChart mLineChart;
     GraphService mGraphService;
 
@@ -240,23 +240,34 @@ public class MeasurementActivity extends Activity {
             }
 
             ArrayList<String> allMatches = new ArrayList<>();
-            Matcher matches = Pattern.compile(PM_PATTERN).matcher(data);
-            while (matches.find()) {
-                allMatches.add(matches.group());
+            Matcher matchesPm = Pattern.compile(PM_PATTERN).matcher(data);
+
+
+            while (matchesPm.find()) {
+                allMatches.add(matchesPm.group());
+                Log.d(TAG, "MATCHES: " + matchesPm.group().toString());
             }
+
+            Log.d(TAG, "displayData: " + allMatches.size());
 
             String pm10 = "";
             String pm25 = "";
+            String sensorId = "";
 
             ArrayList<String> finalValues = new ArrayList<>();
 
             for (int i = 0; i < allMatches.size(); i++) {
-                finalValues.add(allMatches.get(i).replaceAll("PM(10|25)", ""));
+                finalValues.add(allMatches.get(i).replaceAll("PM(1|2)", ""));
             }
 
-            if (finalValues.size() == 2) {
+            if (finalValues.size() == 3) {
                 pm10 = finalValues.get(0);
                 pm25 = finalValues.get(1);
+                sensorId = finalValues.get(2);
+            }
+
+            for(int i=0; i<finalValues.size(); i++){
+                Log.d("FINAL VALUES", "PM10: " + pm10 + " PM25: " + pm25 + " Id: " + sensorId);
             }
 
             mPmTenValue.setText(pm10);
@@ -267,7 +278,7 @@ public class MeasurementActivity extends Activity {
                 mTimeStamp = DataObject.returnTimeStamp();
             }
 
-            mDataObject = new DataObject(pm10, pm25, mTimeStamp, mLocation);
+            mDataObject = new DataObject(pm10, pm25, mTimeStamp, mLocation, sensorId);
             db.addItem(mDataObject);
 
 
@@ -275,7 +286,7 @@ public class MeasurementActivity extends Activity {
             Log.d(TAG, "DB SIZE " + list.size());
 
             for (int i = 0; i < list.size(); i++) {
-                Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate());
+                Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate() + " SensorID: " + list.get(i).getSensorId());
             }
         }
     }

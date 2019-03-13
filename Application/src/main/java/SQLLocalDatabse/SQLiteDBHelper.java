@@ -22,7 +22,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         super(context, FeedEntry.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
 
-        populateDB();
+        //populateDB();
     }
 
     private void populateDB(){
@@ -45,7 +45,8 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 FeedEntry.MEASUREMENT_DATE + " TEXT, " +
                 FeedEntry.LONGITUDE + " TEXT, " +
                 FeedEntry.LATITUDE + " TEXT, " +
-                FeedEntry.ALTITUDE + " TEXT" + " )";
+                FeedEntry.ALTITUDE + " TEXT," +
+                FeedEntry.SENSOR_ID + " TEXT" + " )";
         Log.d(TAG, "onCreate: " + create);
         db.execSQL(create);
     }
@@ -64,6 +65,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         values.put(FeedEntry.LONGITUDE, dataObject.getLocation().getLongitude());
         values.put(FeedEntry.LATITUDE, dataObject.getLocation().getLatitude());
         values.put(FeedEntry.ALTITUDE, dataObject.getLocation().getAltitude());
+        values.put(FeedEntry.SENSOR_ID, dataObject.getSensorId());
 
         db.insert(FeedEntry.MEASUREMENT_TABLE, null, values);
     }
@@ -80,9 +82,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             String longitude = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.LONGITUDE));
             String latitude = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.LATITUDE));
             String altitude = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.ALTITUDE));
+            String sensorId = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.SENSOR_ID));
 
             Location loc = new Location(longitude, latitude, altitude);
-            DataObject item = new DataObject(pmTen, pmTwentyFive, measurementDate, loc);
+            DataObject item = new DataObject(pmTen, pmTwentyFive, measurementDate, loc, sensorId);
             item.setID(measurementId);
             items.add(item);
         }
@@ -101,6 +104,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         public static final String LONGITUDE = "LONGITUDE";
         public static final String LATITUDE = "LATITUDE";
         public static final String ALTITUDE = "ALTITUDE";
+        public static final String SENSOR_ID = "SENSORID";
     }
 
     public static class Querys{
@@ -109,31 +113,18 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     private static ArrayList<DataObject> returnDataObjects(ArrayList<String> dates){
         ArrayList<DataObject> objs = new ArrayList<>();
-//        Location loc = new Location("20.1312", "54.123", "234.645");
-
-//        for(int i = 0; i<dates.size(); i++){
-//            Random r = new Random();
-//            float randPmTen = (float)(3.00 + r.nextFloat() * (3.00 - 1.50));
-//            float randPmTwen = (float)(2.00 + r.nextFloat() * (2.00 - 0.00));
-//
-//            DataObject obj = new DataObject(String.valueOf(randPmTen).substring(0,4), String.valueOf(randPmTwen).substring(0,4), returnDates().get(i), loc);
-//            objs.add(obj);
-//        }
 
         Location loc1 = new Location("12.43077537", "51.37791981", "");
         Location loc2 = new Location("12.43076853", "51.3778346", "");
         Location loc3 = new Location("12.43076853", "50.45165111", "");
         Location loc4 = new Location("12.43077537", "51.37791981", "");
 
-        DataObject o1 = new DataObject("5.201", "0.801", "2019-03-12 22:26:00",loc1);
-        DataObject o2 = new DataObject("5.201","1.801","2019-02-25 10:53:41", loc2);
-        DataObject o3 = new DataObject("5.201","5.401","2019-03-25 10:53:41", loc3);
-        DataObject o4 = new DataObject("10.0", "10.0", "2019-03-31 22:59:36",loc4);
+        DataObject o1 = new DataObject("5.20", "0.80", "2019-03-12 22:26:00",loc1, "12345");
+        DataObject o2 = new DataObject("5.20","1.801","2019-02-25 10:53:41", loc2, "12345");
+        DataObject o3 = new DataObject("5.20","5.401","2019-03-25 10:53:41", loc3, "12345");
+        DataObject o4 = new DataObject("10.0", "10.0", "2019-03-31 22:59:36",loc4, "12345");
 
         objs.add(o1);
-//        objs.add(o2);
-//        objs.add(o3);
-//        objs.add(o4);
 
         return objs;
     }

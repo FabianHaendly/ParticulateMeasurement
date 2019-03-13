@@ -11,14 +11,16 @@ public class DataObject {
     private String PmTwentyFive;
     private String MeasurementDate;
     private Location Location;
+    private String SensorId;
 
     public DataObject() {}
 
-    public DataObject(String pmTen, String pmTwentyFive, String measurementDate, Location location){
+    public DataObject(String pmTen, String pmTwentyFive, String measurementDate, Location location, String sensorId){
         PmTen = pmTen;
         PmTwentyFive = pmTwentyFive;
         MeasurementDate = measurementDate;
         Location = location;
+        SensorId = sensorId;
     }
 
     public static String returnTimeStamp() {
@@ -52,5 +54,9 @@ public class DataObject {
 
     public int getID() {
         return ID;
+    }
+
+    public String getSensorId() {
+        return SensorId;
     }
 }

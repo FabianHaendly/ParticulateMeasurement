@@ -33,6 +33,7 @@ public class SynchronizationService {
     private static final String KEY_LONGITUDE = "longitude";
     private static final String KEY_LATITUDE = "latitude";
     private static final String KEY_ALTITUDE = "altitude";
+    private static final String KEY_SENSOR_ID = "sensor_id";
     private static final String KEY_DATA = "data";
     private static final String KEY_SYNCHRONIZATION_DATE = "synchronization_date";
     private static final String BASE_URL = "http://192.168.0.17/measurements/";
@@ -44,8 +45,6 @@ public class SynchronizationService {
     private int unsynchedValues;
 
     public SynchronizationService(Context context) {
-        Location loc1 = new Location("12.43077537", "51.37791981", "17.8");
-        DataObject o1 = new DataObject("10.12", "10.23", "2017-03-03 22:59:36", loc1);
         synchronizationDate = returnTimeStamp();
         localDb = new SQLiteDBHelper(context);
         lastSynchronization = returnLastSynchronization();
@@ -73,7 +72,10 @@ public class SynchronizationService {
             e.printStackTrace();
         }
 
-        return syncDates.get(syncDates.size() - 1);
+        if(syncDates.size()!=0) {
+            return syncDates.get(syncDates.size() - 1);
+        }
+        return "2000-01-01 00:00:00";
     }
 
     public void synchronizeData(){
@@ -113,13 +115,10 @@ public class SynchronizationService {
         httpParams.put(KEY_LONGITUDE, obj.getLocation().getLongitude());
         httpParams.put(KEY_LATITUDE, obj.getLocation().getLatitude());
         httpParams.put(KEY_ALTITUDE, obj.getLocation().getAltitude());
+        httpParams.put(KEY_SENSOR_ID, obj.getSensorId());
         httpParams.put(KEY_SYNCHRONIZATION_DATE, synchronizationDate);
 
         Log.d(TAG, "addDataObject: ------------ " + httpParams.size());
-
-        for (int i = 0; i < httpParams.size(); i++) {
-            Log.d(TAG, "addDataObject: " + httpParams.get(i));
-        }
 
         JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                 BASE_URL + "add_measurement.php", "POST", httpParams);
