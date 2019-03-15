@@ -46,7 +46,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
                 FeedEntry.LONGITUDE + " TEXT, " +
                 FeedEntry.LATITUDE + " TEXT, " +
                 FeedEntry.ALTITUDE + " TEXT," +
-                FeedEntry.SENSOR_ID + " TEXT" + " )";
+                FeedEntry.SENSOR_ID + " INTEGER" + " )";
         Log.d(TAG, "onCreate: " + create);
         db.execSQL(create);
     }
@@ -65,7 +65,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         values.put(FeedEntry.LONGITUDE, dataObject.getLocation().getLongitude());
         values.put(FeedEntry.LATITUDE, dataObject.getLocation().getLatitude());
         values.put(FeedEntry.ALTITUDE, dataObject.getLocation().getAltitude());
-        values.put(FeedEntry.SENSOR_ID, dataObject.getSensorId());
+        values.put(FeedEntry.SENSOR_ID, Integer.valueOf(dataObject.getSensorId()));
 
         db.insert(FeedEntry.MEASUREMENT_TABLE, null, values);
     }
@@ -82,10 +82,10 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             String longitude = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.LONGITUDE));
             String latitude = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.LATITUDE));
             String altitude = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.ALTITUDE));
-            String sensorId = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.SENSOR_ID));
+            int sensorId = cursor.getInt(cursor.getColumnIndexOrThrow(FeedEntry.SENSOR_ID));
 
             Location loc = new Location(longitude, latitude, altitude);
-            DataObject item = new DataObject(pmTen, pmTwentyFive, measurementDate, loc, sensorId);
+            DataObject item = new DataObject(pmTen, pmTwentyFive, measurementDate, loc, String.valueOf(sensorId));
             item.setID(measurementId);
             items.add(item);
         }

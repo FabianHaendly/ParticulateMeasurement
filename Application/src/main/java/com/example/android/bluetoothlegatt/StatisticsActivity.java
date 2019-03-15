@@ -184,8 +184,8 @@ public class StatisticsActivity extends Activity {
             sumPmTwentyFive += Double.valueOf(list.get(i).getPmTwentyFive());
         }
 
-        String avgPmTen = String.valueOf(sumPmTen / list.size()).substring(0, 4);
-        String avgPmTwentyFive = String.valueOf(sumPmTwentyFive / list.size()).substring(0, 4);
+        String avgPmTen = String.valueOf(sumPmTen / list.size()).substring(0, 3);
+        String avgPmTwentyFive = String.valueOf(sumPmTwentyFive / list.size()).substring(0, 3);
 
 //        Log.d(TAG, "returnAveragePmValues: PM10 AVG: " + avgPmTen);
 //        Log.d(TAG, "returnAveragePmValues: PM25 AVG: " + mAvgPm25);
