@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\android-BluetoothLeGatt\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-gu\\values-gu.xml",
+            "outputFile": "C:\\Users\\Fabian\\AndroidStudioProjects\\ParticulateMeasurement\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-gu\\values-gu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-16.0.1.aar\\62085a22d035c5a054f0a0b674142ee6\\res\\values-gu\\values.xml",

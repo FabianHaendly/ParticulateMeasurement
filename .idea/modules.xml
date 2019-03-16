@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Application/Application.iml" filepath="$PROJECT_DIR$/Application/Application.iml" />
       <module fileurl="file://$PROJECT_DIR$/Location/Location.iml" filepath="$PROJECT_DIR$/Location/Location.iml" />
       <module fileurl="file://$PROJECT_DIR$/MeasurementObject/MeasurementObject.iml" filepath="$PROJECT_DIR$/MeasurementObject/MeasurementObject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-BluetoothLeGatt.iml" filepath="$PROJECT_DIR$/android-BluetoothLeGatt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParticulateMeasurement.iml" filepath="$PROJECT_DIR$/ParticulateMeasurement.iml" />
     </modules>
   </component>
 </project>
