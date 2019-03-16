@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import Helper.SynchronizationService;
+import Services.SynchronizationService;
 
 public class SyncActivity extends Activity {
     private SynchronizationService syncService;

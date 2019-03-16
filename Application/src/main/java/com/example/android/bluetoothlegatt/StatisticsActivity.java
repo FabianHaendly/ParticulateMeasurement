@@ -14,8 +14,10 @@ package com.example.android.bluetoothlegatt;
         import java.text.DecimalFormat;
         import java.util.ArrayList;
 
-        import DataObjects.DataObject;
+        import Entities.MeasurementObject;
         import SQLLocalDatabse.SQLiteDBHelper;
+        import Services.FilterService;
+        import Services.GraphService;
 
 public class StatisticsActivity extends Activity {
     private static String TAG = "DISPLAYLIST: ";
@@ -26,8 +28,8 @@ public class StatisticsActivity extends Activity {
     Button mYearBtn;
     LineChart mLineChart;
     GraphService mGraphService;
-    ArrayList<DataObject> mDbData;
-    ArrayList<DataObject> mDisplayList;
+    ArrayList<MeasurementObject> mDbData;
+    ArrayList<MeasurementObject> mDisplayList;
     FilterService mFilterService;
 
     //    Statistic values
@@ -87,8 +89,8 @@ public class StatisticsActivity extends Activity {
         } else toastMessage("No values for this selection!");
     }
 
-    private void setStatisticValues(ArrayList<DataObject> list) {
-        ArrayList<DataObject> maxes = returnMaxPmObject(list);
+    private void setStatisticValues(ArrayList<MeasurementObject> list) {
+        ArrayList<MeasurementObject> maxes = returnMaxPmObject(list);
         ArrayList<String> avgs = returnAveragePmValues(list);
 
         mValues.setText(String.valueOf(list.size()));
@@ -99,7 +101,7 @@ public class StatisticsActivity extends Activity {
         mAvgPm25.setText(avgs.get(1));
     }
 
-    private String returnTraveledDistance(ArrayList<DataObject> list) {
+    private String returnTraveledDistance(ArrayList<MeasurementObject> list) {
 
         double distanceSum = 0.0;
         double lat1, lat2, lon1, lon2, distance;
@@ -145,9 +147,9 @@ public class StatisticsActivity extends Activity {
         return Math.sqrt(distance);
     }
 
-    private ArrayList<DataObject> returnMaxPmObject(ArrayList<DataObject> list) {
-        DataObject maxPmTenObj = list.get(0);
-        DataObject maxPmTwentyFiveObj = list.get(0);
+    private ArrayList<MeasurementObject> returnMaxPmObject(ArrayList<MeasurementObject> list) {
+        MeasurementObject maxPmTenObj = list.get(0);
+        MeasurementObject maxPmTwentyFiveObj = list.get(0);
         double maxPmTen = Double.valueOf(maxPmTenObj.getPmTen());
         double maxPmTwentyFive = Double.valueOf(maxPmTwentyFiveObj.getPmTen());
 
@@ -168,14 +170,14 @@ public class StatisticsActivity extends Activity {
             }
         }
 
-        ArrayList<DataObject> result = new ArrayList<>();
+        ArrayList<MeasurementObject> result = new ArrayList<>();
         result.add(maxPmTenObj);
         result.add(maxPmTwentyFiveObj);
 
         return result;
     }
 
-    private ArrayList<String> returnAveragePmValues(ArrayList<DataObject> list) {
+    private ArrayList<String> returnAveragePmValues(ArrayList<MeasurementObject> list) {
         double sumPmTen = 0.0;
         double sumPmTwentyFive = 0.0;
 

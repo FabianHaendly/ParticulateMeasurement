@@ -30,9 +30,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import BLEHelper.BluetoothLeService;
-import DataObjects.DataObject;
-import DataObjects.Location;
+import Entities.MeasurementObject;
+import Entities.Location;
 import SQLLocalDatabse.SQLiteDBHelper;
+import Services.GraphService;
 
 
 public class MeasurementActivity extends Activity {
@@ -54,7 +55,7 @@ public class MeasurementActivity extends Activity {
     //Location Activity Member
     LocationManager locationManager;
     LocationListener locationListener;
-    private DataObject mDataObject;
+    private MeasurementObject mMeasurementObject;
     private Location mLocation;
     String mLongitude;
     String mLatitude;
@@ -283,14 +284,14 @@ public class MeasurementActivity extends Activity {
 
             if (pm10 != "" && pm25 != "") {
                 mGraphService.initializeLiveGraph(Double.valueOf(pm10), Double.valueOf(pm25));
-                mTimeStamp = DataObject.returnTimeStamp();
+                mTimeStamp = MeasurementObject.returnTimeStamp();
             }
 
-            mDataObject = new DataObject(pm10, pm25, mTimeStamp, mLocation, sensorId);
-            db.addItem(mDataObject);
+            mMeasurementObject = new MeasurementObject(pm10, pm25, mTimeStamp, mLocation, sensorId);
+            db.addItem(mMeasurementObject);
 
 
-            ArrayList<DataObject> list = db.getItems();
+            ArrayList<MeasurementObject> list = db.getItems();
             Log.d(TAG, "DB SIZE " + list.size());
 
             for (int i = 0; i < list.size(); i++) {

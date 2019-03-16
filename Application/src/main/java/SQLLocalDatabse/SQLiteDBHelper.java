@@ -10,8 +10,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import DataObjects.DataObject;
-import DataObjects.Location;
+import Entities.MeasurementObject;
+import Entities.Location;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static String TAG = "---- SQLHelper ----";
@@ -27,9 +27,9 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
     private void populateDB(){
         ArrayList<String> dates = returnDates();
-        ArrayList<DataObject> list = returnDataObjects(dates);
+        ArrayList<MeasurementObject> list = returnDataObjects(dates);
 
-        for(DataObject obj: list){
+        for(MeasurementObject obj: list){
             this.addItem(obj);
         }
 
@@ -57,23 +57,23 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addItem(DataObject dataObject) {
+    public void addItem(MeasurementObject measurementObject) {
         ContentValues values = new ContentValues();
-        values.put(FeedEntry.PM_TEN, dataObject.getPmTen());
-        values.put(FeedEntry.PM_TWENTY_FIVE, dataObject.getPmTwentyFive());
-        values.put(FeedEntry.MEASUREMENT_DATE, dataObject.getMeasurementDate());
-        values.put(FeedEntry.LONGITUDE, dataObject.getLocation().getLongitude());
-        values.put(FeedEntry.LATITUDE, dataObject.getLocation().getLatitude());
-        values.put(FeedEntry.ALTITUDE, dataObject.getLocation().getAltitude());
-        values.put(FeedEntry.SENSOR_ID, Integer.valueOf(dataObject.getSensorId()));
+        values.put(FeedEntry.PM_TEN, measurementObject.getPmTen());
+        values.put(FeedEntry.PM_TWENTY_FIVE, measurementObject.getPmTwentyFive());
+        values.put(FeedEntry.MEASUREMENT_DATE, measurementObject.getMeasurementDate());
+        values.put(FeedEntry.LONGITUDE, measurementObject.getLocation().getLongitude());
+        values.put(FeedEntry.LATITUDE, measurementObject.getLocation().getLatitude());
+        values.put(FeedEntry.ALTITUDE, measurementObject.getLocation().getAltitude());
+        values.put(FeedEntry.SENSOR_ID, Integer.valueOf(measurementObject.getSensorId()));
 
         db.insert(FeedEntry.MEASUREMENT_TABLE, null, values);
     }
 
-    public ArrayList<DataObject> getItems() {
+    public ArrayList<MeasurementObject> getItems() {
         Cursor cursor = db.rawQuery(Querys.GET_ALL_ITEMS, null);
 
-        ArrayList<DataObject> items = new ArrayList<>();
+        ArrayList<MeasurementObject> items = new ArrayList<>();
         while (cursor.moveToNext()) {
             int measurementId = cursor.getInt(cursor.getColumnIndexOrThrow(FeedEntry.MEASUREMENT_ID));
             String pmTen = cursor.getString(cursor.getColumnIndexOrThrow(FeedEntry.PM_TEN));
@@ -85,7 +85,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
             int sensorId = cursor.getInt(cursor.getColumnIndexOrThrow(FeedEntry.SENSOR_ID));
 
             Location loc = new Location(longitude, latitude, altitude);
-            DataObject item = new DataObject(pmTen, pmTwentyFive, measurementDate, loc, String.valueOf(sensorId));
+            MeasurementObject item = new MeasurementObject(pmTen, pmTwentyFive, measurementDate, loc, String.valueOf(sensorId));
             item.setID(measurementId);
             items.add(item);
         }
@@ -111,18 +111,18 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         public static String GET_ALL_ITEMS = "select * from " + SQLiteDBHelper.FeedEntry.MEASUREMENT_TABLE;
     }
 
-    private static ArrayList<DataObject> returnDataObjects(ArrayList<String> dates){
-        ArrayList<DataObject> objs = new ArrayList<>();
+    private static ArrayList<MeasurementObject> returnDataObjects(ArrayList<String> dates){
+        ArrayList<MeasurementObject> objs = new ArrayList<>();
 
         Location loc1 = new Location("12.43077537", "51.37791981", "");
         Location loc2 = new Location("12.43076853", "51.3778346", "");
         Location loc3 = new Location("12.43076853", "50.45165111", "");
         Location loc4 = new Location("12.43077537", "51.37791981", "");
 
-        DataObject o1 = new DataObject("5.20", "0.80", "2019-03-12 22:26:00",loc1, "12345");
-        DataObject o2 = new DataObject("5.20","1.801","2019-02-25 10:53:41", loc2, "12345");
-        DataObject o3 = new DataObject("5.20","5.401","2019-03-25 10:53:41", loc3, "12345");
-        DataObject o4 = new DataObject("10.0", "10.0", "2019-03-31 22:59:36",loc4, "12345");
+        MeasurementObject o1 = new MeasurementObject("5.20", "0.80", "2019-03-12 22:26:00",loc1, "12345");
+        MeasurementObject o2 = new MeasurementObject("5.20","1.801","2019-02-25 10:53:41", loc2, "12345");
+        MeasurementObject o3 = new MeasurementObject("5.20","5.401","2019-03-25 10:53:41", loc3, "12345");
+        MeasurementObject o4 = new MeasurementObject("10.0", "10.0", "2019-03-31 22:59:36",loc4, "12345");
 
         objs.add(o1);
 

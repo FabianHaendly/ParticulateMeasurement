@@ -28,8 +28,7 @@
 
     <application
         android:debuggable="true"
-        android:label="@string/app_name"
-        android:testOnly="true" >
+        android:label="@string/app_name" >
         <activity android:name="com.example.android.bluetoothlegatt.SyncActivity" />
         <activity android:name="com.example.android.bluetoothlegatt.StatisticsActivity" />
         <activity
