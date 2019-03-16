@@ -72,7 +72,6 @@ public class MeasurementActivity extends Activity {
         mTvDeviceName = findViewById(R.id.tvDeviceName);
         mBtDevice = intent.getParcelableExtra("device");
         mTvDeviceName.setText(mBtDevice.getName());
-        mTvConnectionStatus = findViewById(R.id.tvConnectionStatus);
         mStartMeasurementBtn = findViewById(R.id.startMeasurementBtn);
         mFinishMeasurementBtn = findViewById(R.id.finishMeasurementBtn);
         mPmTenValue = findViewById(R.id.tvPmTenValue);
@@ -215,17 +214,10 @@ public class MeasurementActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
-                updateConnectionState("Connected");
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                updateConnectionState("Disconnected");
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
-                // Show all the supported services and characteristics on the user interface.
-                //displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-
                 String data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
-
-                Log.d(TAG, "onReceiveeeeeeee: " + data);
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -295,15 +287,6 @@ public class MeasurementActivity extends Activity {
                 Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate() + " SensorID: " + list.get(i).getSensorId());
             }
         }
-    }
-
-    private void updateConnectionState(final String state) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTvConnectionStatus.setText(state);
-            }
-        });
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
