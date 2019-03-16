@@ -57,4 +57,9 @@ android {
 
     }
 
+    defaultConfig {
+        applicationId "Activities.MainActivity"
+        minSdkVersion 18
+        targetSdkVersion 28
+    }
 }

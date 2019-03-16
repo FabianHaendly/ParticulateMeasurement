@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.bluetoothlegatt.R;
+import BLEHelper.bluetoothlegatt.R;
 
 import Services.SynchronizationService;
 

@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.bluetoothlegatt.R;
+import BLEHelper.bluetoothlegatt.R;
 
 import BLEHelper.DeviceScanActivity;
 import Helper.CheckNetworkStatus;
@@ -188,7 +188,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // User chose not to enable Bluetooth.
-        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
+//        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
             Toast.makeText(getBaseContext(), "No measurement possible", Toast.LENGTH_SHORT).show();
             return;

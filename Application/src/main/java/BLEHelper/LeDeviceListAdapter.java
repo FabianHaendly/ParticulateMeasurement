@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.android.bluetoothlegatt.R;
+import BLEHelper.bluetoothlegatt.R;
 
 import java.util.ArrayList;
 

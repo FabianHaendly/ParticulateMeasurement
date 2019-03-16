@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 
 import Entities.MeasurementObject;
-import Helper.DataObjectComparer;
+import Helper.MeasurementObjectComparer;
 
 public class FilterService {
     private static final String TAG ="MATCHES SIZE: ";
@@ -17,7 +17,6 @@ public class FilterService {
     public static final int PERIOD_CURRENT_WEEK= 2;
     public static final int PERIOD_CURRENT_MONTH = 3;
     public static final int PERIOD_CURRENT_YEAR = 4;
-    public static final int PERIOD_CUSTOM = 5;
     /**
      *
      * @param list
@@ -27,7 +26,6 @@ public class FilterService {
      * 2 = current week
      * 3 = current month
      * 4 = current year
-     * 5 = custom period
      * @return
      */
     public static ArrayList<MeasurementObject> returnFilteredList(ArrayList<MeasurementObject> list, int period){
@@ -98,7 +96,7 @@ public class FilterService {
             }
         }
 
-        Collections.sort(allMatches, new DataObjectComparer());
+        Collections.sort(allMatches, new MeasurementObjectComparer());
 
         return allMatches;
     }

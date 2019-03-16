@@ -8,7 +8,7 @@ package Activities;
         import android.widget.TextView;
         import android.widget.Toast;
 
-        import com.example.android.bluetoothlegatt.R;
+        import BLEHelper.bluetoothlegatt.R;
         import com.github.mikephil.charting.charts.LineChart;
 
         import java.math.RoundingMode;
@@ -16,7 +16,7 @@ package Activities;
         import java.util.ArrayList;
 
         import Entities.MeasurementObject;
-        import SQLLocalDatabse.SQLiteDBHelper;
+        import Database.SQLiteDBHelper;
         import Services.FilterService;
         import Services.GraphService;
 

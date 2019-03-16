@@ -32,7 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.android.bluetoothlegatt.R;
+import BLEHelper.bluetoothlegatt.R;
 
 /**
  * For a given BLE device, this Activity provides the user interface to connect, display data,

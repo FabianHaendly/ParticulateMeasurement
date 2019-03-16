@@ -17,7 +17,7 @@ import java.util.Map;
 
 import Entities.MeasurementObject;
 import Helper.HttpJsonParser;
-import SQLLocalDatabse.SQLiteDBHelper;
+import Database.SQLiteDBHelper;
 
 public class SynchronizationService {
     private static final String TAG = "SYNCSERVICE";

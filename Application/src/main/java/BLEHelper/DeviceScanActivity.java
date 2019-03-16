@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.android.bluetoothlegatt.R;
+import BLEHelper.bluetoothlegatt.R;
 
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
@@ -43,20 +43,16 @@ public class DeviceScanActivity extends ListActivity {
 
         checkBTPermissions();
 
-        // Use this check to determine whether BLE is supported on the device.  Then you can
-        // selectively disable BLE-related features.
+        // check for bluetooth availability on device
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
             Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
             finish();
         }
 
-        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
-        // BluetoothAdapter through BluetoothManager.
         final BluetoothManager bluetoothManager =
                 (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
 
-        // Checks if Bluetooth is supported on the device.
         if (mBluetoothAdapter == null) {
             Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
             finish();
@@ -129,7 +125,7 @@ public class DeviceScanActivity extends ListActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // User chose not to enable Bluetooth.
-        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
+//        Log.d(TAG, "onActivityResult: CATCHES BT ON OR OFF FROM USER DECISION");
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
 //            finish();
             return;

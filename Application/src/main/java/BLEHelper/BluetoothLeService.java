@@ -34,10 +34,6 @@ import android.util.Log;
 
 import java.util.UUID;
 
-/**
- * Service for managing connection and data communication with a GATT server hosted on a
- * given Bluetooth LE device.
- */
 public class BluetoothLeService extends Service {
     private final static String TAG = BluetoothLeService.class.getSimpleName();
 
@@ -47,15 +43,17 @@ public class BluetoothLeService extends Service {
     private BluetoothGatt mBluetoothGatt;
 
     public final static String ACTION_GATT_CONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_CONNECTED";
+            "ACTION_GATT_CONNECTED";
     public final static String ACTION_GATT_DISCONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED";
+            "ACTION_GATT_DISCONNECTED";
     public final static String ACTION_GATT_SERVICES_DISCOVERED =
-            "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED";
+            "ACTION_GATT_SERVICES_DISCOVERED";
     public final static String ACTION_DATA_AVAILABLE =
-            "com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
+            "ACTION_DATA_AVAILABLE";
     public final static String EXTRA_DATA =
-            "com.example.bluetooth.le.EXTRA_DATA";
+            "EXTRA_DATA";
+    public static String CLIENT_CHARACTERISTIC_CONFIG =
+            "00002902-0000-1000-8000-00805f9b34fb";
 
 
     // Implements callback methods for GATT events that the app cares about.  For example,
@@ -89,17 +87,17 @@ public class BluetoothLeService extends Service {
                 BluetoothGattService service = gatt.getService(pmIdService);
 
                 if (service != null) {
-                    Log.d(TAG, "onServicesDiscovered: ---- PM Service available");
+//                    Log.d(TAG, "onServicesDiscovered: ---- PM Service available");
                     BluetoothGattCharacteristic characteristic = service.getCharacteristic(pmIdCharacteristic);
 
                     if (characteristic != null) {
-                        Log.d(TAG, "onServicesDiscovered: ---- PM CHAR available");
+//                        Log.d(TAG, "onServicesDiscovered: ---- PM CHAR available");
                         gatt.setCharacteristicNotification(characteristic, true);
 
-                        BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+                        BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString(CLIENT_CHARACTERISTIC_CONFIG));
 
                         if (descriptor != null) {
-                            Log.d(TAG, "onServicesDiscovered: ---- Descriptor available " + descriptor.getUuid());
+//                            Log.d(TAG, "onServicesDiscovered: ---- Descriptor available " + descriptor.getUuid());
                             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                             mBluetoothGatt.writeDescriptor(descriptor);
                         }
@@ -125,7 +123,7 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-            Log.d(TAG, "onCharacteristicChanged: CHAR CHANGED");
+//            Log.d(TAG, "onCharacteristicChanged: CHAR CHANGED");
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
     };
@@ -172,11 +170,7 @@ public class BluetoothLeService extends Service {
 
     private final IBinder mBinder = new LocalBinder();
 
-    /**
-     * Initializes a reference to the local Bluetooth adapter.
-     *
-     * @return Return true if the initialization is successful.
-     */
+
     public boolean initialize() {
         // For API level 18 and above, get a reference to BluetoothAdapter through
         // BluetoothManager.
@@ -236,12 +230,7 @@ public class BluetoothLeService extends Service {
         return true;
     }
 
-    /**
-     * Disconnects an existing connection or cancel a pending connection. The disconnection result
-     * is reported asynchronously through the
-     * {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
-     * callback.
-     */
+
     public void disconnect() {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
@@ -250,10 +239,7 @@ public class BluetoothLeService extends Service {
         mBluetoothGatt.disconnect();
     }
 
-    /**
-     * After using a given BLE device, the app must call this method to ensure resources are
-     * released properly.
-     */
+
     public void close() {
         if (mBluetoothGatt == null) {
             return;

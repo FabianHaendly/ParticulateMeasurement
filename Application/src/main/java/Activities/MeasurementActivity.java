@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.bluetoothlegatt.R;
+import BLEHelper.bluetoothlegatt.R;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 import BLEHelper.BluetoothLeService;
 import Entities.MeasurementObject;
 import Entities.Location;
-import SQLLocalDatabse.SQLiteDBHelper;
+import Database.SQLiteDBHelper;
 import Services.GraphService;
 
 
@@ -45,7 +45,6 @@ public class MeasurementActivity extends Activity {
     TextView mPmTwentyFiveValue;
     BluetoothDevice mBtDevice;
     private BluetoothLeService mBluetoothLeService;
-    private TextView mTvConnectionStatus;
     Button mStartMeasurementBtn;
     Button mFinishMeasurementBtn;
     boolean mMeasurementStarted = false;
@@ -124,13 +123,13 @@ public class MeasurementActivity extends Activity {
                     mLatitude = String.valueOf(location.getLatitude());
                     mAltitude = String.valueOf(location.getAltitude());
                     mLocation = new Location(mLongitude, mLatitude, mAltitude);
-                    Log.d(TAG, "onLocationChanged: LOCATION SET");
+//                    Log.d(TAG, "onLocationChanged: LOCATION SET");
                 }
             }
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-                Log.d(TAG, "onStatusChanged: STATUS CHANGE");
+//                Log.d(TAG, "onStatusChanged: STATUS CHANGE");
             }
 
             @Override
@@ -189,7 +188,7 @@ public class MeasurementActivity extends Activity {
         registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mBtDevice.getAddress());
-            Log.d(TAG, "Connect request result=" + result);
+//            Log.d(TAG, "Connect request result=" + result);
         }
     }
 
@@ -217,7 +216,6 @@ public class MeasurementActivity extends Activity {
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                String data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -226,6 +224,8 @@ public class MeasurementActivity extends Activity {
 
     private void displayData(String data) {
         if (data != null) {
+
+            Log.d(TAG, "displayData: " + data);
 
             if (!mMeasurementStarted) {
                 mPmTenValue.setText("   -   ");
@@ -239,10 +239,10 @@ public class MeasurementActivity extends Activity {
 
             while (matchesPm.find()) {
                 allMatches.add(matchesPm.group());
-                Log.d(TAG, "MATCHES: " + matchesPm.group().toString());
+//                Log.d(TAG, "MATCHES: " + matchesPm.group().toString());
             }
 
-            Log.d(TAG, "displayData: " + allMatches.size());
+//            Log.d(TAG, "displayData: " + allMatches.size());
 
             String pm10 = "";
             String pm25 = "";
@@ -256,6 +256,7 @@ public class MeasurementActivity extends Activity {
 
 
             if(finalValues.size() < 3){
+                Log.d(TAG, "displayData: RETURNING - SIZE " + finalValues.size());
                 return;
             }
             else {
@@ -280,12 +281,12 @@ public class MeasurementActivity extends Activity {
             db.addItem(mMeasurementObject);
 
 
-            ArrayList<MeasurementObject> list = db.getItems();
-            Log.d(TAG, "DB SIZE " + list.size());
-
-            for (int i = 0; i < list.size(); i++) {
-                Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate() + " SensorID: " + list.get(i).getSensorId());
-            }
+//            ArrayList<MeasurementObject> list = db.getItems();
+//            Log.d(TAG, "DB SIZE " + list.size());
+//
+//            for (int i = 0; i < list.size(); i++) {
+//                Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate() + " SensorID: " + list.get(i).getSensorId());
+//            }
         }
     }
 
