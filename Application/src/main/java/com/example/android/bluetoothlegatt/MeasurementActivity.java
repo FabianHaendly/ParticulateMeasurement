@@ -224,6 +224,10 @@ public class MeasurementActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
                 //displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
+
+                String data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
+
+                Log.d(TAG, "onReceiveeeeeeee: " + data);
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
@@ -260,7 +264,11 @@ public class MeasurementActivity extends Activity {
                 finalValues.add(allMatches.get(i).replaceAll("PM(1|2)", ""));
             }
 
-            if (finalValues.size() == 3) {
+
+            if(finalValues.size() < 3){
+                return;
+            }
+            else {
                 pm10 = finalValues.get(0);
                 pm25 = finalValues.get(1);
                 sensorId = finalValues.get(2);
