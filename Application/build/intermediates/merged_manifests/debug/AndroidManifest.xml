@@ -7,13 +7,7 @@
     <uses-sdk
         android:minSdkVersion="18"
         android:targetSdkVersion="28" />
-    <!-- Min/target SDK versions (<uses-sdk>) managed by build.gradle -->
-    <!--
- Declare this required feature if you want to make the app available to BLE-capable
-    devices only.  If you want to make your app available to devices that don't support BLE,
-    you should omit this in the manifest.  Instead, determine BLE capability by using
-    PackageManager.hasSystemFeature(FEATURE_BLUETOOTH_LE)
-    -->
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -29,13 +23,13 @@
         android:debuggable="true"
         android:label="@string/app_name"
         android:testOnly="true" >
-        <activity android:name="com.example.android.bluetoothlegatt.SyncActivity" />
-        <activity android:name="com.example.android.bluetoothlegatt.StatisticsActivity" />
+        <activity android:name="Activities.SyncActivity" />
+        <activity android:name="Activities.StatisticsActivity" />
         <activity
-            android:name="com.example.android.bluetoothlegatt.MeasurementActivity"
+            android:name="Activities.MeasurementActivity"
             android:label="@string/title_activity_measurement" />
         <activity
-            android:name="com.example.android.bluetoothlegatt.MainActivity"
+            android:name="Activities.MainActivity"
             android:label="@string/title_activity_my" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
