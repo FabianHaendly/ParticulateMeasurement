@@ -239,10 +239,8 @@ public class MeasurementActivity extends Activity {
 
             while (matchesPm.find()) {
                 allMatches.add(matchesPm.group());
-//                Log.d(TAG, "MATCHES: " + matchesPm.group().toString());
+//                Log.d(TAG, "MATCHES: " + matchesPm.group());
             }
-
-//            Log.d(TAG, "displayData: " + allMatches.size());
 
             String pm10 = "";
             String pm25 = "";
@@ -252,9 +250,9 @@ public class MeasurementActivity extends Activity {
 
             for (int i = 0; i < allMatches.size(); i++) {
                 finalValues.add(allMatches.get(i).replaceAll("PM(1|2)", ""));
+//                Log.d(TAG, "FINAL VALUE " + i + " " + finalValues.get(i));
             }
-
-
+            
             if(finalValues.size() < 3){
                 Log.d(TAG, "displayData: RETURNING - SIZE " + finalValues.size());
                 return;
@@ -265,9 +263,9 @@ public class MeasurementActivity extends Activity {
                 sensorId = finalValues.get(2);
             }
 
-            for(int i=0; i<finalValues.size(); i++){
-                Log.d("FINAL VALUES", "PM10: " + pm10 + " PM25: " + pm25 + " Id: " + sensorId);
-            }
+//            for(int i=0; i<finalValues.size(); i++){
+//                Log.d("FINAL VALUES", "PM10: " + pm10 + " PM25: " + pm25 + " Id: " + sensorId);
+//            }
 
             mPmTenValue.setText(pm10);
             mPmTwentyFiveValue.setText(pm25);
