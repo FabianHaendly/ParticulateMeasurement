@@ -1736,6 +1736,10 @@
         "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\6a29c452da56a3fe581827fc684234e8\\res\\layout-v21\\notification_action_tombstone.xml"
     },
     {
+        "merged": "C:\\Users\\Fabian\\AndroidStudioProjects\\ParticulateMeasurement\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_checked_96px.png.flat",
+        "source": "C:\\Users\\Fabian\\AndroidStudioProjects\\ParticulateMeasurement\\Application\\src\\main\\res\\drawable-xxhdpi\\checked_96px.png"
+    },
+    {
         "merged": "C:\\Users\\Fabian\\AndroidStudioProjects\\ParticulateMeasurement\\Application\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_googleg_standard_color_18.png.flat",
         "source": "C:\\Users\\Fabian\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-16.0.1.aar\\62085a22d035c5a054f0a0b674142ee6\\res\\drawable-hdpi-v4\\googleg_standard_color_18.png"
     },

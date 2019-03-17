@@ -23,7 +23,8 @@
                 android:gravity="center"
                 android:text="@string/device_name_header"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
@@ -41,7 +42,8 @@
                 android:height="40dp"
                 android:gravity="center"
                 android:text="@string/device_name"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
@@ -51,20 +53,25 @@
             android:orientation="vertical">
 
             <Button
+                style="@style/myBtn"
                 android:id="@+id/startMeasurementBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="90dp"
-                android:text="@string/start_measure" />
+                android:text="@string/start_measure"
+                android:layout_marginBottom="10dp"/>
 
             <Button
+                style="@style/myBtn"
                 android:id="@+id/finishMeasurementBtn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="90dp"
                 android:layout_marginRight="90dp"
-                android:drawableRight="@drawable/finish_icon"
+                android:drawableRight="@drawable/checked_96px"
+                android:paddingBottom="2dp"
+                android:paddingRight="8dp"
                 android:gravity="center|center_vertical"
                 android:text="@string/finish_measurement" />
         </LinearLayout>
@@ -82,7 +89,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="PM 10:"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/tvPmTenValue"
@@ -91,7 +99,8 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:text="   -   "
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textColor="#000000"/>
         </LinearLayout>
 
         <LinearLayout
@@ -107,7 +116,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="PM 25:"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/tvPmTwentyFiveValue"
@@ -116,7 +126,8 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:text="   -   "
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textColor="#000000"/>
         </LinearLayout>
 
         <include layout="@layout/graph_layout"></include>

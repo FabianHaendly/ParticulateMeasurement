@@ -24,6 +24,7 @@
                 android:weightSum="2">
 
                 <Button
+                    style="@style/myBtn"
                     android:id="@+id/today_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -32,6 +33,7 @@
                     android:text="@string/this_day_btn" />
 
                 <Button
+                    style="@style/myBtn"
                     android:id="@+id/week_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -47,6 +49,7 @@
                 android:weightSum="2">
 
                 <Button
+                    style="@style/myBtn"
                     android:id="@+id/month_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,6 +58,7 @@
                     android:text="@string/this_month_btn" />
 
                 <Button
+                    style="@style/myBtn"
                     android:id="@+id/year_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

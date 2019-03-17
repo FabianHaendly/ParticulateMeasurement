@@ -18,18 +18,22 @@
                 android:id="@+id/kv_values_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="7"
                 android:text="@string/kv_values"
                 android:textStyle="bold"
                 android:gravity="center_horizontal|right"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/kv_values_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/kv_values_data"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
         </LinearLayout>
         <!--Distance-->
         <LinearLayout
@@ -40,18 +44,22 @@
                 android:id="@+id/kv_distance_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="7"
                 android:text="@string/kv_distance"
                 android:textStyle="bold"
                 android:gravity="center_horizontal|right"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/kv_distance_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/kv_distance_data"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
         </LinearLayout>
         <!--max PM10-->
         <LinearLayout
@@ -62,18 +70,22 @@
                 android:id="@+id/kv_maxPm10_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="7"
                 android:text="@string/kv_maxPm10"
                 android:textStyle="bold"
                 android:gravity="center_horizontal|right"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/kv_maxPmTen_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/kv_maxPmTen_data"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
         </LinearLayout>
         <!--max PM25-->
         <LinearLayout
@@ -84,18 +96,22 @@
                 android:id="@+id/kv_maxPmTwentyFive_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="7"
                 android:text="@string/kv_maxPm25"
                 android:textStyle="bold"
                 android:gravity="center_horizontal|right"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/kv_maxPmTwentyFive_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/kv_maxPm25_data"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
         </LinearLayout>
         <!--avg. PM10-->
         <LinearLayout
@@ -106,18 +122,22 @@
                 android:id="@+id/kv_avgPmTen_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="7"
                 android:text="@string/kv_avgPmTen"
                 android:textStyle="bold"
                 android:gravity="center_horizontal|right"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/kv_avgPmTen_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/kv_avgPmTen_data"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
         </LinearLayout>
         <!--avg. PM25-->
         <LinearLayout
@@ -128,18 +148,22 @@
                 android:id="@+id/kv_avgPMTwentyFive_static"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="7"
                 android:text="@string/kv_avgPmTwentyFive"
                 android:textStyle="bold"
                 android:gravity="center_horizontal|right"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/kv_avgPmTwentyFive_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/kv_avgPmTwentyFive_data"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:paddingLeft="15dp"
+                android:textColor="#000000"/>
         </LinearLayout>
     </LinearLayout>
 

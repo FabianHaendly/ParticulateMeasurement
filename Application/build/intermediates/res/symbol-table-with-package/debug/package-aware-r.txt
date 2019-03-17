@@ -650,6 +650,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable button_change_background
 drawable cancel_64px
+drawable checked_96px
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused

@@ -22,6 +22,7 @@
         android:layout_marginLeft="50dp">
 
         <Button
+            style="@style/myBtn"
             android:id="@+id/search_devices_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,24 +30,29 @@
             android:layout_marginTop="50dp"
             />
         <TextView
+            style=""
             android:id="@+id/display_connection_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
+            android:textColor="#000000"
             android:text="@string/display_connection_info"/>
         <Button
+            style="@style/myBtn"
             android:id="@+id/start_measurement_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:text="@string/start_measurement_btn"/>
         <Button
+            style="@style/myBtn"
             android:id="@+id/statistics_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:text="@string/watch_data_btn"/>
         <Button
+            style="@style/myBtn"
             android:id="@+id/sync_data_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
