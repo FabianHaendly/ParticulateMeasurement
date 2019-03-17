@@ -869,6 +869,7 @@ id tvPmTwentyFive
 id tvPmTwentyFiveValue
 id tv_last_sync
 id tv_last_sync_data
+id tv_period_data
 id tv_unsynced_values_data
 id tv_unsynced_values_static
 id uniform
@@ -1025,6 +1026,8 @@ string menu_disconnect
 string menu_scan
 string menu_stop
 string no_data
+string period_data
+string period_label
 string search_devices_btn
 string search_menu_title
 string start_measure

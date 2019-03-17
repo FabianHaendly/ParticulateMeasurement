@@ -71,5 +71,7 @@
     <string name="last_sync_data"></string>
     <string name="unsynced_values">Unsynced Values: </string>
     <string name="unsynced_values_data"></string>
+    <string name="period_label">Period:</string>
+    <string name="period_data">Data drummy</string>
 
 </resources>

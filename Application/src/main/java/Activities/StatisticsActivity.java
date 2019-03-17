@@ -1,24 +1,30 @@
 package Activities;
 
-        import android.app.Activity;
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.Activity;
+import android.media.MediaSync;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import BLEHelper.bluetoothlegatt.R;
-        import com.github.mikephil.charting.charts.LineChart;
+import BLEHelper.bluetoothlegatt.R;
 
-        import java.math.RoundingMode;
-        import java.text.DecimalFormat;
-        import java.util.ArrayList;
+import com.github.mikephil.charting.charts.LineChart;
 
-        import Entities.MeasurementObject;
-        import Database.SQLiteDBHelper;
-        import Services.FilterService;
-        import Services.GraphService;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import Entities.MeasurementObject;
+import Database.SQLiteDBHelper;
+import Services.FilterService;
+import Services.GraphService;
 
 public class StatisticsActivity extends Activity {
     private static String TAG = "DISPLAYLIST: ";
@@ -32,6 +38,7 @@ public class StatisticsActivity extends Activity {
     ArrayList<MeasurementObject> mDbData;
     ArrayList<MeasurementObject> mDisplayList;
     FilterService mFilterService;
+    TextView mPeriodData;
 
     //    Statistic values
     TextView mValues;
@@ -52,6 +59,7 @@ public class StatisticsActivity extends Activity {
         mYearBtn = findViewById(R.id.year_btn);
         mLineChart = findViewById(R.id.lineChart);
         mFilterService = new FilterService();
+        mPeriodData = findViewById(R.id.tv_period_data);
 
         mValues = findViewById(R.id.kv_values_data);
         mDistance = findViewById(R.id.kv_distance_data);
@@ -62,6 +70,9 @@ public class StatisticsActivity extends Activity {
 
         SQLiteDBHelper db = new SQLiteDBHelper(this);
         mDbData = db.getItems();
+
+        mGraphService = new GraphService(mLineChart, new ArrayList<MeasurementObject>());
+        mGraphService.initializeStaticGraph();
     }
 
     public void onTodayBtnClick(View view) {
@@ -81,13 +92,68 @@ public class StatisticsActivity extends Activity {
     }
 
     private void btnExecute(int period) {
+
+        setPeriodTextView(period);
+
         mDisplayList = FilterService.returnFilteredList(mDbData, period);
         Log.d(TAG, "" + mDisplayList.size());
         if (mDisplayList.size() > 0) {
             mGraphService = new GraphService(mLineChart, mDisplayList);
             mGraphService.initializeStaticGraph();
             setStatisticValues(mDisplayList);
-        } else toastMessage("No values for this selection!");
+        } else {
+            mGraphService = new GraphService(mLineChart, mDisplayList);
+            mGraphService.initializeStaticGraph();
+            toastMessage("No values for this selection!");
+        }
+    }
+
+    private void setPeriodTextView(int period) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+
+        switch (period) {
+            case FilterService.PERIOD_CURRENT_DAY:
+                String currentDate = sdf.format(cal.getTime());
+                mPeriodData.setText(currentDate);
+                break;
+            case FilterService.PERIOD_CURRENT_WEEK:
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                String firstDayWeek = sdf.format(cal.getTime());
+
+                for (int i = 0; i <6; i++) {
+                    cal.add(Calendar.DATE, 1);
+                }
+
+                String lastDayWeek = sdf.format(cal.getTime());
+                String weekPeriod = firstDayWeek + " - " + lastDayWeek;
+
+                mPeriodData.setText(weekPeriod);
+                break;
+            case FilterService.PERIOD_CURRENT_MONTH:
+                Calendar gCal = new GregorianCalendar();
+                int month = gCal.get(Calendar.MONTH);
+                gCal.set(Calendar.MONTH, month);
+                gCal.set(Calendar.DAY_OF_MONTH, 1);
+                Date monthStart = gCal.getTime();
+                gCal.add(Calendar.MONTH, 1);
+                gCal.add(Calendar.DAY_OF_MONTH, -1);
+                Date monthEnd = gCal.getTime();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                String monthPeriod = dateFormat.format(monthStart) + " - " + dateFormat.format(monthEnd);
+                mPeriodData.setText(monthPeriod);
+                break;
+            case FilterService.PERIOD_CURRENT_YEAR:
+                String cDate = sdf.format(cal.getTime());
+                cal.set(Calendar.DAY_OF_YEAR, 1);
+                String startDate = sdf.format(cal.getTime());
+
+                mPeriodData.setText(startDate + " - " + cDate);
+                break;
+            default:
+                mPeriodData.setText("No selection yet!");
+        }
     }
 
     private void setStatisticValues(ArrayList<MeasurementObject> list) {

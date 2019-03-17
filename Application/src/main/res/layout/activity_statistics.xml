@@ -27,7 +27,7 @@
                     style="@style/myBtn"
                     android:id="@+id/today_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
                     android:onClick="onTodayBtnClick"
                     android:text="@string/this_day_btn" />
@@ -36,7 +36,7 @@
                     style="@style/myBtn"
                     android:id="@+id/week_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
                     android:onClick="onWeekBtnClick"
                     android:text="@string/this_week_btn" />
@@ -52,7 +52,7 @@
                     style="@style/myBtn"
                     android:id="@+id/month_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
                     android:onClick="onMonthBtnClick"
                     android:text="@string/this_month_btn" />
@@ -61,11 +61,33 @@
                     style="@style/myBtn"
                     android:id="@+id/year_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
                     android:onClick="onYearBtnClick"
                     android:text="@string/this_year_btn" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="@string/period_label"/>
+            <TextView
+                android:id="@+id/tv_period_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:textColor="#000000"
+                android:text="@string/period_data"/>
         </LinearLayout>
 
         <LinearLayout
