@@ -51,7 +51,7 @@
     <string name="this_day_btn">Today</string>
     <string name="this_week_btn">This Week</string>
     <string name="this_month_btn">This Month</string>
-    <string name="this_year_btn">This year</string>
+    <string name="this_year_btn">This Year</string>
 
     <string name="y_axes">µg pm / m³</string>
     <string name="x_axes">Number of measurement values</string>
@@ -72,6 +72,6 @@
     <string name="unsynced_values">Unsynced Values: </string>
     <string name="unsynced_values_data"></string>
     <string name="period_label">Period:</string>
-    <string name="period_data">Data drummy</string>
+    <string name="period_data">Select a period!</string>
 
 </resources>

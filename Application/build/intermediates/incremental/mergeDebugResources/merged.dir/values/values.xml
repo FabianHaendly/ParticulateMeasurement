@@ -442,7 +442,7 @@
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
     <string name="no_data">No data</string>
-    <string name="period_data">Data drummy</string>
+    <string name="period_data">Select a period!</string>
     <string name="period_label">Period:</string>
     <string name="search_devices_btn">Connect to devices</string>
     <string name="search_menu_title">Search</string>
@@ -454,7 +454,7 @@
     <string name="this_day_btn">Today</string>
     <string name="this_month_btn">This Month</string>
     <string name="this_week_btn">This Week</string>
-    <string name="this_year_btn">This year</string>
+    <string name="this_year_btn">This Year</string>
     <string name="title_activity_measurement">MeasurementActivity</string>
     <string name="title_activity_my">Particulate Matter Measurer</string>
     <string name="title_devices">Discover Devices</string>

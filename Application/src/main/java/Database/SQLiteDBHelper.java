@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Random;
 
 import Entities.MeasurementObject;
 import Entities.Location;
@@ -22,7 +25,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         super(context, DBSchema.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
 
-        //populateDB();
+        populateDB();
     }
 
     private void populateDB(){
@@ -116,17 +119,27 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static ArrayList<MeasurementObject> returnDataObjects(ArrayList<String> dates){
         ArrayList<MeasurementObject> objs = new ArrayList<>();
 
+        Random rand = new Random();
+        int minTen = 3;
+        int maxTen = 5;
+        int minTwen = 1;
+        int maxTwen = 3;
+
         Location loc1 = new Location("12.43077537", "51.37791981", "");
+
+        for(int i = 0; i<returnDates().size(); i++){
+            double randomTen = minTen + Math.random() * (maxTen - minTen);
+            double randomTwen = minTwen + Math.random() * (maxTwen - minTwen);
+            String randTen = String.valueOf(round(randomTen,2)).substring(0,3) + "0";
+            String randTwen = String.valueOf(round(randomTwen,2)).substring(0,3) + "0";
+
+            MeasurementObject object = new MeasurementObject(randTen, randTwen, dates.get(i), loc1, "12345");
+            objs.add(object);
+        }
+
         Location loc2 = new Location("12.43076853", "51.3778346", "");
         Location loc3 = new Location("12.43076853", "50.45165111", "");
         Location loc4 = new Location("12.43077537", "51.37791981", "");
-
-        MeasurementObject o1 = new MeasurementObject("5.20", "0.80", "2019-03-12 22:26:00",loc1, "12345");
-        MeasurementObject o2 = new MeasurementObject("5.20","1.801","2019-02-25 10:53:41", loc2, "12345");
-        MeasurementObject o3 = new MeasurementObject("5.20","5.401","2019-03-25 10:53:41", loc3, "12345");
-        MeasurementObject o4 = new MeasurementObject("10.0", "10.0", "2019-03-31 22:59:36",loc4, "12345");
-
-        objs.add(o1);
 
         return objs;
     }
@@ -158,8 +171,27 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         dates.add("2019-02-07 15:53:41");   //J
         dates.add("2019-02-18 21:47:47");   //J
 
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-17 22:59:36");   //M     //H
+        dates.add("2019-03-11 22:59:36");   //M     //H
+        dates.add("2019-03-11 22:59:36");   //M     //H
+
         dates.add("2018-03-03 22:59:36");
 
         return dates;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

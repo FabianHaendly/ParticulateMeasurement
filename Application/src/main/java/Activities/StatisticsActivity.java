@@ -164,8 +164,8 @@ public class StatisticsActivity extends Activity {
         mDistance.setText(returnTraveledDistance(list));
         mMaxPm10.setText(maxes.get(0).getPmTen());
         mMaxPm25.setText(maxes.get(1).getPmTwentyFive());
-        mAvgPm10.setText(avgs.get(0));
-        mAvgPm25.setText(avgs.get(1));
+        mAvgPm10.setText(avgs.get(0)+"0");
+        mAvgPm25.setText(avgs.get(1)+"0");
     }
 
     private String returnTraveledDistance(ArrayList<MeasurementObject> list) {
