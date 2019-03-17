@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="myBtn" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/common_google_signin_btn_text_dark</item>
+
+    </style>
+</resources>

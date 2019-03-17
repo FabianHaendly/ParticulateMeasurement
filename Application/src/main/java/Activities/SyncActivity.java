@@ -18,6 +18,7 @@ public class SyncActivity extends Activity {
     TextView mLastSync;
     TextView mUnsynchedValues;
     Button mSyncBtn;
+    boolean syncBtnEnabled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,30 +34,41 @@ public class SyncActivity extends Activity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        syncService = new SynchronizationService(this);
-        mLastSync.setText(syncService.getLastSyncDate());
-        mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+        try {
+            syncService = new SynchronizationService(this);
+            mLastSync.setText(syncService.getLastSyncDate());
+            mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+            syncBtnEnabled = true;
+        } catch (Exception e) {
+            syncBtnEnabled = false;
+            Log.d("SYNCACT", "onCreate: EXCEPTION CAUGHT");
+        }
     }
 
 
     public void onSyncBtnClick(View view) {
-        if(syncService.getUnsynchedValues() != 0) {
-            syncService.synchronizeData();
+        if (syncBtnEnabled) {
+            if (syncService.getUnsynchedValues() != 0) {
+                syncService.synchronizeData();
 
-            Log.d("ONSYNCCLICK", "last SYNC: " + syncService.getLastSyncDate());
-            mLastSync.setText(syncService.getLastSyncDate());
+                Log.d("ONSYNCCLICK", "last SYNC: " + syncService.getLastSyncDate());
+                mLastSync.setText(syncService.getLastSyncDate());
 
-            Log.d("ONSYNCCLICK", "UNSYNCHED: " + String.valueOf(syncService.getUnsynchedValues()));
-            mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+                Log.d("ONSYNCCLICK", "UNSYNCHED: " + String.valueOf(syncService.getUnsynchedValues()));
+                mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+            } else {
+                Toast.makeText(SyncActivity.this,
+                        "Already up to date!", Toast.LENGTH_LONG).show();
+            }
         }
-        else {
+        else{
             Toast.makeText(SyncActivity.this,
-                    "Already up to date!", Toast.LENGTH_LONG).show();
+                    "No connection to Server!", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    private void checkSynchronization(){
+    private void checkSynchronization() {
         if (syncService.getSuccess() == 1) {
             //Display success message
             Toast.makeText(SyncActivity.this,

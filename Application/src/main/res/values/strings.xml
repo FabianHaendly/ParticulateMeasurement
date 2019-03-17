@@ -56,20 +56,20 @@
     <string name="y_axes">µg pm / m³</string>
     <string name="x_axes">Number of measurement values</string>
     <string name="kv_values">Values:</string>
-    <string name="kv_values_data">Test</string>
+    <string name="kv_values_data"></string>
     <string name="kv_distance">Distance(km):</string>
-    <string name="kv_distance_data">Test</string>
+    <string name="kv_distance_data"></string>
     <string name="kv_maxPm10">max. Pm10:</string>
-    <string name="kv_maxPmTen_data">Test</string>
+    <string name="kv_maxPmTen_data"></string>
     <string name="kv_maxPm25">max. Pm25:</string>
-    <string name="kv_maxPm25_data">Test</string>
+    <string name="kv_maxPm25_data"></string>
     <string name="kv_avgPmTen">avg. Pm10:</string>
-    <string name="kv_avgPmTen_data">Test</string>
+    <string name="kv_avgPmTen_data"></string>
     <string name="kv_avgPmTwentyFive">avg. PM25:</string>
     <string name="kv_avgPmTwentyFive_data">Test</string>
     <string name="last_sync_text">Last Sync: </string>
-    <string name="last_sync_data">Test</string>
+    <string name="last_sync_data"></string>
     <string name="unsynced_values">Unsynced Values: </string>
-    <string name="unsynced_values_data">Test</string>
+    <string name="unsynced_values_data"></string>
 
 </resources>

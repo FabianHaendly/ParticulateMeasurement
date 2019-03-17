@@ -13,8 +13,6 @@ public class MeasurementObject {
     private Location Location;
     private String SensorId;
 
-    public MeasurementObject() {}
-
     public MeasurementObject(String pmTen, String pmTwentyFive, String measurementDate, Location location, String sensorId){
         PmTen = pmTen;
         PmTwentyFive = pmTwentyFive;

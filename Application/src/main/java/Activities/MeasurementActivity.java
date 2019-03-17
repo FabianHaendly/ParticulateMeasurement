@@ -143,7 +143,8 @@ public class MeasurementActivity extends Activity {
             }
         };
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
@@ -252,7 +253,7 @@ public class MeasurementActivity extends Activity {
                 finalValues.add(allMatches.get(i).replaceAll("PM(1|2)", ""));
 //                Log.d(TAG, "FINAL VALUE " + i + " " + finalValues.get(i));
             }
-            
+
             if(finalValues.size() < 3){
                 Log.d(TAG, "displayData: RETURNING - SIZE " + finalValues.size());
                 return;

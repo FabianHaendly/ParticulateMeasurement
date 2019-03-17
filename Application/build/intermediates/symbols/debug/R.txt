@@ -1409,6 +1409,7 @@ int style Widget_Compat_NotificationActionContainer 0x7f0c0168
 int style Widget_Compat_NotificationActionText 0x7f0c0169
 int style Widget_SampleMessage 0x7f0c016a
 int style Widget_SampleMessageTile 0x7f0c016b
+int style myBtn 0x7f0c016c
 int[] styleable ActionBar { 0x7f020031, 0x7f020032, 0x7f020033, 0x7f020065, 0x7f020066, 0x7f020067, 0x7f020068, 0x7f020069, 0x7f02006a, 0x7f020071, 0x7f020075, 0x7f020076, 0x7f020081, 0x7f020090, 0x7f020091, 0x7f020092, 0x7f020093, 0x7f020094, 0x7f02009b, 0x7f02009e, 0x7f0200dd, 0x7f0200e4, 0x7f0200ef, 0x7f0200f2, 0x7f0200f3, 0x7f02010e, 0x7f020111, 0x7f02012c, 0x7f020135 }
 int styleable ActionBar_background 0
 int styleable ActionBar_backgroundSplit 1

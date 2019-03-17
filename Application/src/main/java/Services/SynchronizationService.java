@@ -1,12 +1,21 @@
 package Services;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +24,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import Activities.MainActivity;
 import Entities.MeasurementObject;
+import Helper.CheckNetworkStatus;
 import Helper.HttpJsonParser;
 import Database.SQLiteDBHelper;
 
@@ -31,6 +42,7 @@ public class SynchronizationService {
     private static final String KEY_SENSOR_ID = "sensor_id";
     private static final String KEY_DATA = "data";
     private static final String KEY_SYNCHRONIZATION_DATE = "synchronization_date";
+    private static final String BASE_URL_TEST = "http://192.168.0.17:80";
     private static final String BASE_URL = "http://192.168.0.17/measurements/";
     private static int SUCCESS;
     private SQLiteDBHelper localDb;
@@ -38,12 +50,46 @@ public class SynchronizationService {
     private String synchronizationDate;
     private String lastSynchronization;
     private int unsynchedValues;
+    Button syncButton;
 
-    public SynchronizationService(Context context) {
-        synchronizationDate = returnTimeStamp();
-        localDb = new SQLiteDBHelper(context);
-        lastSynchronization = returnLastSynchronization();
-        unsynchedValues = returnUnsynchedValues().size();
+    public SynchronizationService(Context context) throws Exception {
+        if(isURLReachable(context)) {
+            Log.d(TAG, "SynchronizationService: URL IS REACHABLE");
+
+            synchronizationDate = returnTimeStamp();
+            localDb = new SQLiteDBHelper(context);
+            lastSynchronization = returnLastSynchronization();
+            unsynchedValues = returnUnsynchedValues().size();
+        }
+        else{
+            Toast.makeText(context, "Server is not reachable", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "SynchronizationService: URL IS NOT REACHABLE");
+            throw new Exception(BASE_URL_TEST + " is not reachable");
+        }
+    }
+
+    static public boolean isURLReachable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            try {
+                URL url = new URL(BASE_URL_TEST);
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setConnectTimeout(1 * 1000);
+                urlc.connect();
+                if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+                    Log.wtf("Connection", "Success !");
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (MalformedURLException e1) {
+                return false;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     private String returnLastSynchronization() {
