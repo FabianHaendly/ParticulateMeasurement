@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/last_sync_data"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:paddingLeft="20dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,14 +52,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:text="@string/unsynced_values_data"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:paddingLeft="20dp"
+
+            />
     </LinearLayout>
 
     <Button
+        style="@style/myBtn"
         android:id="@+id/sync_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sync"
-        android:onClick="onSyncBtnClick"/>
+        android:onClick="onSyncBtnClick"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>

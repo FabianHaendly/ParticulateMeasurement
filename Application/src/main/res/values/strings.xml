@@ -68,8 +68,8 @@
     <string name="kv_avgPmTwentyFive">avg. PM25:</string>
     <string name="kv_avgPmTwentyFive_data">Test</string>
     <string name="last_sync_text">Last Sync: </string>
-    <string name="last_sync_data"></string>
+    <string name="last_sync_data">TEST</string>
     <string name="unsynced_values">Unsynced Values: </string>
-    <string name="unsynced_values_data"></string>
+    <string name="unsynced_values_data">TEST</string>
 
 </resources>

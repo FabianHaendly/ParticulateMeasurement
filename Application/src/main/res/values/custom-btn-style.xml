@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="myBtn" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@color/common_google_signin_btn_text_dark</item>
-
+        <item name="android:background">#191970</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
     </style>
 </resources>
