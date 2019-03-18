@@ -78,7 +78,7 @@ public class SyncActivity extends Activity {
     }
 
 
-    public void onSyncBtnClick(View view) {
+    public void onSyncBtnClick(View view) throws ParseException {
         if (syncBtnEnabled) {
             if (syncService.getNumOfUnsychedValues() != 0) {
                 syncService.synchronizeData();
@@ -93,7 +93,7 @@ public class SyncActivity extends Activity {
                         "Successful synchronized!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(SyncActivity.this,
-                        "Already up to date!", Toast.LENGTH_LONG).show();
+                        "Everything up to date", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(SyncActivity.this,

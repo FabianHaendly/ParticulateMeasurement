@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,15 +39,9 @@ public class SynchronizationService {
     private static final String KEY_SENSOR_ID = "sensor_id";
     private static final String KEY_DATA = "data";
     private static final String KEY_SYNCHRONIZATION_DATE = "synchronization_date";
-    private static final String BASE_URL_TEST = "http://192.168.0.17:80";
     public static final String BASE_URL = "http://192.168.0.17/measurements/";
     private static int SUCCESS;
-    private SQLiteDBHelper localDb;
-    private ArrayList<String> syncDates;
     private String synchronizationDate;
-    private String lastSynchronization;
-    private int unsynchedValues;
-    Button syncButton;
     private Context context;
     private ArrayList<MeasurementObject> unsynchedList;
 
@@ -56,11 +51,9 @@ public class SynchronizationService {
 
         if(isURLReachable(context)) {
             Log.d(TAG, "SynchronizationService: URL IS REACHABLE");
-
             synchronizationDate = returnTimeStamp();
-            localDb = new SQLiteDBHelper(context);
-            lastSynchronization = getLastSynchronization();
-            unsynchedValues = getNumOfUnsychedValues();
+            SQLiteDBHelper localDb = new SQLiteDBHelper(context);
+            unsynchedList = localDb.getItems();
         }
         else{
             Toast.makeText(context, "Server is not reachable", Toast.LENGTH_SHORT).show();
@@ -98,25 +91,37 @@ public class SynchronizationService {
         return fs.getLastSyncDate();
     }
 
-
     public void synchronizeData(){
         for(MeasurementObject obj: unsynchedList){
             addDataObject(obj);
         }
+
+        FileService fs = new FileService(context, 2);
+        fs.saveLatestSyncDate(DateService.getCurrentDateAndTime());
     }
 
-    public int getNumOfUnsychedValues(){
-        ArrayList<MeasurementObject> list = localDb.getItems();
+    public int getNumOfUnsychedValues() throws ParseException {
+        ArrayList<MeasurementObject> list = unsynchedList;
+        list = getRelevantMeasurements(list);
+
+        return list.size();
+    }
+
+    private ArrayList<MeasurementObject> getRelevantMeasurements(ArrayList<MeasurementObject> list) throws ParseException {
+
+        ArrayList<MeasurementObject> filteredList = new ArrayList<>();
         FileService fs = new FileService(context, 2);
         String lastOsmSync = fs.getLastSyncDate();
 
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getMeasurementDate().compareTo(lastOsmSync) > 0){
-                unsynchedList.add(list.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            String mD = list.get(i).getMeasurementDate();
+
+            if (mD.compareTo(lastOsmSync) > 0) {
+                filteredList.add(list.get(i));
             }
         }
 
-        return unsynchedList.size();
+        return filteredList;
     }
 
     private void addDataObject(MeasurementObject obj) {
