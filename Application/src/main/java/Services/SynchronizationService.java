@@ -7,13 +7,11 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -24,9 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import Activities.MainActivity;
 import Entities.MeasurementObject;
-import Helper.CheckNetworkStatus;
 import Helper.HttpJsonParser;
 import Database.SQLiteDBHelper;
 
@@ -51,20 +47,25 @@ public class SynchronizationService {
     private String lastSynchronization;
     private int unsynchedValues;
     Button syncButton;
+    private Context context;
+    private ArrayList<MeasurementObject> unsynchedList;
 
     public SynchronizationService(Context context) throws Exception {
+        this.context = context;
+        unsynchedList = new ArrayList<>();
+
         if(isURLReachable(context)) {
             Log.d(TAG, "SynchronizationService: URL IS REACHABLE");
 
             synchronizationDate = returnTimeStamp();
             localDb = new SQLiteDBHelper(context);
-            lastSynchronization = returnLastSynchronization();
-            unsynchedValues = returnUnsynchedValues().size();
+            lastSynchronization = getLastSynchronization();
+            unsynchedValues = getNumOfUnsychedValues();
         }
         else{
             Toast.makeText(context, "Server is not reachable", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "SynchronizationService: URL IS NOT REACHABLE");
-            throw new Exception(BASE_URL_TEST + " is not reachable");
+            throw new Exception(BASE_URL + " is not reachable");
         }
     }
 
@@ -73,7 +74,7 @@ public class SynchronizationService {
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()) {
             try {
-                URL url = new URL(BASE_URL_TEST);
+                URL url = new URL(BASE_URL);
                 HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                 urlc.setConnectTimeout(1 * 1000);
                 urlc.connect();
@@ -92,57 +93,30 @@ public class SynchronizationService {
         return false;
     }
 
-    private String returnLastSynchronization() {
-        HttpJsonParser httpJsonParser = new HttpJsonParser();
-        JSONObject jsonObject = httpJsonParser.makeHttpRequest(
-                BASE_URL + "list_measurements.php", "POST", null);
-        try {
-            int success = jsonObject.getInt(KEY_SUCCESS);
-            JSONArray measurements;
-            if (success == 1) {
-                syncDates = new ArrayList<>();
-                measurements = jsonObject.getJSONArray(KEY_DATA);
-                //Iterate through the response and populate movies list
-                for (int i = 0; i < measurements.length(); i++) {
-                    JSONObject measurement = measurements.getJSONObject(i);
-                    String synchro_date = measurement.getString(KEY_SYNCHRONIZATION_DATE);
-                    syncDates.add(synchro_date);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        if(syncDates.size()!=0) {
-            return syncDates.get(syncDates.size() - 1);
-        }
-        return "2000-01-01 00:00:00";
+    public String getLastSynchronization(){
+        FileService fs = new FileService( context,2);
+        return fs.getLastSyncDate();
     }
 
-    public void synchronizeData(){
-        ArrayList<MeasurementObject> unsynchedList = returnUnsynchedValues();
 
+    public void synchronizeData(){
         for(MeasurementObject obj: unsynchedList){
             addDataObject(obj);
         }
-
-        lastSynchronization = returnLastSynchronization();
-        Log.d(TAG, "synchronizeData: " + lastSynchronization);
-        unsynchedValues = returnUnsynchedValues().size();
-        Log.d(TAG, "synchronizeData: " + unsynchedValues);
     }
 
-    private ArrayList<MeasurementObject> returnUnsynchedValues() {
-        ArrayList<MeasurementObject> localDbData = localDb.getItems();
-        ArrayList<MeasurementObject> unsynchedMeasurementObjects = new ArrayList<>();
+    public int getNumOfUnsychedValues(){
+        ArrayList<MeasurementObject> list = localDb.getItems();
+        FileService fs = new FileService(context, 2);
+        String lastOsmSync = fs.getLastSyncDate();
 
-        for(MeasurementObject obj: localDbData){
-            if(obj.getMeasurementDate().compareTo(lastSynchronization) > 0){
-                unsynchedMeasurementObjects.add(obj);
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getMeasurementDate().compareTo(lastOsmSync) > 0){
+                unsynchedList.add(list.get(i));
             }
         }
 
-        return unsynchedMeasurementObjects;
+        return unsynchedList.size();
     }
 
     private void addDataObject(MeasurementObject obj) {
@@ -175,14 +149,6 @@ public class SynchronizationService {
         }
     }
 
-    public int getSuccess() {
-        return SUCCESS;
-    }
-
-    public String getLastSyncDate(){
-        return lastSynchronization;
-    }
-
     private String returnTimeStamp() {
         Calendar cal = Calendar.getInstance();
         Date date = cal.getTime();
@@ -190,10 +156,6 @@ public class SynchronizationService {
         String formattedDate = dateFormat.format(date);
 
         return formattedDate;
-    }
-
-    public int getUnsynchedValues() {
-        return unsynchedValues;
     }
 
 }

@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+
 import BLEHelper.bluetoothlegatt.R;
 
 import Services.SynchronizationOpenSenseMapService;
@@ -46,41 +48,46 @@ public class SyncActivity extends Activity {
         }
 
         initializiePrivateServer();
-        initializeOpenSenseMapServer();
+        try {
+            initializeOpenSenseMapServer();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializiePrivateServer() {
         mHostLabel.setText(SynchronizationService.BASE_URL);
         try {
             syncService = new SynchronizationService(this);
-            mLastSync.setText(syncService.getLastSyncDate());
-            mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+            mLastSync.setText(syncService.getLastSynchronization());
+            mUnsynchedValues.setText(String.valueOf(String.valueOf(syncService.getNumOfUnsychedValues())));
             syncBtnEnabled = true;
         } catch (Exception e) {
             syncBtnEnabled = false;
             Log.d("SYNCACT", "onCreate: EXCEPTION CAUGHT");
+            e.printStackTrace();
         }
     }
 
-    private void initializeOpenSenseMapServer() {
+    private void initializeOpenSenseMapServer() throws ParseException {
         SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this);
         mHostOpenSenseMapUrl.setText(service.getUrl());
         mOpenSenseMapSensorID.setText(service.getSensorBoxId());
         mOSMLastSyncData.setText(service.getLastOsmSync());
-        mOsmUnsychedValuesData.setText(String.valueOf(service.getUnsychedValues()));
+        mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsychedValues()*2));
     }
 
 
     public void onSyncBtnClick(View view) {
         if (syncBtnEnabled) {
-            if (syncService.getUnsynchedValues() != 0) {
+            if (syncService.getNumOfUnsychedValues() != 0) {
                 syncService.synchronizeData();
 
-                Log.d("ONSYNCCLICK", "last SYNC: " + syncService.getLastSyncDate());
-                mLastSync.setText(syncService.getLastSyncDate());
+                Log.d("ONSYNCCLICK", "last SYNC: " + syncService.getLastSynchronization());
+                mLastSync.setText(syncService.getLastSynchronization());
 
-                Log.d("ONSYNCCLICK", "UNSYNCHED: " + String.valueOf(syncService.getUnsynchedValues()));
-                mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+                Log.d("ONSYNCCLICK", "UNSYNCHED: " + String.valueOf(syncService.getNumOfUnsychedValues()));
+                mUnsynchedValues.setText(String.valueOf(syncService.getNumOfUnsychedValues()));
 
                 Toast.makeText(SyncActivity.this,
                         "Successful synchronized!", Toast.LENGTH_LONG).show();
@@ -94,8 +101,10 @@ public class SyncActivity extends Activity {
         }
     }
 
-    public void onOpenSenseMapSyncBtnClick(View view) throws InterruptedException {
-        SynchronizationOpenSenseMapService osmService = new SynchronizationOpenSenseMapService(this);
-        osmService.sendPost();
+    public void onOpenSenseMapSyncBtnClick(View view) throws InterruptedException, ParseException {
+        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this);
+        service.sendPost();
+        mOSMLastSyncData.setText(service.getLastOsmSync());
+        mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsychedValues()));
     }
 }

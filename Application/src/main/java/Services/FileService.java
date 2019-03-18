@@ -1,16 +1,16 @@
 package Services;
 
 import android.content.Context;
+import android.text.LoginFilter;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class FileService {
     private static final String FILE_NAME_OSM = "LastOpenSenseMapSynchronization.txt";
@@ -18,20 +18,15 @@ public class FileService {
     private static final int SAVE_OSM_SYNC = 1;
     private static final int SAVE_PRIVATE_SERVER_SYNC = 2;
     private static int FILE_SELECTION;
-    private static String DATE_TO_SAVE;
 
     private Context context;
 
     public FileService(Context context, int fileSelection){
         this.context = context;
         FILE_SELECTION = fileSelection;
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        DATE_TO_SAVE = sdf.format(cal.getTime());
-        System.out.println(sdf.format(cal.getTime()));
     }
 
-    public void saveLatestSyncDate(){
+    public void saveLatestSyncDate(String date){
         FileOutputStream fos = null;
         String selectedFile;
 
@@ -44,7 +39,7 @@ public class FileService {
 
         try {
             fos = context.openFileOutput(selectedFile, context.MODE_PRIVATE);
-            fos.write(DATE_TO_SAVE.getBytes());
+            fos.write(date.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -73,6 +68,12 @@ public class FileService {
         }
 
         try {
+
+            if (!fileExists(context, selectedFile)) {
+                Log.d("FileService", "Created file " + selectedFile);
+                saveLatestSyncDate("2000-01-01 00:00:00");
+            }
+
             fis = context.openFileInput(selectedFile);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
@@ -81,7 +82,6 @@ public class FileService {
 
             while((temp = br.readLine()) != null){
                 lastSyncDate += temp;
-                Log.d("SAVE SYNC", "FILE: " + selectedFile + " Date: " + lastSyncDate);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -90,5 +90,14 @@ public class FileService {
         }
 
         return lastSyncDate;
+    }
+
+    public boolean fileExists(Context context, String fileName) {
+        File file = new File(context.getFilesDir() + "/" + fileName);
+
+        if(file == null || !file.exists()) {
+            return false;
+        }
+        return true;
     }
 }

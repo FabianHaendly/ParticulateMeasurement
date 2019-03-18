@@ -2,7 +2,6 @@ package Services;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -50,7 +49,6 @@ public class SynchronizationOpenSenseMapService {
 
         localDb = new SQLiteDBHelper(context);
         measurementObjects = localDb.getItems();
-        Log.d(TAG, "SynchronizationOpenSenseMapService: " + measurementObjects.size());
         this.context = context;
 
     }
@@ -72,62 +70,68 @@ public class SynchronizationOpenSenseMapService {
 
                     JSONArray multipleMeasurements = new JSONArray();
 
-                    for (int i = 0; i < measurementObjects.size(); i++) {
-                        MeasurementObject currObject = measurementObjects.get(i);
-                        String measurementDate = currObject.getMeasurementDate();
+                    if (getNumOfUnsychedValues() > 0) {
 
-                        if (isDateOlderThanAnHour(measurementDate)) {
-                            JSONArray locationCoords = new JSONArray();
-                            JSONObject jsonObjectPmTen = new JSONObject();
-                            JSONObject jsonObjectPmTwentyFive = new JSONObject();
+                        for (int i = 0; i < measurementObjects.size(); i++) {
+                            MeasurementObject currObject = measurementObjects.get(i);
+                            String measurementDate = currObject.getMeasurementDate();
 
-                            //fill location array
-                            if (currObject.getLocation().getLatitude() != "0.0" && currObject.getLocation().getLongitude() != "0.0") {
-                                locationCoords.put(Double.valueOf(currObject.getLocation().getLatitude()));
-                                locationCoords.put(Double.valueOf(currObject.getLocation().getLongitude()));
-                                locationCoords.put(Double.valueOf(currObject.getLocation().getAltitude()));
+                            if (isDateOlderThanAnHour(measurementDate)) {
+                                JSONArray locationCoords = new JSONArray();
+                                JSONObject jsonObjectPmTen = new JSONObject();
+                                JSONObject jsonObjectPmTwentyFive = new JSONObject();
+
+                                //fill location array
+                                if (currObject.getLocation().getLatitude() != "0.0" && currObject.getLocation().getLongitude() != "0.0") {
+                                    locationCoords.put(Double.valueOf(currObject.getLocation().getLatitude()));
+                                    locationCoords.put(Double.valueOf(currObject.getLocation().getLongitude()));
+                                    locationCoords.put(Double.valueOf(currObject.getLocation().getAltitude()));
+                                }
+                                String rfcDateOfCurrentObj = DateService.getRFCFormattedDate(currObject.getMeasurementDate());
+
+                                //PM10 object
+                                jsonObjectPmTen.put(SENSOR_ID, SENSOR_PM_TEN_ID);
+                                jsonObjectPmTen.put(VALUE, currObject.getPmTen());
+                                jsonObjectPmTen.put(CREATED_AT, rfcDateOfCurrentObj);
+                                if (locationCoords.length() > 0) {
+                                    jsonObjectPmTen.put(LOCATION, (Object) locationCoords);
+                                }
+                                //PM25 object
+                                jsonObjectPmTwentyFive.put(SENSOR_ID, SENSOR_PM_TWENTY_FIVE_ID);
+                                jsonObjectPmTwentyFive.put(VALUE, currObject.getPmTwentyFive());
+                                jsonObjectPmTwentyFive.put(CREATED_AT, rfcDateOfCurrentObj);
+                                if (locationCoords.length() > 0) {
+                                    jsonObjectPmTwentyFive.put(LOCATION, (Object) locationCoords);
+                                }
+
+                                multipleMeasurements.put(jsonObjectPmTen);
+                                multipleMeasurements.put(jsonObjectPmTwentyFive);
                             }
-                            String rfcDateOfCurrentObj = DateFormatterService.returnRFCFormattedDate(currObject.getMeasurementDate());
-
-                            //PM10 object
-                            jsonObjectPmTen.put(SENSOR_ID, SENSOR_PM_TEN_ID);
-                            jsonObjectPmTen.put(VALUE, currObject.getPmTen());
-                            jsonObjectPmTen.put(CREATED_AT, rfcDateOfCurrentObj);
-                            if (locationCoords.length() > 0) {
-                                jsonObjectPmTen.put(LOCATION, (Object) locationCoords);
-                            }
-                            //PM25 object
-                            jsonObjectPmTwentyFive.put(SENSOR_ID, SENSOR_PM_TWENTY_FIVE_ID);
-                            jsonObjectPmTwentyFive.put(VALUE, currObject.getPmTwentyFive());
-                            jsonObjectPmTwentyFive.put(CREATED_AT, rfcDateOfCurrentObj);
-                            if (locationCoords.length() > 0) {
-                                jsonObjectPmTwentyFive.put(LOCATION, (Object) locationCoords);
-                            }
-
-                            multipleMeasurements.put(jsonObjectPmTen);
-                            multipleMeasurements.put(jsonObjectPmTwentyFive);
                         }
+
+                        Log.i("JSON", multipleMeasurements.toString());
+
+                        if (multipleMeasurements.length() > 0) {
+                            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                            os.writeBytes(multipleMeasurements.toString());
+                            os.flush();
+                            os.close();
+                        }
+
+                        Log.i("STATUS", String.valueOf(conn.getResponseCode()));
+                        Log.i("MSG", conn.getResponseMessage());
+                        SyncSuccessMessage = multipleMeasurements.length() + " elements have been synchronized";
+
+                        // Saving Sync Date
+                        FileService fs = new FileService(context, 1);
+                        fs.saveLatestSyncDate(DateService.getCurrentDateAndTime());
+                        Log.d(TAG, "Saved to " + context.getFilesDir() + "/");
+
+                        conn.disconnect();
                     }
-
-                    Log.i("JSON", multipleMeasurements.toString());
-
-                    if (multipleMeasurements.length() > 0) {
-                        DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                        os.writeBytes(multipleMeasurements.toString());
-                        os.flush();
-                        os.close();
+                    else{
+                        SyncSuccessMessage = "Everything up to date";
                     }
-
-                    Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-                    Log.i("MSG", conn.getResponseMessage());
-                    SyncSuccessMessage = multipleMeasurements.length() + " elements have been synchronized";
-
-                    // Saving Sync Date
-                    FileService fs = new FileService(context,1);
-                    fs.saveLatestSyncDate();
-                    Log.d(TAG, "Saved to " + context.getFilesDir() + "/");
-                    
-                    conn.disconnect();
                 } catch (Exception e) {
                     SyncSuccessMessage = "Error in sychnronizing with openSenseMap";
                     e.printStackTrace();
@@ -141,27 +145,34 @@ public class SynchronizationOpenSenseMapService {
         Toast.makeText(context, SyncSuccessMessage, Toast.LENGTH_LONG).show();
     }
 
-    public String getLastOsmSync(){
+    public String getLastOsmSync() {
         FileService fs = new FileService(context, 1);
         return fs.getLastSyncDate();
     }
 
-    public int getUnsychedValues(){
+    public int getNumOfUnsychedValues() throws ParseException {
         ArrayList<MeasurementObject> list = localDb.getItems();
+        list = getRelevantMeasurements(list);
+
+        return list.size();
+    }
+
+    private ArrayList<MeasurementObject> getRelevantMeasurements(ArrayList<MeasurementObject> list) throws ParseException {
+
+        ArrayList<MeasurementObject> filteredList = new ArrayList<>();
         FileService fs = new FileService(context, 1);
         String lastOsmSync = fs.getLastSyncDate();
 
-        int unsynchedValues = 0;
+        for (int i = 0; i < list.size(); i++) {
+            String mD = list.get(i).getMeasurementDate();
 
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getMeasurementDate().compareTo(lastOsmSync) > 0){
-                unsynchedValues++;
+            if (mD.compareTo(lastOsmSync) > 0 && isDateOlderThanAnHour(mD)) {
+                filteredList.add(list.get(i));
             }
         }
 
-        return unsynchedValues;
+        return filteredList;
     }
-
 
     /*
     Checks if measurement date is is at least 60 minutes younger than the utc0 time from now
