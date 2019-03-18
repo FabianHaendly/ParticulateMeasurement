@@ -22,6 +22,8 @@ public class SyncActivity extends Activity {
     Button mSyncBtn;
     TextView mHostOpenSenseMapUrl;
     TextView mOpenSenseMapSensorID;
+    TextView mOSMLastSyncData;
+    TextView mOsmUnsychedValuesData;
     boolean syncBtnEnabled = false;
 
     @Override
@@ -35,6 +37,8 @@ public class SyncActivity extends Activity {
         mSyncBtn = findViewById(R.id.sync_data_btn);
         mHostOpenSenseMapUrl = findViewById(R.id.host_openSenseMap_url);
         mOpenSenseMapSensorID = findViewById(R.id.openSenseMap_sensor_id);
+        mOSMLastSyncData = findViewById(R.id.osm_last_sync_data);
+        mOsmUnsychedValuesData = findViewById(R.id.osm_unsyched_values_data);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -59,9 +63,11 @@ public class SyncActivity extends Activity {
     }
 
     private void initializeOpenSenseMapServer() {
-        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService();
+        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this);
         mHostOpenSenseMapUrl.setText(service.getUrl());
         mOpenSenseMapSensorID.setText(service.getSensorBoxId());
+        mOSMLastSyncData.setText(service.getLastOsmSync());
+        mOsmUnsychedValuesData.setText(String.valueOf(service.getUnsychedValues()));
     }
 
 
@@ -88,7 +94,8 @@ public class SyncActivity extends Activity {
         }
     }
 
-    public void onOpenSenseMapSyncBtnClick(View view) {
+    public void onOpenSenseMapSyncBtnClick(View view) throws InterruptedException {
         SynchronizationOpenSenseMapService osmService = new SynchronizationOpenSenseMapService(this);
+        osmService.sendPost();
     }
 }

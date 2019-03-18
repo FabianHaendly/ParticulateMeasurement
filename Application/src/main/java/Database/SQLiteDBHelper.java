@@ -149,7 +149,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
         // KW 9
 
-        dates.add("2019-03-18 15:15:00");   //KW
+        dates.add("2019-03-19 15:15:00");   //KW
 //        dates.add("2019-03-17 10:30:00");   //KW
 //        dates.add("2019-03-17 11:30:00");   //KW
 //        dates.add("2019-03-17 11:00:00");   //KW

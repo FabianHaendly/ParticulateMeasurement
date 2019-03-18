@@ -808,6 +808,10 @@ id onOff_btn
 id openSenseMap_sensor_id
 id openSenseMap_sensor_id_label
 id opensensemap_sync_btn
+id osm_last_sync_data
+id osm_last_sync_label
+id osm_unsyched_values_data
+id osm_unsynched_values_label
 id packed
 id parent
 id parentPanel
@@ -1039,6 +1043,10 @@ string menu_stop
 string no_data
 string openSenseMap_sensor_id_data
 string openSenseMap_sync_label
+string osm_last_sync_data
+string osm_last_sync_label
+string osm_unsyched_values_data
+string osm_unsyched_values_label
 string period_data
 string period_label
 string search_devices_btn

@@ -2,6 +2,7 @@ package Services;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -43,27 +44,19 @@ public class SynchronizationOpenSenseMapService {
     private String SyncSuccessMessage = "";
     private SQLiteDBHelper localDb;
     private Context context;
-
-    public SynchronizationOpenSenseMapService() {
-    }
+    ArrayList<MeasurementObject> measurementObjects;
 
     public SynchronizationOpenSenseMapService(Context context) {
 
         localDb = new SQLiteDBHelper(context);
-        ArrayList<MeasurementObject> list = localDb.getItems();
-        Log.d(TAG, "SynchronizationOpenSenseMapService: " + list.size());
+        measurementObjects = localDb.getItems();
+        Log.d(TAG, "SynchronizationOpenSenseMapService: " + measurementObjects.size());
         this.context = context;
 
-        try {
-            sendPost(list);
-        }
-        catch(InterruptedException e){
-            e.printStackTrace();
-        }
     }
 
 
-    public void sendPost(final ArrayList<MeasurementObject> list) throws InterruptedException {
+    public void sendPost() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -79,8 +72,8 @@ public class SynchronizationOpenSenseMapService {
 
                     JSONArray multipleMeasurements = new JSONArray();
 
-                    for (int i = 0; i < list.size(); i++) {
-                        MeasurementObject currObject = list.get(i);
+                    for (int i = 0; i < measurementObjects.size(); i++) {
+                        MeasurementObject currObject = measurementObjects.get(i);
                         String measurementDate = currObject.getMeasurementDate();
 
                         if (isDateOlderThanAnHour(measurementDate)) {
@@ -147,6 +140,28 @@ public class SynchronizationOpenSenseMapService {
 
         Toast.makeText(context, SyncSuccessMessage, Toast.LENGTH_LONG).show();
     }
+
+    public String getLastOsmSync(){
+        FileService fs = new FileService(context, 1);
+        return fs.getLastSyncDate();
+    }
+
+    public int getUnsychedValues(){
+        ArrayList<MeasurementObject> list = localDb.getItems();
+        FileService fs = new FileService(context, 1);
+        String lastOsmSync = fs.getLastSyncDate();
+
+        int unsynchedValues = 0;
+
+        for(int i=0; i<list.size(); i++){
+            if(list.get(i).getMeasurementDate().compareTo(lastOsmSync) > 0){
+                unsynchedValues++;
+            }
+        }
+
+        return unsynchedValues;
+    }
+
 
     /*
     Checks if measurement date is is at least 60 minutes younger than the utc0 time from now

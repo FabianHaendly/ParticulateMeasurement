@@ -69,7 +69,7 @@
     <string name="kv_avgPmTwentyFive_data"></string>
     <string name="last_sync_text">Last Sync: </string>
     <string name="last_sync_data"></string>
-    <string name="unsynced_values">Unsynced Values: </string>
+    <string name="unsynced_values">Unsynched Values: </string>
     <string name="unsynced_values_data"></string>
     <string name="period_label">Period:</string>
     <string name="period_data">Select a period!</string>
@@ -82,5 +82,9 @@
     <string name="host_openSenseMap_url_data" />
     <string name="sensor_id_label">SensorBox-ID:</string>
     <string name="openSenseMap_sensor_id_data" />
+    <string name="osm_unsyched_values_label">Unsynched Values</string>
+    <string name="osm_unsyched_values_data" />
+    <string name="osm_last_sync_label">Last Sync</string>
+    <string name="osm_last_sync_data" />
 
 </resources>
