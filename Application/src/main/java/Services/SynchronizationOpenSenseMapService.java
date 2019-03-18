@@ -1,7 +1,6 @@
 package Services;
 
 import android.content.Context;
-import android.media.audiofx.Equalizer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.FormatFlagsConversionMismatchException;
 
 import Database.SQLiteDBHelper;
 import Entities.MeasurementObject;
@@ -44,7 +42,7 @@ public class SynchronizationOpenSenseMapService {
 
     private String SyncSuccessMessage = "";
     private SQLiteDBHelper localDb;
-    private Context con;
+    private Context context;
 
     public SynchronizationOpenSenseMapService() {
     }
@@ -54,7 +52,7 @@ public class SynchronizationOpenSenseMapService {
         localDb = new SQLiteDBHelper(context);
         ArrayList<MeasurementObject> list = localDb.getItems();
         Log.d(TAG, "SynchronizationOpenSenseMapService: " + list.size());
-        con = context;
+        this.context = context;
 
         try {
             sendPost(list);
@@ -131,6 +129,11 @@ public class SynchronizationOpenSenseMapService {
                     Log.i("MSG", conn.getResponseMessage());
                     SyncSuccessMessage = multipleMeasurements.length() + " elements have been synchronized";
 
+                    // Saving Sync Date
+                    FileService fs = new FileService(context,1);
+                    fs.saveLatestSyncDate();
+                    Log.d(TAG, "Saved to " + context.getFilesDir() + "/");
+                    
                     conn.disconnect();
                 } catch (Exception e) {
                     SyncSuccessMessage = "Error in sychnronizing with openSenseMap";
@@ -142,7 +145,7 @@ public class SynchronizationOpenSenseMapService {
         thread.start();
         thread.join();
 
-        Toast.makeText(con, SyncSuccessMessage, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, SyncSuccessMessage, Toast.LENGTH_LONG).show();
     }
 
     /*
