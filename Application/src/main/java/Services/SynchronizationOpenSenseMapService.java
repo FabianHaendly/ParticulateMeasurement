@@ -1,5 +1,7 @@
 package Services;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,16 +11,18 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
+import Database.SQLiteDBHelper;
 import Entities.MeasurementObject;
 
 public class SynchronizationOpenSenseMapService {
     private static final String TAG = "OpenSenseMapService";
 
     //SensorBox data
-    private static final String SENSOR_BOX_ID = "5c8e80d0922ca900193a229c";
-    private static final String SENSOR_PM_TEN_ID = "5c8e80d0922ca900193a229e";
-    private static final String SENSOR_PM_TWENTY_FIVE_ID = "5c8e80d0922ca900193a229d";
+    private static final String SENSOR_BOX_ID = "5c8f789b922ca9001982b1e8";
+    private static final String SENSOR_PM_TEN_ID = "5c8f789b922ca9001982b1ea";
+    private static final String SENSOR_PM_TWENTY_FIVE_ID = "5c8f789b922ca9001982b1e9";
 
     //URLs
     private static final String BASE_URL = "https://api.opensensemap.org/boxes/";
@@ -31,13 +35,17 @@ public class SynchronizationOpenSenseMapService {
     private static final String LOCATION = "location";
 
     private String SyncSuccessMessage = "";
+    private SQLiteDBHelper localDb;
 
     public SynchronizationOpenSenseMapService(){}
 
-    public SynchronizationOpenSenseMapService(ArrayList<MeasurementObject> list){
+    public SynchronizationOpenSenseMapService(Context context){
+
+        localDb = new SQLiteDBHelper(context);
+        ArrayList<MeasurementObject> list = localDb.getItems();
         Log.d(TAG, "SynchronizationOpenSenseMapService: " + list.size());
 
-        //sendPost(list);
+        sendPost(list);
     }
 
 

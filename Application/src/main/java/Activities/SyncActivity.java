@@ -41,7 +41,7 @@ public class SyncActivity extends Activity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        initializiePrivateServer();
+        //initializiePrivateServer();
         initializeOpenSenseMapServer();
     }
 
@@ -86,5 +86,7 @@ public class SyncActivity extends Activity {
     }
 
     public void onOpenSenseMapSyncBtnClick(View view) {
+        SynchronizationOpenSenseMapService osmService = new SynchronizationOpenSenseMapService(this);
+
     }
 }

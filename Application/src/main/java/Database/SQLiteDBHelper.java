@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Activities.SyncActivity;
 import Entities.MeasurementObject;
 import Entities.Location;
 
@@ -149,40 +150,40 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
         // KW 9
 
-        dates.add("2019-02-25 10:53:41");   //KW
-        dates.add("2019-02-26 14:53:12");   //KW
-        dates.add("2019-02-27 15:53:41");   //KW
-        dates.add("2019-02-28 21:47:47");   //KW
-        dates.add("2019-03-01 15:53:41");   //KW    //M
-        dates.add("2019-03-02 21:47:47");   //KW    //M
-        dates.add("2019-03-03 15:53:41");   //KW    //M
-        // aktueller Monat
-        dates.add("2019-03-01 22:36:41");   //M
-        dates.add("2019-03-01 22:59:36");   //M
-        dates.add("2019-03-03 22:36:41");   //M
-        dates.add("2019-03-03 22:59:36");   //M
-        dates.add("2019-03-06 22:36:41");   //M     //H
-        dates.add("2019-03-07 22:59:36");   //M     //H
-        dates.add("2019-03-07 22:59:36");   //M     //H
-
-        //aktuelles Jahr
-        dates.add("2019-01-14 10:53:41");   //J
-        dates.add("2019-01-23 14:53:12");   //J
-        dates.add("2019-02-07 15:53:41");   //J
-        dates.add("2019-02-18 21:47:47");   //J
-
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-17 22:59:36");   //M     //H
-        dates.add("2019-03-11 22:59:36");   //M     //H
-        dates.add("2019-03-11 22:59:36");   //M     //H
-
-        dates.add("2018-03-03 22:59:36");
+        dates.add("2019-03-17 10:20:00");   //KW
+        dates.add("2019-03-17 10:21:00");   //KW
+        dates.add("2019-03-17 10:22:00");   //KW
+//        dates.add("2019-02-28 21:47:47");   //KW
+//        dates.add("2019-03-01 15:53:41");   //KW    //M
+//        dates.add("2019-03-02 21:47:47");   //KW    //M
+//        dates.add("2019-03-03 15:53:41");   //KW    //M
+//        // aktueller Monat
+//        dates.add("2019-03-01 22:36:41");   //M
+//        dates.add("2019-03-01 22:59:36");   //M
+//        dates.add("2019-03-03 22:36:41");   //M
+//        dates.add("2019-03-03 22:59:36");   //M
+//        dates.add("2019-03-06 22:36:41");   //M     //H
+//        dates.add("2019-03-07 22:59:36");   //M     //H
+//        dates.add("2019-03-07 22:59:36");   //M     //H
+//
+//        //aktuelles Jahr
+//        dates.add("2019-01-14 10:53:41");   //J
+//        dates.add("2019-01-23 14:53:12");   //J
+//        dates.add("2019-02-07 15:53:41");   //J
+//        dates.add("2019-02-18 21:47:47");   //J
+//
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-17 22:59:36");   //M     //H
+//        dates.add("2019-03-11 22:59:36");   //M     //H
+//        dates.add("2019-03-11 22:59:36");   //M     //H
+//
+//        dates.add("2018-03-03 22:59:36");
 
         return dates;
     }
