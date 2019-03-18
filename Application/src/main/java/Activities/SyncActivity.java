@@ -11,13 +11,17 @@ import android.widget.Toast;
 
 import BLEHelper.bluetoothlegatt.R;
 
+import Services.SynchronizationOpenSenseMapService;
 import Services.SynchronizationService;
 
 public class SyncActivity extends Activity {
     private SynchronizationService syncService;
+    TextView mHostLabel;
     TextView mLastSync;
     TextView mUnsynchedValues;
     Button mSyncBtn;
+    TextView mHostOpenSenseMapUrl;
+    TextView mOpenSenseMapSensorID;
     boolean syncBtnEnabled = false;
 
     @Override
@@ -25,15 +29,24 @@ public class SyncActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sync);
 
+        mHostLabel = findViewById(R.id.host_url);
         mLastSync = findViewById(R.id.tv_last_sync_data);
         mUnsynchedValues = findViewById(R.id.tv_unsynced_values_data);
         mSyncBtn = findViewById(R.id.sync_data_btn);
+        mHostOpenSenseMapUrl = findViewById(R.id.host_openSenseMap_url);
+        mOpenSenseMapSensorID = findViewById(R.id.openSenseMap_sensor_id);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
+        initializiePrivateServer();
+        initializeOpenSenseMapServer();
+    }
+
+    private void initializiePrivateServer() {
+        mHostLabel.setText(SynchronizationService.BASE_URL);
         try {
             syncService = new SynchronizationService(this);
             mLastSync.setText(syncService.getLastSyncDate());
@@ -43,6 +56,12 @@ public class SyncActivity extends Activity {
             syncBtnEnabled = false;
             Log.d("SYNCACT", "onCreate: EXCEPTION CAUGHT");
         }
+    }
+
+    private void initializeOpenSenseMapServer() {
+        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService();
+        mHostOpenSenseMapUrl.setText(service.getUrl());
+        mOpenSenseMapSensorID.setText(service.getSensorBoxId());
     }
 
 
@@ -60,26 +79,9 @@ public class SyncActivity extends Activity {
                 Toast.makeText(SyncActivity.this,
                         "Already up to date!", Toast.LENGTH_LONG).show();
             }
-        }
-        else{
-            Toast.makeText(SyncActivity.this,
-                    "No connection to Server!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    private void checkSynchronization() {
-        if (syncService.getSuccess() == 1) {
-            //Display success message
-            Toast.makeText(SyncActivity.this,
-                    "Measurements synchronized", Toast.LENGTH_LONG).show();
-            finish();
-
         } else {
             Toast.makeText(SyncActivity.this,
-                    "Some error occurred while synchronizing measurement",
-                    Toast.LENGTH_LONG).show();
-
+                    "No connection to Server!", Toast.LENGTH_SHORT).show();
         }
     }
 

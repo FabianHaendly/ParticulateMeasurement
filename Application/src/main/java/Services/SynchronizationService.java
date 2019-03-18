@@ -43,7 +43,7 @@ public class SynchronizationService {
     private static final String KEY_DATA = "data";
     private static final String KEY_SYNCHRONIZATION_DATE = "synchronization_date";
     private static final String BASE_URL_TEST = "http://192.168.0.17:80";
-    private static final String BASE_URL = "http://192.168.0.17/measurements/";
+    public static final String BASE_URL = "http://192.168.0.17/measurements/";
     private static int SUCCESS;
     private SQLiteDBHelper localDb;
     private ArrayList<String> syncDates;
@@ -195,4 +195,5 @@ public class SynchronizationService {
     public int getUnsynchedValues() {
         return unsynchedValues;
     }
+
 }
