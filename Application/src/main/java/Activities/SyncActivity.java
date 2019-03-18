@@ -82,4 +82,7 @@ public class SyncActivity extends Activity {
 
         }
     }
+
+    public void onOpenSenseMapSyncBtnClick(View view) {
+    }
 }

@@ -74,4 +74,13 @@
     <string name="period_label">Period:</string>
     <string name="period_data">Select a period!</string>
 
+    <!--Sync string-->
+    <string name="local_db_sync_label">Private Server</string>
+    <string name="openSenseMap_sync_label">OpenSenseMap</string>
+    <string name="host_label">Host: </string>
+    <string name="host_url_data" />
+    <string name="host_openSenseMap_url_data" />
+    <string name="sensor_id_label">SensorBox-ID</string>
+    <string name="openSenseMap_sensor_id_data" />
+
 </resources>

@@ -410,6 +410,9 @@
     <string name="display_connection_info">Connected: - to Device:</string>
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
     <string name="finish_measurement">Finish current measurement</string>
+    <string name="host_label">Host: </string>
+    <string name="host_openSenseMap_url_data"/>
+    <string name="host_url_data"/>
     <string name="intro_message">
         <![CDATA[
         
@@ -437,15 +440,19 @@
     <string name="label_state">State:</string>
     <string name="last_sync_data"/>
     <string name="last_sync_text">Last Sync: </string>
+    <string name="local_db_sync_label">Private Server</string>
     <string name="menu_connect">Connect</string>
     <string name="menu_disconnect">Disconnect</string>
     <string name="menu_scan">Scan</string>
     <string name="menu_stop">Stop</string>
     <string name="no_data">No data</string>
+    <string name="openSenseMap_sensor_id_data"/>
+    <string name="openSenseMap_sync_label">OpenSenseMap</string>
     <string name="period_data">Select a period!</string>
     <string name="period_label">Period:</string>
     <string name="search_devices_btn">Connect to devices</string>
     <string name="search_menu_title">Search</string>
+    <string name="sensor_id_label">SensorBox-ID</string>
     <string name="start_measure">Start Measurement</string>
     <string name="start_measurement_btn">Start measurement</string>
     <string name="status_bar_notification_info_overflow">999+</string>

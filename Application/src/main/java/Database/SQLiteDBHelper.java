@@ -25,7 +25,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         super(context, DBSchema.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
 
-        populateDB();
+        //populateDB();
     }
 
     private void populateDB(){
@@ -125,7 +125,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         int minTwen = 1;
         int maxTwen = 3;
 
-        Location loc1 = new Location("12.43077537", "51.37791981", "");
+        Location loc1 = new Location("51.37791981", "12.43077537", "110");
 
         for(int i = 0; i<returnDates().size(); i++){
             double randomTen = minTen + Math.random() * (maxTen - minTen);
