@@ -3,6 +3,7 @@ package Services;
 import android.content.Context;
 import android.media.audiofx.Equalizer;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,6 +44,7 @@ public class SynchronizationOpenSenseMapService {
 
     private String SyncSuccessMessage = "";
     private SQLiteDBHelper localDb;
+    private Context con;
 
     public SynchronizationOpenSenseMapService() {
     }
@@ -52,12 +54,18 @@ public class SynchronizationOpenSenseMapService {
         localDb = new SQLiteDBHelper(context);
         ArrayList<MeasurementObject> list = localDb.getItems();
         Log.d(TAG, "SynchronizationOpenSenseMapService: " + list.size());
+        con = context;
 
-        sendPost(list);
+        try {
+            sendPost(list);
+        }
+        catch(InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
 
-    public void sendPost(final ArrayList<MeasurementObject> list) {
+    public void sendPost(final ArrayList<MeasurementObject> list) throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -77,7 +85,7 @@ public class SynchronizationOpenSenseMapService {
                         MeasurementObject currObject = list.get(i);
                         String measurementDate = currObject.getMeasurementDate();
 
-                        if(isDateOlderThanAnHour(measurementDate)) {
+                        if (isDateOlderThanAnHour(measurementDate)) {
                             JSONArray locationCoords = new JSONArray();
                             JSONObject jsonObjectPmTen = new JSONObject();
                             JSONObject jsonObjectPmTwentyFive = new JSONObject();
@@ -121,16 +129,20 @@ public class SynchronizationOpenSenseMapService {
 
                     Log.i("STATUS", String.valueOf(conn.getResponseCode()));
                     Log.i("MSG", conn.getResponseMessage());
-                    SyncSuccessMessage = String.valueOf(conn.getResponseCode()) + conn.getResponseMessage();
+                    SyncSuccessMessage = multipleMeasurements.length() + " elements have been synchronized";
 
                     conn.disconnect();
                 } catch (Exception e) {
+                    SyncSuccessMessage = "Error in sychnronizing with openSenseMap";
                     e.printStackTrace();
                 }
             }
         });
 
         thread.start();
+        thread.join();
+
+        Toast.makeText(con, SyncSuccessMessage, Toast.LENGTH_LONG).show();
     }
 
     /*
@@ -150,45 +162,27 @@ public class SynchronizationOpenSenseMapService {
         int osmMinutes = cal.get(MINUTE);
         int osmHour = cal.get(HOUR_OF_DAY);
 
-        if(measurementHour<osmHour)
-        {
+        if (measurementHour < osmHour) {
             // Fall 1: Stunde ist KLEINER als derzeitige Zeit (-1); Minuten sind dann egal
             // Messzeit 12:59 - akt. Zeit 14:01
             // true
             return true;
-        }
-        else if(measurementHour<=osmHour && measurementMinutes<=osmMinutes){
+        } else if (measurementHour <= osmHour && measurementMinutes <= osmMinutes) {
             // Fall 2: Stunde ist KLEINER GLEICH der derzeitigen Zeit (-1); Minuten sind KLEINER GLEICH der jetzigen Zeit
             // Messzeit 13:01 - akt. Zeit 14:01
             // true
             return true;
-        }
-        else if(measurementHour<=osmHour && measurementMinutes>osmMinutes){
+        } else if (measurementHour <= osmHour && measurementMinutes > osmMinutes) {
             // Fall 3: Stunde ist KLEINER GLEICH der derzeitigen Zeit (-1); Minuten sind GRÖßER als die der jetzigen Zeit
             // Messzeit 12:02 - akt. Zeit 13:01
             // false
             return false;
-        }
-        else {
+        } else {
             // Fall 4: Stunde ist GRÖßER der derzeitigen Zeit (-1); Minuten sind egal
             // Messzeit 13:01 - akt. Zeit 13:30
             // false
             return false;
         }
-    }
-
-    private String getUTCZeroTime(){
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        cal.setTime(cal.getTime());
-        cal.add(Calendar.HOUR, -1);
-        String time = sdf.format(cal.getTime());
-
-        return time;
-    }
-
-    public String getSyncSuccessMessage() {
-        return SyncSuccessMessage;
     }
 
     public String getSensorBoxId() {

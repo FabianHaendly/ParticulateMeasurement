@@ -26,7 +26,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         super(context, DBSchema.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
 
-        populateDB();
+        //populateDB();
     }
 
     private void populateDB(){
