@@ -41,7 +41,7 @@ public class SyncActivity extends Activity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        //initializiePrivateServer();
+        initializiePrivateServer();
         initializeOpenSenseMapServer();
     }
 
@@ -75,6 +75,9 @@ public class SyncActivity extends Activity {
 
                 Log.d("ONSYNCCLICK", "UNSYNCHED: " + String.valueOf(syncService.getUnsynchedValues()));
                 mUnsynchedValues.setText(String.valueOf(syncService.getUnsynchedValues()));
+
+                Toast.makeText(SyncActivity.this,
+                        "Successful synchronized!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(SyncActivity.this,
                         "Already up to date!", Toast.LENGTH_LONG).show();
@@ -87,6 +90,5 @@ public class SyncActivity extends Activity {
 
     public void onOpenSenseMapSyncBtnClick(View view) {
         SynchronizationOpenSenseMapService osmService = new SynchronizationOpenSenseMapService(this);
-
     }
 }

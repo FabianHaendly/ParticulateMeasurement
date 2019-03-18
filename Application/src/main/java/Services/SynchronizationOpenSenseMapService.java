@@ -1,7 +1,7 @@
 package Services;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.media.audiofx.Equalizer;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -10,11 +10,18 @@ import org.json.JSONObject;
 import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.FormatFlagsConversionMismatchException;
 
 import Database.SQLiteDBHelper;
 import Entities.MeasurementObject;
+
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MINUTE;
 
 public class SynchronizationOpenSenseMapService {
     private static final String TAG = "OpenSenseMapService";
@@ -37,9 +44,10 @@ public class SynchronizationOpenSenseMapService {
     private String SyncSuccessMessage = "";
     private SQLiteDBHelper localDb;
 
-    public SynchronizationOpenSenseMapService(){}
+    public SynchronizationOpenSenseMapService() {
+    }
 
-    public SynchronizationOpenSenseMapService(Context context){
+    public SynchronizationOpenSenseMapService(Context context) {
 
         localDb = new SQLiteDBHelper(context);
         ArrayList<MeasurementObject> list = localDb.getItems();
@@ -66,40 +74,50 @@ public class SynchronizationOpenSenseMapService {
                     JSONArray multipleMeasurements = new JSONArray();
 
                     for (int i = 0; i < list.size(); i++) {
-                        JSONArray locationCoords = new JSONArray();
-                        JSONObject jsonObjectPmTen = new JSONObject();
-                        JSONObject jsonObjectPmTwentyFive = new JSONObject();
                         MeasurementObject currObject = list.get(i);
+                        String measurementDate = currObject.getMeasurementDate();
 
-                        //fill location array
-                        locationCoords.put(Double.valueOf(currObject.getLocation().getLatitude()));
-                        locationCoords.put(Double.valueOf(currObject.getLocation().getLongitude()));
-                        locationCoords.put(Double.valueOf(currObject.getLocation().getAltitude()));
+                        if(isDateOlderThanAnHour(measurementDate)) {
+                            JSONArray locationCoords = new JSONArray();
+                            JSONObject jsonObjectPmTen = new JSONObject();
+                            JSONObject jsonObjectPmTwentyFive = new JSONObject();
 
-                        String openSenseDateFormat = DateFormatterService.returnRFCFormattedDate(currObject.getMeasurementDate());
+                            //fill location array
+                            if (currObject.getLocation().getLatitude() != "0.0" && currObject.getLocation().getLongitude() != "0.0") {
+                                locationCoords.put(Double.valueOf(currObject.getLocation().getLatitude()));
+                                locationCoords.put(Double.valueOf(currObject.getLocation().getLongitude()));
+                                locationCoords.put(Double.valueOf(currObject.getLocation().getAltitude()));
+                            }
+                            String rfcDateOfCurrentObj = DateFormatterService.returnRFCFormattedDate(currObject.getMeasurementDate());
 
-                        //PM10 object
-                        jsonObjectPmTen.put(SENSOR_ID, SENSOR_PM_TEN_ID);
-                        jsonObjectPmTen.put(VALUE, currObject.getPmTen());
-                        jsonObjectPmTen.put(CREATED_AT, openSenseDateFormat);
-                        jsonObjectPmTen.put(LOCATION, (Object)locationCoords);
+                            //PM10 object
+                            jsonObjectPmTen.put(SENSOR_ID, SENSOR_PM_TEN_ID);
+                            jsonObjectPmTen.put(VALUE, currObject.getPmTen());
+                            jsonObjectPmTen.put(CREATED_AT, rfcDateOfCurrentObj);
+                            if (locationCoords.length() > 0) {
+                                jsonObjectPmTen.put(LOCATION, (Object) locationCoords);
+                            }
+                            //PM25 object
+                            jsonObjectPmTwentyFive.put(SENSOR_ID, SENSOR_PM_TWENTY_FIVE_ID);
+                            jsonObjectPmTwentyFive.put(VALUE, currObject.getPmTwentyFive());
+                            jsonObjectPmTwentyFive.put(CREATED_AT, rfcDateOfCurrentObj);
+                            if (locationCoords.length() > 0) {
+                                jsonObjectPmTwentyFive.put(LOCATION, (Object) locationCoords);
+                            }
 
-                        //PM25 object
-                        jsonObjectPmTwentyFive.put(SENSOR_ID, SENSOR_PM_TWENTY_FIVE_ID);
-                        jsonObjectPmTwentyFive.put(VALUE, currObject.getPmTwentyFive());
-                        jsonObjectPmTwentyFive.put(CREATED_AT, openSenseDateFormat);
-                        jsonObjectPmTwentyFive.put(LOCATION, (Object)locationCoords);
-
-                        multipleMeasurements.put(jsonObjectPmTen);
-                        multipleMeasurements.put(jsonObjectPmTwentyFive);
+                            multipleMeasurements.put(jsonObjectPmTen);
+                            multipleMeasurements.put(jsonObjectPmTwentyFive);
+                        }
                     }
 
                     Log.i("JSON", multipleMeasurements.toString());
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    os.writeBytes(multipleMeasurements.toString());
 
-                    os.flush();
-                    os.close();
+                    if (multipleMeasurements.length() > 0) {
+                        DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                        os.writeBytes(multipleMeasurements.toString());
+                        os.flush();
+                        os.close();
+                    }
 
                     Log.i("STATUS", String.valueOf(conn.getResponseCode()));
                     Log.i("MSG", conn.getResponseMessage());
@@ -115,15 +133,69 @@ public class SynchronizationOpenSenseMapService {
         thread.start();
     }
 
+    /*
+    Checks if measurement date is is at least 60 minutes younger than the utc0 time from now
+     */
+    boolean isDateOlderThanAnHour(String measurementDate) throws ParseException {
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date temp = sdf.parse(measurementDate);
+        cal.setTime(temp);
+        int measurementMinutes = cal.get(MINUTE);
+        int measurementHour = cal.get(HOUR_OF_DAY);
+
+        cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR, -1);
+        int osmMinutes = cal.get(MINUTE);
+        int osmHour = cal.get(HOUR_OF_DAY);
+
+        if(measurementHour<osmHour)
+        {
+            // Fall 1: Stunde ist KLEINER als derzeitige Zeit (-1); Minuten sind dann egal
+            // Messzeit 12:59 - akt. Zeit 14:01
+            // true
+            return true;
+        }
+        else if(measurementHour<=osmHour && measurementMinutes<=osmMinutes){
+            // Fall 2: Stunde ist KLEINER GLEICH der derzeitigen Zeit (-1); Minuten sind KLEINER GLEICH der jetzigen Zeit
+            // Messzeit 13:01 - akt. Zeit 14:01
+            // true
+            return true;
+        }
+        else if(measurementHour<=osmHour && measurementMinutes>osmMinutes){
+            // Fall 3: Stunde ist KLEINER GLEICH der derzeitigen Zeit (-1); Minuten sind GRÖßER als die der jetzigen Zeit
+            // Messzeit 12:02 - akt. Zeit 13:01
+            // false
+            return false;
+        }
+        else {
+            // Fall 4: Stunde ist GRÖßER der derzeitigen Zeit (-1); Minuten sind egal
+            // Messzeit 13:01 - akt. Zeit 13:30
+            // false
+            return false;
+        }
+    }
+
+    private String getUTCZeroTime(){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        cal.setTime(cal.getTime());
+        cal.add(Calendar.HOUR, -1);
+        String time = sdf.format(cal.getTime());
+
+        return time;
+    }
+
     public String getSyncSuccessMessage() {
         return SyncSuccessMessage;
     }
 
-    public String getSensorBoxId(){
+    public String getSensorBoxId() {
         return SENSOR_BOX_ID;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return BASE_URL;
     }
 }

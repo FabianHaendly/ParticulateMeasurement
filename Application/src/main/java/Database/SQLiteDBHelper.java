@@ -26,7 +26,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         super(context, DBSchema.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
 
-        //populateDB();
+        populateDB();
     }
 
     private void populateDB(){
@@ -120,7 +120,6 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
     private static ArrayList<MeasurementObject> returnDataObjects(ArrayList<String> dates){
         ArrayList<MeasurementObject> objs = new ArrayList<>();
 
-        Random rand = new Random();
         int minTen = 3;
         int maxTen = 5;
         int minTwen = 1;
@@ -150,9 +149,11 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
 
         // KW 9
 
-        dates.add("2019-03-17 10:20:00");   //KW
-        dates.add("2019-03-17 10:21:00");   //KW
-        dates.add("2019-03-17 10:22:00");   //KW
+        dates.add("2019-03-18 15:15:00");   //KW
+//        dates.add("2019-03-17 10:30:00");   //KW
+//        dates.add("2019-03-17 11:30:00");   //KW
+//        dates.add("2019-03-17 11:00:00");   //KW
+//        dates.add("2019-03-17 12:30:00");   //KW
 //        dates.add("2019-02-28 21:47:47");   //KW
 //        dates.add("2019-03-01 15:53:41");   //KW    //M
 //        dates.add("2019-03-02 21:47:47");   //KW    //M
