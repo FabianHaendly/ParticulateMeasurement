@@ -119,8 +119,8 @@ public class MeasurementActivity extends Activity {
                     mLocation = new Location("0.0", "0.0", "0.0");
                     Log.d(TAG, "onLocationChanged: GOOGLES LOCATION WAS NULL");
                 } else {
-                    mLongitude = String.valueOf(location.getLongitude());
                     mLatitude = String.valueOf(location.getLatitude());
+                    mLongitude = String.valueOf(location.getLongitude());
                     mAltitude = String.valueOf(location.getAltitude());
                     mLocation = new Location(mLongitude, mLatitude, mAltitude);
 //                    Log.d(TAG, "onLocationChanged: LOCATION SET");

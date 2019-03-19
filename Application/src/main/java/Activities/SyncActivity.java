@@ -1,6 +1,7 @@
 package Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.StrictMode;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import java.text.ParseException;
 
 import BLEHelper.bluetoothlegatt.R;
 
+import Database.SQLiteDBHelper;
 import Services.SynchronizationOpenSenseMapService;
 import Services.SynchronizationService;
 
@@ -27,6 +29,7 @@ public class SyncActivity extends Activity {
     TextView mOSMLastSyncData;
     TextView mOsmUnsychedValuesData;
     boolean syncBtnEnabled = false;
+    SQLiteDBHelper localDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +45,25 @@ public class SyncActivity extends Activity {
         mOSMLastSyncData = findViewById(R.id.osm_last_sync_data);
         mOsmUnsychedValuesData = findViewById(R.id.osm_unsyched_values_data);
 
+        localDb = new SQLiteDBHelper(this);
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
-        initializiePrivateServer();
+        initializiePrivateServer(localDb);
         try {
-            initializeOpenSenseMapServer();
+            initializeOpenSenseMapServer(localDb);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    private void initializiePrivateServer() {
+    private void initializiePrivateServer(SQLiteDBHelper db) {
         mHostLabel.setText(SynchronizationService.BASE_URL);
         try {
-            syncService = new SynchronizationService(this);
+            syncService = new SynchronizationService(this, db);
             mLastSync.setText(syncService.getLastSynchronization());
             mUnsynchedValues.setText(String.valueOf(String.valueOf(syncService.getNumOfUnsychedValues())));
             syncBtnEnabled = true;
@@ -69,8 +74,8 @@ public class SyncActivity extends Activity {
         }
     }
 
-    private void initializeOpenSenseMapServer() throws ParseException {
-        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this);
+    private void initializeOpenSenseMapServer(SQLiteDBHelper db) throws ParseException {
+        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this, db);
         mHostOpenSenseMapUrl.setText(service.getUrl());
         mOpenSenseMapSensorID.setText(service.getSensorBoxId());
         mOSMLastSyncData.setText(service.getLastOsmSync());
@@ -98,7 +103,7 @@ public class SyncActivity extends Activity {
     }
 
     public void onOpenSenseMapSyncBtnClick(View view) throws InterruptedException, ParseException {
-        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this);
+        SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this, localDb);
         service.sendPost();
         mOSMLastSyncData.setText(service.getLastOsmSync());
         mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsynchedValues()));

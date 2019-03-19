@@ -43,12 +43,12 @@ public class SynchronizationService {
     private Context context;
     private SQLiteDBHelper localDb;
 
-    public SynchronizationService(Context context) throws Exception {
+    public SynchronizationService(Context context, SQLiteDBHelper db) throws Exception {
         this.context = context;
 
         if(isURLReachable(context)) {
             Log.d(TAG, "SynchronizationService: URL IS REACHABLE");
-            localDb = new SQLiteDBHelper(context);
+            localDb = db;
         }
         else{
             Toast.makeText(context, "Server is not reachable", Toast.LENGTH_SHORT).show();

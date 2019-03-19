@@ -45,9 +45,9 @@ public class SynchronizationOpenSenseMapService {
     private Context context;
     ArrayList<MeasurementObject> measurementObjects;
 
-    public SynchronizationOpenSenseMapService(Context context) {
+    public SynchronizationOpenSenseMapService(Context context, SQLiteDBHelper db) {
 
-        localDb = new SQLiteDBHelper(context);
+        localDb = db;
         measurementObjects = localDb.getItems();
         this.context = context;
 
@@ -83,8 +83,8 @@ public class SynchronizationOpenSenseMapService {
 
                                 //fill location array
                                 if (currObject.getLocation().getLatitude() != "0.0" && currObject.getLocation().getLongitude() != "0.0") {
-                                    locationCoords.put(Double.valueOf(currObject.getLocation().getLatitude()));
                                     locationCoords.put(Double.valueOf(currObject.getLocation().getLongitude()));
+                                    locationCoords.put(Double.valueOf(currObject.getLocation().getLatitude()));
                                     locationCoords.put(Double.valueOf(currObject.getLocation().getAltitude()));
                                 }
                                 String rfcDateOfCurrentObj = DateService.getRFCFormattedDate(currObject.getMeasurementDate());
