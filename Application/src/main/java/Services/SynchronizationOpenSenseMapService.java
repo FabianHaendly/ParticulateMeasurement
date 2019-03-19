@@ -26,9 +26,9 @@ public class SynchronizationOpenSenseMapService {
     private static final String TAG = "OpenSenseMapService";
 
     //SensorBox data
-    private static final String SENSOR_BOX_ID = "5c8f789b922ca9001982b1e8";
-    private static final String SENSOR_PM_TEN_ID = "5c8f789b922ca9001982b1ea";
-    private static final String SENSOR_PM_TWENTY_FIVE_ID = "5c8f789b922ca9001982b1e9";
+    private static final String SENSOR_BOX_ID = "5c90fdc8922ca90019f429d9";
+    private static final String SENSOR_PM_TEN_ID = "5c90fdc8922ca90019f429db";
+    private static final String SENSOR_PM_TWENTY_FIVE_ID = "5c90fdc8922ca90019f429da";
 
     //URLs
     private static final String BASE_URL = "https://api.opensensemap.org/boxes/";

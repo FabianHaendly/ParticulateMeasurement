@@ -26,7 +26,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         super(context, DBSchema.DATABASE_NAME, null, DATABASE_VERSION);
         db = getReadableDatabase();
 
-        //populateDB();
+        populateDB();
     }
 
     private void populateDB(){
@@ -145,6 +145,7 @@ public class SQLiteDBHelper extends SQLiteOpenHelper {
         ArrayList<String> dates = new ArrayList<>();
 
         // KW 9
+        dates.add("2019-03-19 14:59:00");   //KW
         dates.add("2019-03-19 14:30:00");   //KW
         dates.add("2019-03-19 14:16:00");   //KW
         dates.add("2019-03-19 12:30:00");   //KW
