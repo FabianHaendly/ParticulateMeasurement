@@ -28,9 +28,9 @@ public class HttpJsonParser {
     // by making HTTP POST or GET method
     public JSONObject makeHttpRequest(String url, String method,
                                       Map<String, String> params) {
-
-        Log.d(TAG, "Method Parameters: " + url);
-        Log.d(TAG, "Method Parameters: " + method);
+//
+//        Log.d(TAG, "Method Parameters: " + url);
+//        Log.d(TAG, "Method Parameters: " + method);
 
         try {
             Uri.Builder builder = new Uri.Builder();
@@ -43,7 +43,7 @@ public class HttpJsonParser {
 
                 //?year=1999&genre=rrrrr&rating=5&movie_name=aaaaaa
                 //works: ?pm_ten=10.0&altitude=17.8&pm_twenty_five=10.0&measurement_date=2017-03-03%2022%3A59%3A36&latitude=51.37791981&longitude=12.43077537
-                Log.d(TAG, "makeHttpRequest: " + builder.toString());
+//                Log.d(TAG, "makeHttpRequest: " + builder.toString());
 
             }
             if (builder.build().getEncodedQuery() != null) {
@@ -56,7 +56,7 @@ public class HttpJsonParser {
             urlObj = new URL(url);
 
             //works: http://192.168.0.17/measurements/add_measurement.php
-            Log.d(TAG, "URL: " + url);
+//            Log.d(TAG, "URL: " + url);
 
             urlConnection = (HttpURLConnection) urlObj.openConnection();
             urlConnection.setRequestMethod(method);
@@ -64,7 +64,7 @@ public class HttpJsonParser {
             urlConnection.setRequestProperty("Content-Length", String.valueOf(encodedParams.getBytes().length));
             urlConnection.getOutputStream().write(encodedParams.getBytes());
 
-            Log.d("POST!!!!", "makeHttpRequest: " + urlConnection.toString());
+//            Log.d("POST!!!!", "makeHttpRequest: " + urlConnection.toString());
 
             urlConnection.connect();
             is = urlConnection.getInputStream();

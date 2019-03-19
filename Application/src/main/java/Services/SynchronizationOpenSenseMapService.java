@@ -141,7 +141,7 @@ public class SynchronizationOpenSenseMapService {
         thread.start();
         thread.join();
 
-        Toast.makeText(context, SyncSuccessMessage, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, SyncSuccessMessage, Toast.LENGTH_SHORT).show();
     }
 
     public String getLastOsmSync() {
@@ -171,7 +171,7 @@ public class SynchronizationOpenSenseMapService {
             String mD = list.get(i).getMeasurementDate();
 
             if (mD.compareTo(lastOsmSync) > 0 && isDateOlderThanAnHour(mD)) {
-                Log.d(TAG, "getRelevantMeasurements: ITEM ADDED UNSYCHED OSM");
+//                Log.d(TAG, "getRelevantMeasurements: ITEM ADDED UNSYCHED OSM");
                 filteredList.add(list.get(i));
             }
         }
@@ -194,11 +194,11 @@ public class SynchronizationOpenSenseMapService {
         // if measurementdate < utc+0 -> measurement is valid for sync
         if (measurementDate.compareTo(sdf.format(cal.getTime())) < 0) {
 
-            Log.d(TAG, "TRUE - DATE TO CHECK: " + measurementDate + " is < " + "CURRENT UTC+0: " + sdf.format(cal.getTime()));
+//            Log.d(TAG, "TRUE - DATE TO CHECK: " + measurementDate + " is < " + "CURRENT UTC+0: " + sdf.format(cal.getTime()));
             return true;
         }
 
-        Log.d(TAG, "FALSE - DATE TO CHECK: " + measurementDate + " is > " + "CURRENT UTC+0: " + sdf.format(cal.getTime()));
+//        Log.d(TAG, "FALSE - DATE TO CHECK: " + measurementDate + " is > " + "CURRENT UTC+0: " + sdf.format(cal.getTime()));
 
         return false;
     }

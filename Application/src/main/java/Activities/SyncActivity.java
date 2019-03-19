@@ -89,7 +89,7 @@ public class SyncActivity extends Activity {
                         "Synchronized successfully!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(SyncActivity.this,
-                        "Everything up to date", Toast.LENGTH_LONG).show();
+                        "Everything up to date", Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(SyncActivity.this,

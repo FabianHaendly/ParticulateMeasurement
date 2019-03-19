@@ -41,16 +41,14 @@ public class SynchronizationService {
     public static final String BASE_URL = "http://192.168.0.17/measurements/";
     private static int SUCCESS;
     private Context context;
-    private ArrayList<MeasurementObject> unsynchedList;
+    private SQLiteDBHelper localDb;
 
     public SynchronizationService(Context context) throws Exception {
         this.context = context;
-        unsynchedList = new ArrayList<>();
 
         if(isURLReachable(context)) {
             Log.d(TAG, "SynchronizationService: URL IS REACHABLE");
-            SQLiteDBHelper localDb = new SQLiteDBHelper(context);
-            unsynchedList = localDb.getItems();
+            localDb = new SQLiteDBHelper(context);
         }
         else{
             Toast.makeText(context, "Server is not reachable", Toast.LENGTH_SHORT).show();
@@ -69,7 +67,7 @@ public class SynchronizationService {
                 urlc.setConnectTimeout(1 * 1000);
                 urlc.connect();
                 if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-                    Log.wtf("Connection", "Success !");
+                    Log.d("Connection", "Success !");
                     return true;
                 } else {
                     return false;
@@ -88,8 +86,10 @@ public class SynchronizationService {
         return fs.getLastSyncDate();
     }
 
-    public void synchronizeData(){
-        for(MeasurementObject obj: unsynchedList){
+    public void synchronizeData() throws ParseException {
+        ArrayList<MeasurementObject> dbdata = localDb.getItems();
+
+        for(MeasurementObject obj: getRelevantMeasurements(dbdata)){
             addDataObject(obj);
         }
 
@@ -98,8 +98,8 @@ public class SynchronizationService {
     }
 
     public int getNumOfUnsychedValues() throws ParseException {
-        ArrayList<MeasurementObject> list = unsynchedList;
-        list = getRelevantMeasurements(list);
+        ArrayList<MeasurementObject> list = getRelevantMeasurements(localDb.getItems());
+        Log.d(TAG, "#relevantList: " + list.size());
 
         return list.size();
     }
@@ -113,7 +113,7 @@ public class SynchronizationService {
         for (int i = 0; i < list.size(); i++) {
             String mD = list.get(i).getMeasurementDate();
 
-            if (mD.compareTo(lastOsmSync) > 0) {
+            if (mD.compareTo(lastOsmSync) > 0 && mD.compareTo(DateService.getCurrentDateAndTime()) < 0) {
                 filteredList.add(list.get(i));
             }
         }
@@ -133,8 +133,6 @@ public class SynchronizationService {
         httpParams.put(KEY_LATITUDE, obj.getLocation().getLatitude());
         httpParams.put(KEY_ALTITUDE, obj.getLocation().getAltitude());
         httpParams.put(KEY_SENSOR_ID, obj.getSensorId());
-
-        Log.d(TAG, "addDataObject: ------------ " + httpParams.size());
 
         JSONObject jsonObject = httpJsonParser.makeHttpRequest(
                 BASE_URL + "add_measurement.php", "POST", httpParams);
