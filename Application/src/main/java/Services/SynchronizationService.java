@@ -38,10 +38,8 @@ public class SynchronizationService {
     private static final String KEY_ALTITUDE = "altitude";
     private static final String KEY_SENSOR_ID = "sensor_id";
     private static final String KEY_DATA = "data";
-    private static final String KEY_SYNCHRONIZATION_DATE = "synchronization_date";
     public static final String BASE_URL = "http://192.168.0.17/measurements/";
     private static int SUCCESS;
-    private String synchronizationDate;
     private Context context;
     private ArrayList<MeasurementObject> unsynchedList;
 
@@ -51,7 +49,6 @@ public class SynchronizationService {
 
         if(isURLReachable(context)) {
             Log.d(TAG, "SynchronizationService: URL IS REACHABLE");
-            synchronizationDate = returnTimeStamp();
             SQLiteDBHelper localDb = new SQLiteDBHelper(context);
             unsynchedList = localDb.getItems();
         }
@@ -136,7 +133,6 @@ public class SynchronizationService {
         httpParams.put(KEY_LATITUDE, obj.getLocation().getLatitude());
         httpParams.put(KEY_ALTITUDE, obj.getLocation().getAltitude());
         httpParams.put(KEY_SENSOR_ID, obj.getSensorId());
-        httpParams.put(KEY_SYNCHRONIZATION_DATE, synchronizationDate);
 
         Log.d(TAG, "addDataObject: ------------ " + httpParams.size());
 
@@ -154,13 +150,20 @@ public class SynchronizationService {
         }
     }
 
-    private String returnTimeStamp() {
-        Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String formattedDate = dateFormat.format(date);
+    /*
 
-        return formattedDate;
-    }
+    MySQL table
 
+   CREATE TABLE IF NOT EXISTS `measurements` (
+  `measurement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pm_ten` varchar(10) NOT NULL,
+  `pm_twenty_five` varchar(10) NOT NULL,
+  `measurement_date` datetime NOT NULL,
+  `longitude` varchar(50) NOT NULL,
+  `latitude` varchar(50) NOT NULL,
+  `altitude` varchar(50) NOT NULL,
+  `sensor_id` int(11) NOT NULL,
+  PRIMARY KEY (`measurement_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+*/
 }

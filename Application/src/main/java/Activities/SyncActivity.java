@@ -74,7 +74,7 @@ public class SyncActivity extends Activity {
         mHostOpenSenseMapUrl.setText(service.getUrl());
         mOpenSenseMapSensorID.setText(service.getSensorBoxId());
         mOSMLastSyncData.setText(service.getLastOsmSync());
-        mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsychedValues()*2));
+        mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsynchedValues()*2));
     }
 
 
@@ -82,15 +82,11 @@ public class SyncActivity extends Activity {
         if (syncBtnEnabled) {
             if (syncService.getNumOfUnsychedValues() != 0) {
                 syncService.synchronizeData();
-
-                Log.d("ONSYNCCLICK", "last SYNC: " + syncService.getLastSynchronization());
                 mLastSync.setText(syncService.getLastSynchronization());
-
-                Log.d("ONSYNCCLICK", "UNSYNCHED: " + String.valueOf(syncService.getNumOfUnsychedValues()));
                 mUnsynchedValues.setText(String.valueOf(syncService.getNumOfUnsychedValues()));
 
                 Toast.makeText(SyncActivity.this,
-                        "Successful synchronized!", Toast.LENGTH_LONG).show();
+                        "Synchronized successfully!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(SyncActivity.this,
                         "Everything up to date", Toast.LENGTH_LONG).show();
@@ -105,6 +101,6 @@ public class SyncActivity extends Activity {
         SynchronizationOpenSenseMapService service = new SynchronizationOpenSenseMapService(this);
         service.sendPost();
         mOSMLastSyncData.setText(service.getLastOsmSync());
-        mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsychedValues()));
+        mOsmUnsychedValuesData.setText(String.valueOf(service.getNumOfUnsynchedValues()));
     }
 }

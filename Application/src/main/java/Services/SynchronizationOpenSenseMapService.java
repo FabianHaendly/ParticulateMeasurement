@@ -70,7 +70,7 @@ public class SynchronizationOpenSenseMapService {
 
                     JSONArray multipleMeasurements = new JSONArray();
 
-                    if (getNumOfUnsychedValues() > 0) {
+                    if (getNumOfUnsynchedValues() > 0) {
 
                         for (int i = 0; i < measurementObjects.size(); i++) {
                             MeasurementObject currObject = measurementObjects.get(i);
@@ -128,8 +128,7 @@ public class SynchronizationOpenSenseMapService {
                         Log.d(TAG, "Saved to " + context.getFilesDir() + "/");
 
                         conn.disconnect();
-                    }
-                    else{
+                    } else {
                         SyncSuccessMessage = "Everything up to date";
                     }
                 } catch (Exception e) {
@@ -150,9 +149,14 @@ public class SynchronizationOpenSenseMapService {
         return fs.getLastSyncDate();
     }
 
-    public int getNumOfUnsychedValues() throws ParseException {
+    public int getNumOfUnsynchedValues() throws ParseException {
         ArrayList<MeasurementObject> list = localDb.getItems();
+
+//        Log.d(TAG, "getNumOfUnsynchedValues: DB ITEM FROM OSM " + list.size());
+
         list = getRelevantMeasurements(list);
+
+//        Log.d(TAG, "getNumOfUnsynchedValues: RELEVANT " + list.size());
 
         return list.size();
     }
@@ -167,6 +171,7 @@ public class SynchronizationOpenSenseMapService {
             String mD = list.get(i).getMeasurementDate();
 
             if (mD.compareTo(lastOsmSync) > 0 && isDateOlderThanAnHour(mD)) {
+                Log.d(TAG, "getRelevantMeasurements: ITEM ADDED UNSYCHED OSM");
                 filteredList.add(list.get(i));
             }
         }
@@ -181,37 +186,21 @@ public class SynchronizationOpenSenseMapService {
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date temp = sdf.parse(measurementDate);
-        cal.setTime(temp);
-        int measurementMinutes = cal.get(MINUTE);
-        int measurementHour = cal.get(HOUR_OF_DAY);
-
         cal = Calendar.getInstance();
         cal.add(Calendar.HOUR, -1);
-        int osmMinutes = cal.get(MINUTE);
-        int osmHour = cal.get(HOUR_OF_DAY);
 
-        if (measurementHour < osmHour) {
-            // Fall 1: Stunde ist KLEINER als derzeitige Zeit (-1); Minuten sind dann egal
-            // Messzeit 12:59 - akt. Zeit 14:01
-            // true
+
+
+        // if measurementdate < utc+0 -> measurement is valid for sync
+        if (measurementDate.compareTo(sdf.format(cal.getTime())) < 0) {
+
+            Log.d(TAG, "TRUE - DATE TO CHECK: " + measurementDate + " is < " + "CURRENT UTC+0: " + sdf.format(cal.getTime()));
             return true;
-        } else if (measurementHour <= osmHour && measurementMinutes <= osmMinutes) {
-            // Fall 2: Stunde ist KLEINER GLEICH der derzeitigen Zeit (-1); Minuten sind KLEINER GLEICH der jetzigen Zeit
-            // Messzeit 13:01 - akt. Zeit 14:01
-            // true
-            return true;
-        } else if (measurementHour <= osmHour && measurementMinutes > osmMinutes) {
-            // Fall 3: Stunde ist KLEINER GLEICH der derzeitigen Zeit (-1); Minuten sind GRÖßER als die der jetzigen Zeit
-            // Messzeit 12:02 - akt. Zeit 13:01
-            // false
-            return false;
-        } else {
-            // Fall 4: Stunde ist GRÖßER der derzeitigen Zeit (-1); Minuten sind egal
-            // Messzeit 13:01 - akt. Zeit 13:30
-            // false
-            return false;
         }
+
+        Log.d(TAG, "FALSE - DATE TO CHECK: " + measurementDate + " is > " + "CURRENT UTC+0: " + sdf.format(cal.getTime()));
+
+        return false;
     }
 
     public String getSensorBoxId() {

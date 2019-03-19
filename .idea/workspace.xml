@@ -18,11 +18,19 @@
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Activities/SyncActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Activities/SyncActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Database/SQLiteDBHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Database/SQLiteDBHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Services/SynchronizationOpenSenseMapService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Services/SynchronizationOpenSenseMapService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Services/SynchronizationOpenSenseMapService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Services/SynchronizationOpenSenseMapService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Services/SynchronizationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/Services/SynchronizationService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Activities/SyncActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Activities/SyncActivity.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Database/SQLiteDBHelper.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Database/SQLiteDBHelper.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Services/SynchronizationOpenSenseMapService$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Services/SynchronizationOpenSenseMapService$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Services/SynchronizationOpenSenseMapService.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Services/SynchronizationOpenSenseMapService.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Services/SynchronizationService.dex" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/intermediates/transforms/dexBuilder/debug/0/Services/SynchronizationService.dex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/build/outputs/apk/debug/Application-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/Application/build/outputs/apk/debug/Application-debug.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/src/main/java/Activities/SyncActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Application/src/main/java/Activities/SyncActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationService.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,20 +50,22 @@
     <session id="-1661735818">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="32" />
+          <entry key="java" value="35" />
           <entry key="txt" value="14" />
           <entry key="xml" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="32" />
+          <entry key="JAVA" value="35" />
           <entry key="PLAIN_TEXT" value="14" />
           <entry key="XML" value="8" />
         </counts>
@@ -63,13 +73,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="7" />
-          <entry key="java" value="5602" />
+          <entry key="java" value="6297" />
           <entry key="xml" value="627" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5602" />
+          <entry key="JAVA" value="6297" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="XML" value="627" />
         </counts>
@@ -77,37 +87,40 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+            <state relative-caret-position="-28">
+              <caret line="123" column="25" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="25" />
               <folding>
                 <element signature="method#isURLReachable#0;class#SynchronizationService#0" />
-                <element signature="method#returnTimeStamp#0;class#SynchronizationService#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="125" selection-start-line="125" selection-end-line="126" selection-end-column="83" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="189" column="35" lean-forward="true" selection-start-line="189" selection-start-column="35" selection-end-line="189" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#9911#9912#0" expanded="true" />
+                <element signature="e#9947#9948#0" expanded="true" />
+                <element signature="e#9977#9978#0" expanded="true" />
+                <element signature="e#10008#10009#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/Activities/SyncActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="95" column="46" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
+            <state relative-caret-position="340">
+              <caret line="76" column="66" selection-start-line="76" selection-start-column="66" selection-end-line="76" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -115,7 +128,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
+            <state relative-caret-position="221">
               <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
             </state>
           </provider>
@@ -141,6 +154,7 @@
       <find>unsynchedList</find>
       <find>everyth</find>
       <find>already</find>
+      <find>successf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,10 +168,10 @@
         <option value="$PROJECT_DIR$/Application/src/main/res/layout/activity_sync.xml" />
         <option value="$PROJECT_DIR$/Application/src/main/java/Services/DateService.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/Services/FileService.java" />
-        <option value="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java" />
-        <option value="$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationService.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/Activities/SyncActivity.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java" />
       </list>
     </option>
   </component>
@@ -172,6 +186,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -188,19 +203,13 @@
               <item name="ParticulateMeasurement" type="1abcf292:AndroidViewProjectNode" />
               <item name="Application" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="Activities" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ParticulateMeasurement" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Application" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="Database" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
             <path>
               <item name="ParticulateMeasurement" type="1abcf292:AndroidViewProjectNode" />
               <item name="Application" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="Helper" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Entities" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
             <path>
               <item name="ParticulateMeasurement" type="1abcf292:AndroidViewProjectNode" />
@@ -208,22 +217,10 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="Services" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ParticulateMeasurement" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Application" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="ParticulateMeasurement" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Application" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
     </panes>
   </component>
@@ -231,7 +228,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="BH903YNB5Z" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -334,10 +331,8 @@
       <window_info id="Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Build Variants" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.16471216" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.16471216" />
       <window_info id="Captures" order="7" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Run" visible="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Debug" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.329718" />
@@ -346,12 +341,14 @@
       <window_info anchor="bottom" id="Build" order="5" weight="0.329718" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
       <window_info anchor="bottom" id="Logcat" order="7" />
+      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Debug" order="9" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
       <window_info anchor="right" id="Preview" order="3" weight="0.44136462" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Device File Explorer" order="5" visible="true" weight="0.24840085" />
+      <window_info anchor="right" id="Device File Explorer" order="5" weight="0.24840085" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -366,12 +363,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_statistics.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/Helper/MeasurementObjectComparer.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -415,7 +412,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_sync.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="469">
           <caret line="230" column="62" selection-start-line="230" selection-start-column="62" selection-end-line="230" selection-end-column="62" />
@@ -427,54 +423,57 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
-        </state>
-      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/BLEHelper/DeviceScanActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-306" />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/sony-f5321-BH903YNB5Z/data/data/Activities.MainActivity/files/LastOpenSenseMapSynchronization.txt">
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/sony-f5321-BH903YNB5Z/data/data/Activities.MainActivity/files/LastOpenSenseMapSynchronization.txt" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/sony-f5321-BH903YNB5Z/data/data/Activities.MainActivity/files/LastPrivateServerSynchronization.txt" />
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Entities/MeasurementObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/sony-f5321-BH903YNB5Z/data/data/Activities.MainActivity/files/LastPrivateServerSynchronization.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="125" selection-start-line="125" selection-end-line="126" selection-end-column="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
-          <folding>
-            <element signature="method#isURLReachable#0;class#SynchronizationService#0" />
-            <element signature="method#returnTimeStamp#0;class#SynchronizationService#0" />
-          </folding>
+        <state relative-caret-position="6">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/Activities/SyncActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="95" column="46" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
+        <state relative-caret-position="340">
+          <caret line="76" column="66" selection-start-line="76" selection-start-column="66" selection-end-line="76" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Database/SQLiteDBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="123" column="25" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="25" />
+          <folding>
+            <element signature="method#isURLReachable#0;class#SynchronizationService#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/Services/SynchronizationOpenSenseMapService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="189" column="35" lean-forward="true" selection-start-line="189" selection-start-column="35" selection-end-line="189" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9911#9912#0" expanded="true" />
+            <element signature="e#9947#9948#0" expanded="true" />
+            <element signature="e#9977#9978#0" expanded="true" />
+            <element signature="e#10008#10009#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
