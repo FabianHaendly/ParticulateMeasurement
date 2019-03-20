@@ -53,7 +53,7 @@ public class DeviceControlActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private boolean mConnected = false;
     private Handler mHandler;
-    private static int CON_TIME = 3000;
+    private static int CON_TIME = 1000;
     private BluetoothDevice mDevice;
 
 
