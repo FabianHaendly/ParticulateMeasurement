@@ -1011,6 +1011,7 @@ string connection_status_header
 string device_name
 string device_name_header
 string disconnected
+string discover_devices
 string display_connection_info
 string error_bluetooth_not_supported
 string finish_measurement
@@ -1054,6 +1055,7 @@ string search_menu_title
 string sensor_id_label
 string start_measure
 string start_measurement_btn
+string statistics_activity_label
 string status_bar_notification_info_overflow
 string stop_measure
 string sync_data_btn

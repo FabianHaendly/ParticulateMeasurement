@@ -86,5 +86,7 @@
     <string name="osm_unsyched_values_data" />
     <string name="osm_last_sync_label">Last Sync</string>
     <string name="osm_last_sync_data" />
+    <string name="discover_devices">Discovering Devices</string>
+    <string name="statistics_activity_label">Statistics</string>
 
 </resources>

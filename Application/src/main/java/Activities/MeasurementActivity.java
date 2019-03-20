@@ -122,7 +122,7 @@ public class MeasurementActivity extends Activity {
                     mLatitude = String.valueOf(location.getLatitude());
                     mLongitude = String.valueOf(location.getLongitude());
                     mAltitude = String.valueOf(location.getAltitude());
-                    mLocation = new Location(mLongitude, mLatitude, mAltitude);
+                    mLocation = new Location(mLatitude, mLongitude, mAltitude);
 //                    Log.d(TAG, "onLocationChanged: LOCATION SET");
                 }
             }
