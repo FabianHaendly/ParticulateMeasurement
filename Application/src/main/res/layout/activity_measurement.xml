@@ -12,7 +12,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -23,15 +24,25 @@
                 android:gravity="center"
                 android:text="@string/device_name_header"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:height="40dp"
+                android:gravity="center"
+                android:text="@string/connection_status_header"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <TextView
                 android:id="@+id/tvDeviceName"
@@ -42,9 +53,18 @@
                 android:height="40dp"
                 android:gravity="center"
                 android:text="@string/device_name"
-                android:textSize="20dp"
-                android:textColor="#000000"/>
+                android:textSize="20dp"/>
 
+            <TextView
+                android:id="@+id/tvConnectionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:height="40dp"
+                android:gravity="center"
+                android:text="@string/connection_status"
+                android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout
