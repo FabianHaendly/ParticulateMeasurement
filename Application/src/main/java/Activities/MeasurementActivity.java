@@ -60,6 +60,7 @@ public class MeasurementActivity extends Activity {
     String mAltitude;
     String mTimeStamp;
     SQLiteDBHelper db;
+    private TextView mTvConnectionStatus;
 
 
     @Override
@@ -77,6 +78,7 @@ public class MeasurementActivity extends Activity {
         mPmTwentyFiveValue = findViewById(R.id.tvPmTwentyFiveValue);
         mLineChart = findViewById(R.id.lineChart);
         mGraphService = new GraphService(mLineChart);
+        mTvConnectionStatus = findViewById(R.id.tvConnectionStatus);
         db = new SQLiteDBHelper(this);
 
         mStartMeasurementBtn.setOnClickListener(new View.OnClickListener() {
@@ -214,8 +216,12 @@ public class MeasurementActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+                updateConnectionState("Connected");
             } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                updateConnectionState("Disconnected");
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+                // Show all the supported services and characteristics on the user interface.
+                //displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
@@ -287,6 +293,15 @@ public class MeasurementActivity extends Activity {
 //                Log.d(TAG, "ID: " + list.get(i).getID() + " PM10: " + list.get(i).getPmTen() + " PM25: " + list.get(i).getPmTwentyFive() + " Date: " + list.get(i).getMeasurementDate() + " SensorID: " + list.get(i).getSensorId());
 //            }
         }
+    }
+
+    private void updateConnectionState(final String state) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mTvConnectionStatus.setText(state);
+            }
+        });
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {

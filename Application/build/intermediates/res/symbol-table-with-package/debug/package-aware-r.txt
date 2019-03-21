@@ -873,6 +873,7 @@ id title_template
 id today_btn
 id top
 id topPanel
+id tvConnectionStatus
 id tvDeviceName
 id tvPmTen
 id tvPmTenValue

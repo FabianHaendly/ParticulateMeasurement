@@ -1724,7 +1724,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td></td></tr>
+     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
@@ -3196,25 +3196,26 @@ public final class R {
     public static final int today_btn=0x7f0700b7;
     public static final int top=0x7f0700b8;
     public static final int topPanel=0x7f0700b9;
-    public static final int tvDeviceName=0x7f0700ba;
-    public static final int tvPmTen=0x7f0700bb;
-    public static final int tvPmTenValue=0x7f0700bc;
-    public static final int tvPmTwentyFive=0x7f0700bd;
-    public static final int tvPmTwentyFiveValue=0x7f0700be;
-    public static final int tv_last_sync=0x7f0700bf;
-    public static final int tv_last_sync_data=0x7f0700c0;
-    public static final int tv_period_data=0x7f0700c1;
-    public static final int tv_unsynced_values_data=0x7f0700c2;
-    public static final int tv_unsynced_values_static=0x7f0700c3;
-    public static final int uniform=0x7f0700c4;
-    public static final int up=0x7f0700c5;
-    public static final int useLogo=0x7f0700c6;
-    public static final int week_btn=0x7f0700c7;
-    public static final int wide=0x7f0700c8;
-    public static final int withText=0x7f0700c9;
-    public static final int wrap=0x7f0700ca;
-    public static final int wrap_content=0x7f0700cb;
-    public static final int year_btn=0x7f0700cc;
+    public static final int tvConnectionStatus=0x7f0700ba;
+    public static final int tvDeviceName=0x7f0700bb;
+    public static final int tvPmTen=0x7f0700bc;
+    public static final int tvPmTenValue=0x7f0700bd;
+    public static final int tvPmTwentyFive=0x7f0700be;
+    public static final int tvPmTwentyFiveValue=0x7f0700bf;
+    public static final int tv_last_sync=0x7f0700c0;
+    public static final int tv_last_sync_data=0x7f0700c1;
+    public static final int tv_period_data=0x7f0700c2;
+    public static final int tv_unsynced_values_data=0x7f0700c3;
+    public static final int tv_unsynced_values_static=0x7f0700c4;
+    public static final int uniform=0x7f0700c5;
+    public static final int up=0x7f0700c6;
+    public static final int useLogo=0x7f0700c7;
+    public static final int week_btn=0x7f0700c8;
+    public static final int wide=0x7f0700c9;
+    public static final int withText=0x7f0700ca;
+    public static final int wrap=0x7f0700cb;
+    public static final int wrap_content=0x7f0700cc;
+    public static final int year_btn=0x7f0700cd;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f080000;
@@ -8057,7 +8058,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td></td></tr>
+     * <tr><td>direct</td><td>1</td><td>direct, barriers, chains</td></tr>
      * <tr><td>groups</td><td>20</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>7</td><td></td></tr>
