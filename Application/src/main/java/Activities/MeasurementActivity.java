@@ -34,6 +34,7 @@ import BLEHelper.BluetoothLeService;
 import Entities.MeasurementObject;
 import Entities.Location;
 import Database.SQLiteDBHelper;
+import Services.ExampleService;
 import Services.GraphService;
 
 

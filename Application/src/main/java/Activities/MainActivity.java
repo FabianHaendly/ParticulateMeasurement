@@ -19,6 +19,7 @@ import BLEHelper.bluetoothlegatt.R;
 
 import BLEHelper.DeviceScanActivity;
 import Helper.CheckNetworkStatus;
+import Services.ExampleService;
 
 public class MainActivity extends Activity {
     private static String TAG = "New My Code";
@@ -52,12 +53,24 @@ public class MainActivity extends Activity {
         mSyncButton = findViewById(R.id.sync_data_btn);
 
         onOffBtnListen();
-        onSearchDevicesBtn();
-        onStartMeasurementBtn();
-        onStatisticBtn();
-        onSyncBtn();
     }
 
+    private void startMyService(){
+        String info = "Test mate";
+
+        Intent serviceIntent = new Intent(this, ExampleService.class);
+        serviceIntent.putExtra("measurementValue", info);
+
+        startService(serviceIntent);
+    }
+
+    private void stopService(){
+        Intent serviceInten = new Intent(this, ExampleService.class);
+        stopService(serviceInten);
+    }
+
+
+    //menu buttons
     private void onOffBtnListen(){
         mOnOffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,68 +81,47 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void onSearchDevicesBtn(){
-        mSearchDevBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: SEARCH btn clicked");
-                if(mBluetoothAdapter.isEnabled())
-                {
-                    //GO TO SCAN
-                    startActivityForResult(new Intent(MainActivity.this, DeviceScanActivity.class), 1);
-                }
-                else{
-                    Toast.makeText(getBaseContext(), "Turn on Bluetooth first", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+    public void onDiscoverDevicesBtnClick(View view) {
+        Log.d(TAG, "onClick: SEARCH btn clicked");
+        if(mBluetoothAdapter.isEnabled())
+        {
+            //GO TO SCAN
+            startActivityForResult(new Intent(MainActivity.this, DeviceScanActivity.class), 1);
+        }
+        else{
+            Toast.makeText(getBaseContext(), "Turn on Bluetooth first", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void onStartMeasurementBtn(){
-        mStartMeasurementBtn.setOnClickListener(new View.OnClickListener(){
+    public void onStartMeasurementClick(View view) {
+        if(mBtDevice == null){
+            Toast.makeText(getBaseContext(), "Please connect to a device first", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            @Override
-            public void onClick(View v) {
-                if(mBtDevice == null){
-                    Toast.makeText(getBaseContext(), "Please connect to a device first", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                Intent passArgIntent = new Intent(MainActivity.this, MeasurementActivity.class);
-                passArgIntent.putExtra("device", mBtDevice);
-                startActivity(passArgIntent);
-            }
-        });
+        Intent passArgIntent = new Intent(MainActivity.this, MeasurementActivity.class);
+        passArgIntent.putExtra("device", mBtDevice);
+        startMyService();
+        startActivity(passArgIntent);
     }
 
-    private void onStatisticBtn(){
-        mStatisticsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
-                startActivity(intent);
-            }
-        });
+    public void onStatisticsBtnClick(View view) {
+        Intent intent = new Intent(MainActivity.this, StatisticsActivity.class);
+        startActivity(intent);
     }
 
-    public void onSyncBtn(){
-        mSyncButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
-                    Intent i = new Intent(getApplicationContext(),
-                            SyncActivity.class);
-                    startActivity(i);
-                } else {
-                    //Display error message if not connected to internet
-                    Toast.makeText(MainActivity.this,
-                            "Unable to connect to internet",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+    public void onSyncBtnClick(View view) {
+        if (CheckNetworkStatus.isNetworkAvailable(getApplicationContext())) {
+            Intent i = new Intent(getApplicationContext(),
+                    SyncActivity.class);
+            startActivity(i);
+        } else {
+            //Display error message if not connected to internet
+            Toast.makeText(MainActivity.this,
+                    "Unable to connect to internet",
+                    Toast.LENGTH_LONG).show();
+        }
     }
-
 
 
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {

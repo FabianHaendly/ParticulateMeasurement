@@ -11,7 +11,8 @@
         android:id="@+id/layout_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <include layout="@layout/on_off_btn_layout" android:id="@+id/switch_btn"/>
+        <include layout="@layout/on_off_btn_layout"
+            android:id="@+id/switch_btn"/>
     </LinearLayout>
     <LinearLayout
         android:layout_height="wrap_content"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/search_devices_btn"
             android:layout_marginTop="50dp"
+            android:onClick="onDiscoverDevicesBtnClick"
             />
         <TextView
             style=""
@@ -43,22 +45,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:text="@string/start_measurement_btn"/>
+            android:text="@string/start_measurement_btn"
+            android:onClick="onStartMeasurementClick"
+            />
         <Button
             style="@style/myBtn"
             android:id="@+id/statistics_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:text="@string/watch_data_btn"/>
+            android:text="@string/watch_data_btn"
+            android:onClick="onStatisticsBtnClick"/>
         <Button
             style="@style/myBtn"
             android:id="@+id/sync_data_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-
-            android:text="@string/sync_data_btn"/>
+            android:text="@string/sync_data_btn"
+            android:onClick="onSyncBtnClick"/>
 
 
     </LinearLayout>
