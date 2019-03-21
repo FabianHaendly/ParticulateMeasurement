@@ -48,7 +48,7 @@ public class MeasurementActivity extends Activity {
     Button mStartMeasurementBtn;
     Button mFinishMeasurementBtn;
     boolean mMeasurementStarted = false;
-    private final String PM_PATTERN = "PM(1|2)[0-9]+.[0-9]{2}|[0-9]{5}";
+    private final String PM_PATTERN = "PM(1|2)[\\d]{1,2}.[\\d]{1,2}|[\\d]{5}";
     LineChart mLineChart;
     GraphService mGraphService;
     LocationManager locationManager;
@@ -257,7 +257,7 @@ public class MeasurementActivity extends Activity {
 
             for (int i = 0; i < allMatches.size(); i++) {
                 finalValues.add(allMatches.get(i).replaceAll("PM(1|2)", ""));
-//                Log.d(TAG, "FINAL VALUE " + i + " " + finalValues.get(i));
+                Log.d(TAG, "FINAL VALUE " + i + " " + finalValues.get(i));
             }
 
             if(finalValues.size() < 3){
