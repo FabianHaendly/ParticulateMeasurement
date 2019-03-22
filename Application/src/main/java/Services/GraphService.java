@@ -25,6 +25,7 @@ public class GraphService {
     ArrayList<ILineDataSet> dataSets;
     private LineChart mLineChart;
     ArrayList<MeasurementObject> mObjList;
+    private int numOfTotalMeasurements;
 
     public GraphService(LineChart lineChart) {
         this(lineChart, null);
@@ -68,7 +69,7 @@ public class GraphService {
             yPmTen = returnBufferedList(yPmTen);
             yPmTwentyFive = returnBufferedList(yPmTwentyFive);
 
-            Log.d("BUFFER", "onClick: Ten: " + yPmTen.size());
+//            Log.d("BUFFER", "onClick: Ten: " + yPmTen.size());
         }
 
         yPmTen.add(new Entry(yPmTen.size(), (float)pm10));
@@ -85,7 +86,10 @@ public class GraphService {
         dataSets.add(dataSetTwentyFive);
         mLineChart.setData(new LineData(dataSets));
 
-        Log.d("Onclick", "onClick: Size 10: " + yPmTen.size() + "Size 25: " + yPmTwentyFive.size());
+        numOfTotalMeasurements++;
+        Log.d("TOTALELEMENTS", ": " + numOfTotalMeasurements);
+
+//        Log.d("Onclick", "onClick: Size 10: " + yPmTen.size() + "Size 25: " + yPmTwentyFive.size());
     }
 
     private ArrayList<Entry> returnBufferedList(ArrayList<Entry> arr) {
@@ -98,9 +102,9 @@ public class GraphService {
             newArr.add(new Entry(prevEntry.getX(), currentEntry.getY()));
         }
 
-        for (int i = 0; i < arr.size(); i++) {
-            Log.d("TAG", "ELEMENT at: " + i + "   X: " + arr.get(i).getX() + "   Y: " + arr.get(i).getY());
-        }
+//        for (int i = 0; i < arr.size(); i++) {
+//            Log.d("TAG", "ELEMENT at: " + i + "   X: " + arr.get(i).getX() + "   Y: " + arr.get(i).getY());
+//        }
         return newArr;
     }
 

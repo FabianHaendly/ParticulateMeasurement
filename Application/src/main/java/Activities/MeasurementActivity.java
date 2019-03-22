@@ -34,7 +34,6 @@ import BLEHelper.BluetoothLeService;
 import Entities.MeasurementObject;
 import Entities.Location;
 import Database.SQLiteDBHelper;
-import Services.ExampleService;
 import Services.GraphService;
 
 
@@ -81,6 +80,7 @@ public class MeasurementActivity extends Activity {
         mGraphService = new GraphService(mLineChart);
         mTvConnectionStatus = findViewById(R.id.tvConnectionStatus);
         db = new SQLiteDBHelper(this);
+        mLocation = new Location("0.0", "0.0", "0.0");
 
         mStartMeasurementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +111,6 @@ public class MeasurementActivity extends Activity {
             }
         });
 
-        mLocation = new Location("0.0", "0.0", "0.0");
 
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -183,6 +182,7 @@ public class MeasurementActivity extends Activity {
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
+            Log.d(TAG, "onServiceDisconnected: SERVICE DISCONNECTED");
             mBluetoothLeService = null;
         }
     };
@@ -199,7 +199,7 @@ public class MeasurementActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(mGattUpdateReceiver);
+//        unregisterReceiver(mGattUpdateReceiver);
     }
 
     @Override
@@ -258,11 +258,11 @@ public class MeasurementActivity extends Activity {
 
             for (int i = 0; i < allMatches.size(); i++) {
                 finalValues.add(allMatches.get(i).replaceAll("PM(1|2)", ""));
-                Log.d(TAG, "FINAL VALUE " + i + " " + finalValues.get(i));
+//                Log.d(TAG, "FINAL VALUE " + i + " " + finalValues.get(i));
             }
 
             if(finalValues.size() < 3){
-                Log.d(TAG, "displayData: RETURNING - SIZE " + finalValues.size());
+//                Log.d(TAG, "displayData: RETURNING - SIZE " + finalValues.size());
                 return;
             }
             else {

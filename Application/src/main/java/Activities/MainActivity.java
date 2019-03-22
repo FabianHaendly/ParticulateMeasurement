@@ -19,7 +19,6 @@ import BLEHelper.bluetoothlegatt.R;
 
 import BLEHelper.DeviceScanActivity;
 import Helper.CheckNetworkStatus;
-import Services.ExampleService;
 
 public class MainActivity extends Activity {
     private static String TAG = "New My Code";
@@ -55,20 +54,6 @@ public class MainActivity extends Activity {
         onOffBtnListen();
     }
 
-    private void startMyService(){
-        String info = "Test mate";
-
-        Intent serviceIntent = new Intent(this, ExampleService.class);
-        serviceIntent.putExtra("measurementValue", info);
-
-        startService(serviceIntent);
-    }
-
-    private void stopService(){
-        Intent serviceInten = new Intent(this, ExampleService.class);
-        stopService(serviceInten);
-    }
-
 
     //menu buttons
     private void onOffBtnListen(){
@@ -101,7 +86,6 @@ public class MainActivity extends Activity {
 
         Intent passArgIntent = new Intent(MainActivity.this, MeasurementActivity.class);
         passArgIntent.putExtra("device", mBtDevice);
-        startMyService();
         startActivity(passArgIntent);
     }
 
