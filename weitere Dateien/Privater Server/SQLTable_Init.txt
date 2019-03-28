@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS `measurements` (
+  `measurement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pm_ten` varchar(10) NOT NULL,
+  `pm_twenty_five` varchar(10) NOT NULL,  
+  `measurement_date` datetime NOT NULL,
+  `latitude` varchar(50) NOT NULL,
+  `longitude` varchar(50) NOT NULL,
+  `altitude` varchar(50) NOT NULL,
+  `sensor_id` int(11) NOT NULL,
+  PRIMARY KEY (`measurement_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
